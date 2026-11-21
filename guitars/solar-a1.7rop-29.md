@@ -13,6 +13,7 @@
 | Model code | A1.7ROP-29+ (from the title; no separate SKU field) |
 | Series | Solar |
 | Type | A |
+| Line | A1 / 29+ (per you; the page says "Solar Type A1" range and puts "29+" in the model code without explaining it) |
 | Finish | Red Open Pore Matte |
 | Strings | 7 |
 | Left-handed shape | No |

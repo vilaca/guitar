@@ -4,14 +4,15 @@
 
 - **Source:** https://www.ibanez.com/eu/products/detail/xptb720_1p_01.html (Ibanez Europe), read on 2026-11-21.
 - **Basis:** every spec below is from that page. Anything I calculated or added is labelled. See "Not on the page" for what is missing.
-- **Naming:** the page lists the model as XPTB720 in the X series, with an "Iron Label" logo. It doesn't use the names "Xiphos" or "baritone". You call it the Xiphos.
+- **Naming:** the page lists the model as XPTB720 in the X series, with an Iron Label logo; you confirmed it is an Ibanez Iron Label. It doesn't use the names "Xiphos" or "baritone". You call it the Xiphos.
 
 ## Identity
 
 | Field | Value |
 | --- | --- |
 | Model code | XPTB720 |
-| Series | X (with "Iron Label" logo) |
+| Series | X |
+| Line | Ibanez Iron Label (the page shows the logo; you confirmed the line) |
 | Finish | BKF: Black Flat (the only colour listed) |
 | Strings | 7 |
 | Hardware colour | Black |

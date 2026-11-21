@@ -1,6 +1,6 @@
 # Ibanez XPTB720 vs Solar A1.7ROP-29+ vs Ibanez SRMS625EX
 
-Side by side. Specs come from the three manufacturer pages (read 2026-11-21); see `ibanez-xptb720.md`, `solar-a1.7rop-29.md` and `ibanez-srms625ex.md` for the full lists. Sections marked "calculated" are my maths, and "general note" means it is not from any page.
+Side by side. Specs come from the three manufacturer pages (read 2026-11-21), plus a Thomann listing for the bass that you pasted (marked "Thomann"); see `ibanez-xptb720.md`, `solar-a1.7rop-29.md` and `ibanez-srms625ex.md` for the full lists. Sections marked "calculated" are my maths, and "general note" means it is not from any page.
 
 The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass, so some rows (strings, EQ) only compare loosely.
 
@@ -11,8 +11,8 @@ The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass
 | Instrument | 7-string guitar | 7-string guitar | 5-string bass |
 | Scale | 648 mm (25.5") | 29" (736.6 mm) | 901.7 mm (35.5") to 864.0 mm (34.0") |
 | Factory tuning | A standard: A D G C F A D | B standard: B E A D G B E | B standard: B E A D G |
-| Your tuning | G standard: G C F Bb Eb G C | B standard | Not stated |
-| Construction | Neck-through | Set thru | Not stated (neck described as "SRMS5 for Multi Scale") |
+| Your tuning | G standard: G C F Bb Eb G C | B standard | B standard (same as factory) |
+| Construction | Neck-through | Set thru | Bolt-on (Thomann) |
 | Body | Okoume | Swamp ash, 45 mm thick | Okoume |
 | Bridge | Edge-Zero II-7 tremolo, stud-lock | Evertune | MR5 (Mono-Rail V) |
 | Finish | Black Flat | Red Open Pore Matte | Black Flat |
@@ -25,12 +25,12 @@ The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass
 
 | | Ibanez XPTB720 | Solar A1.7ROP-29+ | Ibanez SRMS625EX |
 | --- | --- | --- | --- |
-| Neck wood | Wizard II-7, 5pc maple/walnut | 3 piece maple | SRMS5 for Multi Scale, 5pc maple/walnut |
-| Neck shape | Wizard II-7 (thin, flat, per the page) | C Solar | Not named |
+| Neck wood | 5pc maple/walnut | 3 piece maple | 5pc maple/walnut |
+| Neck shape | Wizard II-7 (thin, flat, per the page) | C Solar | SRMS5 Multi Scale (Thomann) |
 | Fretboard | Ebony | Ebony | Ebonol |
 | Radius | 400 mmR | R400 | 305 mmR |
-| Frets | 24, jumbo | 24, stainless steel, standard fretting | 24, medium |
-| Nut | Locking | PPS | Not stated |
+| Frets | 24, jumbo | 24, stainless steel, standard fretting | 24, medium, fanned (Thomann) |
+| Nut | Locking | PPS | Plastic (Thomann) |
 | Width at nut | 48 mm | Not listed (48 mm at fret 1) | 45 mm |
 | Width at fret 24 | 68 mm | Not listed | 68 mm |
 | Thickness at fret 1 | 19 mm | 20 mm | 19.5 mm |
@@ -47,13 +47,13 @@ The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass
 
 | | Ibanez XPTB720 | Solar A1.7ROP-29+ | Ibanez SRMS625EX |
 | --- | --- | --- | --- |
-| Joint | Neck-through | Set thru | Not stated |
+| Joint | Neck-through | Set thru | Bolt-on (Thomann) |
 | Body | Okoume | Swamp ash, 45 mm | Okoume |
 | Bridge | Edge-Zero II-7 | Evertune (constant tension) | MR5, saddles locked individually |
 | String space | 10.8 mm | Not listed | 16.5 mm |
-| Machine heads | Gotoh | Solar Locking, 18:1 | Not listed |
+| Machine heads | Gotoh | Solar Locking, 18:1 | Ibanez, no model (Thomann) |
 | Hardware | Black | Black | Black |
-| Logo | Iron Label | n/a | Iron Label |
+| Line | Ibanez Iron Label | Solar A1 / 29+ | Ibanez Iron Label |
 | Origin | Not listed | Indonesia | Not listed |
 
 ### Electronics
@@ -135,5 +135,5 @@ All the guitar tunings share one interval pattern, 5-5-5-5-4-5. The bass is B E 
 
 - **All three:** weight, and pickup output figures. I haven't seen the photos.
 - **Ibanez 7-string and bass:** price and origin.
-- **Bass only:** joint type, nut material, tuner model, neck profile name, middle-string scale lengths and the fan angle.
+- **Bass only:** the tuner model (Thomann says only "Ibanez machine heads"), the middle-string scale lengths and the fan angle.
 - **Solar only:** no warranty text on the page.

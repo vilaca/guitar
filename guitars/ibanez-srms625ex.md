@@ -3,7 +3,8 @@
 5-string multi-scale bass (35.5" to 34"), Bartolini BH2 pickups, Ibanez 3-band EQ with bypass and a 3-way mid-frequency switch. Factory tuning B E A D G.
 
 - **Source:** https://www.ibanez.com/usa/products/detail/srms625ex_1p_03.html (Ibanez USA), read on 2026-11-21.
-- **Basis:** every spec below is from that page. Anything I calculated or added is labelled. See "Not on the page" for what is missing.
+- **Second source:** the Thomann Portugal listing https://www.thomann.pt/ibanez_srms625ex_bkf.htm. I did not fetch it; the content is the text you pasted into the session. Items from it are marked "Thomann" and collected in their own section.
+- **Basis:** every spec outside the Thomann section is from the Ibanez page. Anything I calculated or added is labelled. See "Still missing" for what neither source says.
 
 ## Identity
 
@@ -12,7 +13,7 @@
 | Model code | SRMS625EX |
 | Series | SR, electric basses |
 | Finish | BKF: Black Flat (the only colour listed) |
-| Logo | "Iron Label" logo image beside the title (no text on the page) |
+| Line | Ibanez Iron Label (the page shows the logo beside the title, with no text; you and Thomann ("Iron Label Series") both give the line) |
 | Hardware colour | Black |
 | Recommended case | MB300C |
 
@@ -26,6 +27,7 @@ From you, not the page:
 | --- | --- |
 | Purchase date | 16.04.2025 |
 | Price paid | 1019 € |
+| Tuning | B standard (same as factory) |
 
 ## Specifications
 
@@ -46,6 +48,21 @@ Labels are as on the page. The page runs the pickup labels together with "Passiv
 | Strings | D'Addario EXL170-5SL |
 | String gauges | .045 / .065 / .080 / .100 / .130 |
 | Hardware | Black |
+
+## Thomann listing
+
+Pasted by you. It adds the details below that the Ibanez page lacks.
+
+| Field | Value |
+| --- | --- |
+| Neck joint | Bolt-on |
+| Neck profile | SRMS5 Multi Scale |
+| Nut | Plastic |
+| Frets | 24 fanned medium frets |
+| Machine heads | Ibanez (no model given) |
+| Series | Iron Label Series |
+
+Thomann's other lines agree with the Ibanez page: okoume body, maple/walnut neck, Ebonol fretboard, 305 mm radius, 45 mm nut width, 864–902 mm multi-scale length, two Bartolini BH2 humbuckers, volume, balance, bass, middle and treble controls, 3-way mid-frequency switch, EQ bypass switch, Ibanez Custom 3-band EQ, MR5 bridge, black hardware, .045–.130 strings and Black Flat.
 
 ## Neck dimensions
 
@@ -122,7 +139,7 @@ Paraphrased from the page's feature blocks:
 - **EQ:** the Ibanez Custom Electronics 3-band EQ with bypass and the 3-way mid switch.
 - **Bridge:** MR5, described as a Mono-Rail V bridge with each saddle locked independently to the body.
 
-The page doesn't use the word "fanned". "Multi scale" is its only term. **General note:** a multi-scale bass has a different scale length per string and angled (fanned) frets.
+The Ibanez page doesn't use the word "fanned" and says only "multi scale". Thomann lists "24 fanned medium frets". **General note:** a multi-scale bass has a different scale length per string and angled (fanned) frets.
 
 ## How it relates to the other instruments in this repo (calculated)
 
@@ -131,10 +148,12 @@ The page doesn't use the word "fanned". "Multi scale" is its only term. **Genera
 - **`tunings/` PDF:** `B E A D G` is the start of the all-fourths sequence `B E A D G C F` on page 2. The bass in B standard has no major third between any pair of strings, so no 4-semitone gap.
 - **Scale guides in `scales/pdfs/`:** the bass's five strings match strings 7 to 3 of the guitar tabs in B standard, so those fret numbers give the same note names one octave lower. All five open strings (B E A D G) belong to B Phrygian and E minor pentatonic. In the Bb dominant bebop collection, B and E are outside the scale.
 
-## Not on the page
+## Still missing
 
-- Price, availability, weight and country of origin.
-- Number of strings as a field, nut material, tuner model and neck profile name.
+Not in the Ibanez page or the Thomann paste:
+
+- Price (the page and the paste give none), availability, weight and country of origin.
+- Number of strings as a field, and the tuner model (Thomann says only "Ibanez machine heads").
 - Scale lengths of the middle strings, the fan angle and which end of the scale range is the low B.
 - Pickup output, resistance and wiring, pot values and battery or power details.
 - Other colours (the page shows Black Flat only).
