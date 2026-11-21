@@ -45,11 +45,11 @@ The PDFs say "guitar + piano", but chords appear only as piano diagrams. Guitari
 - Add power-chord shapes in drop A (one finger on string 7).
 - Add a few triad and seventh shapes for standard and drop A.
 
-## B. Commit the generator source (M)
+## B. Share one template across the generators (M)
 
-The repo holds only the PDFs, so every fix means regenerating them from somewhere else.
+The generator source is now in `generators/` (done), so fixes can be made there and the PDFs regenerated into `pdfs/`. The three scripts are still standalone copies.
 
-- Use one shared template for all three PDFs.
+- Move the shared layout code into one module used by all three scripts.
 - This also fixes the font mismatch.
 - It makes fix #1 above a one-line change.
 
