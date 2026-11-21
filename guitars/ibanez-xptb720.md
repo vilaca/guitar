@@ -111,3 +111,7 @@ The page gives note names only. The octave numbers are assumed from the usual 7-
 
 - Manuals index: https://www.ibanez.com/world/support/manual/ (generic, not specific to this model).
 - Parts catalogue: https://cs.hoshinogakki.co.jp/pcw.nsf
+
+## Manuals
+
+- [`manuals/ibanez-edge-zero-ii-tremolo.pdf`](manuals/ibanez-edge-zero-ii-tremolo.pdf): Ibanez "Edge-Zero2 tremolo bridge" manual, 4 pages, English. Downloaded 2026-11-21 from http://www.hoshinogakki.co.jp/pdf/ibanez/manual/en/eg/03_EN_AUG14978_edgezero2.pdf, which the Ibanez manuals index links. It covers the standard Edge-Zero II, not the Edge-Zero II-7 fitted to this model, and the index has no model-specific manual.

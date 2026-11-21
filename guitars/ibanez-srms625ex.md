@@ -166,3 +166,7 @@ Not in the Ibanez page or the Thomann paste:
 - Manuals index: https://www.ibanez.com/world/support/manual/ (generic, not specific to this model).
 - Parts lookup: https://cs.hoshinogakki.co.jp/pcw.nsf
 - Support: https://www.ibanez.com/usa/support/
+
+## Manuals
+
+- [`manuals/ibanez-srms-series-bass.pdf`](manuals/ibanez-srms-series-bass.pdf): Ibanez "SRMS" manual, 1 page, English. Downloaded 2026-11-21 from http://www.hoshinogakki.co.jp/pdf/ibanez/manual/en/eb/SRMS_en.pdf, which the Ibanez manuals index links under the SRMS bridge list. It labels the bridge parts of an "MR5S" (intonation screw, saddle height screw with a 1.5 mm hex key, slidable saddle lock screw) and gives the string-replacement step of hooking the ball end under the string catch at the rear of the bridge. The product page calls the bridge "MR5", so the manual may describe a closely related variant. It doesn't name the SRMS625EX.

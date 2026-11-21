@@ -24,7 +24,8 @@ guitar/
     ├── ibanez-xptb720.md
     ├── solar-a1.7rop-29.md
     ├── comparison.md
-    └── ibanez-srms625ex.md
+    ├── ibanez-srms625ex.md
+    └── manuals/
 ```
 
 ## Regenerate
