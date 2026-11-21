@@ -18,6 +18,15 @@
 
 The page doesn't state the number of strings as a field. Five follows from the factory tuning (1G, 2D, 3A, 4E, 5B) and the five gauges.
 
+## Ownership
+
+From you, not the page:
+
+| Field | Value |
+| --- | --- |
+| Purchase date | 16.04.2025 |
+| Price paid | 1019 € |
+
 ## Specifications
 
 Labels are as on the page. The page runs the pickup labels together with "Passive"; they are separated here.

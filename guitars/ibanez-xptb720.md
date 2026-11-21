@@ -16,6 +16,16 @@
 | Strings | 7 |
 | Hardware colour | Black |
 
+## Ownership
+
+From you, not the page:
+
+| Field | Value |
+| --- | --- |
+| Purchase date | 18.11.2023 |
+| Price paid | 1268 € |
+| Current tuning | G standard (factory is A standard) |
+
 ## Specifications
 
 Labels are as on the page. The page runs some values together; they are separated here.

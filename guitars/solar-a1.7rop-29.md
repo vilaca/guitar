@@ -18,7 +18,17 @@
 | Left-handed shape | No |
 | Country of origin | Indonesia |
 
-## Specifications
+## Ownership
+
+From you, not the page:
+
+| Field | Value |
+| --- | --- |
+| Purchase date | 16.11.2026 |
+| Price paid | 1359 € |
+| Tuning | B standard |
+
+The page's price is in US dollars (see "Price" below), so I haven't compared it with what you paid.
 
 Labels are as printed on the page. The page gives no units for some fields; units in brackets are assumed.
 
