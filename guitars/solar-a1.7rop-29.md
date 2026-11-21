@@ -3,8 +3,8 @@
 7-string, 29" scale, set-thru neck, Evertune bridge, swamp ash body. Tuning B standard.
 
 - **Source:** https://www.solar-guitars.com/product/a1-7rop-29-red-open-pore-matte/ (Solar Guitars), read on 2026-11-21.
-- **Basis:** every spec below is from that page. Anything I calculated or added is labelled. See "Not on the page" for what is missing.
-- **Naming:** the page title is "A1.7ROP-29+ – Red Open Pore Matte". The page describes it as a seven-string in the Solar Type A1 range. It doesn't use the words "baritone" or "B standard"; the TUNING field reads "B-E 7 string". You call it the 29" baritone.
+- **Basis:** every spec below is from that page. Anything calculated or added is labelled. See "Not on the page" for what is missing.
+- **Naming:** the page title is "A1.7ROP-29+ – Red Open Pore Matte". The page describes it as a seven-string in the Solar Type A1 range. It doesn't use the words "baritone" or "B standard"; the TUNING field reads "B-E 7 string". In this repo it is called the 29" baritone.
 
 ## Identity
 
@@ -13,7 +13,7 @@
 | Model code | A1.7ROP-29+ (from the title; no separate SKU field) |
 | Series | Solar |
 | Type | A |
-| Line | A1 / 29+ (per you; the page says "Solar Type A1" range and puts "29+" in the model code without explaining it) |
+| Line | A1 / 29+ (the page says "Solar Type A1" range and puts "29+" in the model code without explaining it) |
 | Finish | Red Open Pore Matte |
 | Strings | 7 |
 | Left-handed shape | No |
@@ -21,7 +21,7 @@
 
 ## Ownership
 
-From you, not the page:
+Purchase and usage details (not from the page):
 
 | Field | Value |
 | --- | --- |
@@ -29,7 +29,7 @@ From you, not the page:
 | Price paid | 1359 € |
 | Tuning | B standard |
 
-The page's price is in US dollars (see "Price" below), so I haven't compared it with what you paid.
+The page's price is in US dollars (see "Price" below), so it is not compared with the price paid.
 
 Labels are as printed on the page. The page gives no units for some fields; units in brackets are assumed.
 
@@ -120,7 +120,7 @@ The page's TUNING field says "B-E 7 string". That matches **B standard**, thicke
 | 2 | B3 | .011 |
 | 1 (thinnest) | E4 | .009 |
 
-The page gives gauges only. The note names and octaves are my reading of "B standard" and the usual 7-string register.
+The page gives gauges only. The note names and octaves follow from "B standard" and the usual 7-string register.
 
 ## Price
 
@@ -133,4 +133,4 @@ As displayed on 2026-11-21, in US dollars: list price $1,699.00, current price *
 - Pickup output or resistance figures and wiring.
 - The meaning of the "+" in the model code, and what the 5-way switch selects with two pickups.
 - Options or variants.
-- Photos: I did not view them.
+- Photos: not reviewed.

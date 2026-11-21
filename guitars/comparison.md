@@ -1,6 +1,6 @@
 # Ibanez XPTB720 vs Solar A1.7ROP-29+ vs Ibanez SRMS625EX
 
-Side by side. Specs come from the three manufacturer pages (read 2026-11-21), plus a Thomann listing for the bass that you pasted (marked "Thomann"); see `ibanez-xptb720.md`, `solar-a1.7rop-29.md` and `ibanez-srms625ex.md` for the full lists. Sections marked "calculated" are my maths, and "general note" means it is not from any page.
+Side by side. Specs come from the three manufacturer pages (read 2026-11-21), plus a Thomann listing for the bass (marked "Thomann"); see `ibanez-xptb720.md`, `solar-a1.7rop-29.md` and `ibanez-srms625ex.md` for the full lists. Sections marked "calculated" are derived from the listed specs, and "general note" means it is not from any page.
 
 The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass, so some rows (strings, EQ) only compare loosely.
 
@@ -11,13 +11,13 @@ The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass
 | Instrument | 7-string guitar | 7-string guitar | 5-string bass |
 | Scale | 648 mm (25.5") | 29" (736.6 mm) | 901.7 mm (35.5") to 864.0 mm (34.0") |
 | Factory tuning | A standard: A D G C F A D | B standard: B E A D G B E | B standard: B E A D G |
-| Your tuning | G standard: G C F Bb Eb G C | B standard | B standard (same as factory) |
+| Tuning in use | G standard: G C F Bb Eb G C | B standard | B standard (same as factory) |
 | Construction | Neck-through | Set thru | Bolt-on (Thomann) |
 | Body | Okoume | Swamp ash, 45 mm thick | Okoume |
 | Bridge | Edge-Zero II-7 tremolo, stud-lock | Evertune | MR5 (Mono-Rail V) |
 | Finish | Black Flat | Red Open Pore Matte | Black Flat |
 | Price on the page | Not on the page | $1,399 (list $1,699) | Not on the page |
-| Paid by you | 1268 € on 18.11.2023 | 1359 € on 16.11.2026 | 1019 € on 16.04.2025 |
+| Price paid | 1268 € on 18.11.2023 | 1359 € on 16.11.2026 | 1019 € on 16.04.2025 |
 
 ## Full comparison
 
@@ -94,11 +94,11 @@ The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass
 
 - **Solar vs Ibanez 7-string:** 736.6 mm vs 648 mm is 88.6 mm longer, a ratio of 1.137.
 - **Bass vs Solar:** the bass's range is 127 to 165 mm longer than the Solar's 29". The page doesn't say which end of the range is the low B.
-- **Tension rule:** at the same string gauge and pitch, tension grows with the square of scale length. The 29" scale carries about 29% more than the 25.5". The same rule applies to the bass, but I haven't estimated its tension, because its strings are not plain wire (see below).
+- **Tension rule:** at the same string gauge and pitch, tension grows with the square of scale length. The 29" scale carries about 29% more than the 25.5". The same rule applies to the bass, but its tension is not estimated, because its strings are not plain wire (see below).
 
 ### Plain-string tension, guitars only (estimated)
 
-These are for the first three strings only, using each guitar's factory gauges, A4 = 440 Hz and steel at 7.85 g/cm³. The Solar page marks its wound strings with "w", so its first three are plain. The Ibanez 7-string page doesn't mark them, so I assumed .010, .013 and .017 are plain. Wound strings need the maker's unit weights, so I left them out. The bass page doesn't mark wound strings either. Bass strings at .045 and up are normally wound, so I left the bass out. Treat the values as estimates, probably within a few percent.
+These are for the first three strings only, using each guitar's factory gauges, A4 = 440 Hz and steel at 7.85 g/cm³. The Solar page marks its wound strings with "w", so its first three are plain. The Ibanez 7-string page doesn't mark them, so .010, .013 and .017 are assumed to be plain. Wound strings need the maker's unit weights, so they are left out. The bass page doesn't mark wound strings either. Bass strings at .045 and up are normally wound, so the bass is left out. Treat the values as estimates, probably within a few percent.
 
 | Setup | String 1 | String 2 | String 3 |
 | --- | --- | --- | --- |
@@ -106,7 +106,7 @@ These are for the first three strings only, using each guitar's factory gauges, 
 | Ibanez 7-string, G standard, same gauges (C4, G3, Eb3) | 10.3 lbf (45.7 N) | 9.7 lbf (43.3 N) | 10.5 lbf (46.7 N) |
 | Solar, B standard (E4 .009, B3 .011, G3 .016) | 17.1 lbf (76.0 N) | 14.3 lbf (63.7 N) | 19.1 lbf (84.9 N) |
 
-- Going from factory A standard to G standard on the Ibanez drops the plain strings by about 20%, to roughly 10 lbf. That is a slack feel unless you go up in gauge.
+- Going from factory A standard to G standard on the Ibanez drops the plain strings by about 20%, to roughly 10 lbf. That is a slack feel unless the gauges go up.
 - The Solar's plain strings carry about 14–19 lbf, and its tuning is two semitones above the Ibanez's factory tuning.
 
 ## Tuning relationship (calculated)
@@ -133,7 +133,7 @@ All the guitar tunings share one interval pattern, 5-5-5-5-4-5. The bass is B E 
 
 ## Things the pages don't say
 
-- **All three:** weight, and pickup output figures. I haven't seen the photos.
-- **Ibanez 7-string and bass:** retail price and origin (what you paid is in the "Paid by you" row).
+- **All three:** weight, and pickup output figures. The photos were not reviewed.
+- **Ibanez 7-string and bass:** retail price and origin (the price paid is in the "Price paid" row).
 - **Bass only:** the tuner model (Thomann says only "Ibanez machine heads"), the middle-string scale lengths and the fan angle.
 - **Solar only:** no warranty text on the page.

@@ -3,8 +3,8 @@
 7-string, 25.5" scale, neck-through, Edge-Zero II-7 tremolo. Factory tuning A standard.
 
 - **Source:** https://www.ibanez.com/eu/products/detail/xptb720_1p_01.html (Ibanez Europe), read on 2026-11-21.
-- **Basis:** every spec below is from that page. Anything I calculated or added is labelled. See "Not on the page" for what is missing.
-- **Naming:** the page lists the model as XPTB720 in the X series, with an Iron Label logo; you confirmed it is an Ibanez Iron Label. It doesn't use the names "Xiphos" or "baritone". You call it the Xiphos.
+- **Basis:** every spec below is from that page. Anything calculated or added is labelled. See "Not on the page" for what is missing.
+- **Naming:** the page lists the model as XPTB720 in the X series, with an Iron Label logo, and it is an Ibanez Iron Label model. It doesn't use the names "Xiphos" or "baritone"; in this repo it is called the Xiphos.
 
 ## Identity
 
@@ -12,14 +12,14 @@
 | --- | --- |
 | Model code | XPTB720 |
 | Series | X |
-| Line | Ibanez Iron Label (the page shows the logo; you confirmed the line) |
+| Line | Ibanez Iron Label (the page shows the logo) |
 | Finish | BKF: Black Flat (the only colour listed) |
 | Strings | 7 |
 | Hardware colour | Black |
 
 ## Ownership
 
-From you, not the page:
+Purchase and usage details (not from the page):
 
 | Field | Value |
 | --- | --- |
@@ -92,19 +92,19 @@ Factory tuning from the page is **A standard**, thickest to thinnest: A D G C F 
 | 2 | A3 | .013 |
 | 1 (thinnest) | D4 | .010 |
 
-The page gives note names only. The octave numbers are my assumption from the usual 7-string register.
+The page gives note names only. The octave numbers are assumed from the usual 7-string register.
 
-**Current tuning (from you, not the page):** G standard, G C F Bb Eb G C, intervals 5-5-5-5-4-5. That is a whole tone below factory. At the same string gauges, a lower pitch on the same 25.5" scale means lower tension. See `comparison.md` for estimated numbers on the plain strings.
+**Current tuning (not from the page):** G standard, G C F Bb Eb G C, intervals 5-5-5-5-4-5. That is a whole tone below factory. At the same string gauges, a lower pitch on the same 25.5" scale means lower tension. See `comparison.md` for estimated numbers on the plain strings.
 
 ## Not on the page
 
 - Weight, body dimensions, body shape name.
-- Retail price, stock and availability (what you paid is under Ownership).
+- Retail price, stock and availability (the price paid is under Ownership).
 - Neck profile name beyond "Wizard II-7".
 - Gig bag model, pickup output or resistance figures, pot values and wiring.
 - Country of origin.
 - Other colours (the page shows Black Flat only).
-- Photos and diagrams: I did not view them.
+- Photos and diagrams: not reviewed.
 
 ## Links on the page
 

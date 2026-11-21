@@ -45,7 +45,7 @@ All interval strings, transpositions, Phrygian roots and degrees, scale-membersh
 
 ## 7. Add the Xiphos (factory and current tuning) and the 29" baritone
 
-Name the owner's seven-string instruments in the tables. All three tunings already appear in the p3 table, but none is tied to a guitar, and the p1 table lists only B standard for seven strings.
+Name the seven-string instruments in the tables. All three tunings already appear in the p3 table, but none is tied to a guitar, and the p1 table lists only B standard for seven strings.
 
 | Instrument | Tuning | Open notes | Semitones | Phrygian root |
 | --- | --- | --- | --- | --- |
@@ -66,10 +66,10 @@ All three have the same interval pattern, so the same shapes and fret numbers wo
 | B Phrygian | B C D E F# G A | F | F, Bb, Eb |
 | E minor pentatonic | E G A B D | C, F | C, F, Bb, Eb |
 
-  The G Phrygian row is the natural match for G standard, and A Phrygian for A standard. The other rows show what changes if you play the other scales on that tuning. These values and the 5-5-5-5-4-5 interval string were checked with a short script.
+  The G Phrygian row is the natural match for G standard, and A Phrygian for A standard. The other rows show what changes if the other scales are played on that tuning. These values and the 5-5-5-5-4-5 interval string were checked with a short script.
 - **Link to the scale guides:** the guides in `scales/pdfs/` are written for B standard and drop A. On the Xiphos the same fret numbers work, but they sound lower: a whole tone lower in A standard (A Phrygian instead of B Phrygian), and a major third lower in G standard (G Phrygian). Say this once on p3, using the Phrygian PDF's rule: keep the fret numbers and apply the same root rule.
 - **Where to change it:** add the new tunings to the tuning data in `generators/generate_tunings_reference.py`. Its assertions check the intervals and the Phrygian open-string rule.
-- **Not verified:** the instrument labels and the tunings come from you. I haven't checked them against manufacturer specifications.
+- **Not verified:** the instrument labels and the tunings are as supplied and have not been checked against manufacturer specifications.
 
 ## Sources checked
 

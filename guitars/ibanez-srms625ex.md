@@ -3,8 +3,8 @@
 5-string multi-scale bass (35.5" to 34"), Bartolini BH2 pickups, Ibanez 3-band EQ with bypass and a 3-way mid-frequency switch. Factory tuning B E A D G.
 
 - **Source:** https://www.ibanez.com/usa/products/detail/srms625ex_1p_03.html (Ibanez USA), read on 2026-11-21.
-- **Second source:** the Thomann Portugal listing https://www.thomann.pt/ibanez_srms625ex_bkf.htm. I did not fetch it; the content is the text you pasted into the session. Items from it are marked "Thomann" and collected in their own section.
-- **Basis:** every spec outside the Thomann section is from the Ibanez page. Anything I calculated or added is labelled. See "Still missing" for what neither source says.
+- **Second source:** the Thomann Portugal listing https://www.thomann.pt/ibanez_srms625ex_bkf.htm. The page itself was not fetched; the content here is the text copied from the listing. Items from it are marked "Thomann" and collected in their own section.
+- **Basis:** every spec outside the Thomann section is from the Ibanez page. Anything calculated or added is labelled. See "Still missing" for what neither source says.
 
 ## Identity
 
@@ -13,7 +13,7 @@
 | Model code | SRMS625EX |
 | Series | SR, electric basses |
 | Finish | BKF: Black Flat (the only colour listed) |
-| Line | Ibanez Iron Label (the page shows the logo beside the title, with no text; you and Thomann ("Iron Label Series") both give the line) |
+| Line | Ibanez Iron Label (the page shows the logo beside the title, with no text; Thomann lists "Iron Label Series") |
 | Hardware colour | Black |
 | Recommended case | MB300C |
 
@@ -21,7 +21,7 @@ The page doesn't state the number of strings as a field. Five follows from the f
 
 ## Ownership
 
-From you, not the page:
+Purchase and usage details (not from the page):
 
 | Field | Value |
 | --- | --- |
@@ -51,7 +51,7 @@ Labels are as on the page. The page runs the pickup labels together with "Passiv
 
 ## Thomann listing
 
-Pasted by you. It adds the details below that the Ibanez page lacks.
+Copied from the listing. It adds the details below that the Ibanez page lacks.
 
 | Field | Value |
 | --- | --- |
@@ -91,13 +91,13 @@ Factory tuning from the page is **B standard bass**, thickest to thinnest: B E A
 | 2 | D2 | .065 |
 | 1 (thinnest) | G2 | .045 |
 
-- The page gives note names only. The octave numbers are my assumption from the usual 5-string bass register.
+- The page gives note names only. The octave numbers are assumed from the usual 5-string bass register.
 - **General note, not on the page:** in D'Addario's naming, "5SL" means a five-string set for super long scale. The page doesn't explain the code.
 - **Calculated:** 4 gaps at 16.5 mm span 66 mm. The page doesn't say where the string spacing is measured.
 
 ## Electronics and controls
 
-Described in the page's text. I did not view the control diagram.
+Described in the page's text. The control diagram was not reviewed.
 
 - **Pickups:** two Bartolini BH2, passive. The page describes them as dual-coil with a long blade pole piece.
 - **Knobs:** three small knobs on the lower body edge are bass, mid and treble boost/cut. Two larger knobs near the bridge are pickup balance and volume.
@@ -133,7 +133,7 @@ Paraphrased from the page's feature blocks:
 
 - **Neck:** five pieces of maple and walnut.
 - **Fretboard:** Ebonol, a synthetic material made from layers of black paper and phenolic resin, described as giving a tight, bright sound.
-- **Multi scale:** said to give equalised string tension and a more lively tone, and to suit the hand angle as you move up the neck.
+- **Multi scale:** said to give equalised string tension and a more lively tone, and to suit the hand angle as the hand moves up the neck.
 - **Body:** okoume, described as bright and solid sounding.
 - **Pickups:** Bartolini BH2, dual-coil with a long blade pole piece.
 - **EQ:** the Ibanez Custom Electronics 3-band EQ with bypass and the 3-way mid switch.
@@ -152,13 +152,13 @@ The Ibanez page doesn't use the word "fanned" and says only "multi scale". Thoma
 
 Not in the Ibanez page or the Thomann paste:
 
-- Availability, weight and country of origin. Neither source gives a retail price; what you paid is under Ownership.
+- Availability, weight and country of origin. Neither source gives a retail price; the price paid is under Ownership.
 - Number of strings as a field, and the tuner model (Thomann says only "Ibanez machine heads").
 - Scale lengths of the middle strings, the fan angle and which end of the scale range is the low B.
 - Pickup output, resistance and wiring, pot values and battery or power details.
 - Other colours (the page shows Black Flat only).
-- Photos and diagrams (neck, control and EQ curve): I did not view them.
-- Whether any content sits behind tabs on the live page, since I read a text conversion.
+- Photos and diagrams (neck, control and EQ curve): not reviewed.
+- Whether any content sits behind tabs on the live page, since a text conversion of the page was read.
 
 ## Links on the page
 
