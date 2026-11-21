@@ -14,6 +14,7 @@
 | Series | Solar |
 | Type | A |
 | Line | A1 / 29+ (the page says "Solar Type A1" range and puts "29+" in the model code without explaining it) |
+| Announced | 7 July 2023 ([Music Players](https://musicplayers.com/?p=58486)), as "a new model to the Type A line", at 1399 € EU / 1299 USD. [Thomann](https://www.thomannmusic.com/solar_guitars_a1.7rop_29.htm) lists it "Available since August 2024", which is the retailer's listing date. Solar's product images were uploaded in July and August 2023. No shipping date found. |
 | Finish | Red Open Pore Matte |
 | Strings | 7 |
 | Left-handed shape | No |

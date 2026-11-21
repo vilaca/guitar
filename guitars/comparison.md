@@ -16,8 +16,11 @@ The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass
 | Body | Okoume | Swamp ash, 45 mm thick | Okoume |
 | Bridge | Edge-Zero II-7 tremolo, stud-lock | Evertune | MR5 (Mono-Rail V) |
 | Finish | Black Flat | Red Open Pore Matte | Black Flat |
+| Announced | 21 June 2021 | 7 July 2023 | 21 June 2021 |
 | Price on the page | Not on the page | $1,399 (list $1,699) | Not on the page |
 | Price paid | 1268 € on 18.11.2023 | 1359 € on 16.11.2026 | 1019 € on 16.04.2025 |
+
+"Announced" is the earliest date found, with the sources listed in each instrument's file. No shipping dates were found.
 
 ## Full comparison
 

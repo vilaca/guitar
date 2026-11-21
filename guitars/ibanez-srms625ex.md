@@ -14,6 +14,7 @@
 | Series | SR, electric basses |
 | Finish | BKF: Black Flat (the only colour listed) |
 | Line | Ibanez Iron Label (the page shows the logo beside the title, with no text; Thomann lists "Iron Label Series") |
+| Announced | 21 June 2021, with the Iron Label revival ([Guitar World](https://guitarworld.com/news/ibanez-iron-label-2021)); [No Treble](https://www.notreble.com/buzz/2021/06/25/ibanez-unveils-new-iron-label-series-basses/) covered the basses on 25 June 2021. No price or release date was given then. No shipping date found. |
 | Hardware colour | Black |
 | Recommended case | MB300C |
 

@@ -13,6 +13,7 @@
 | Model code | XPTB720 |
 | Series | X |
 | Line | Ibanez Iron Label (the page shows the logo) |
+| Announced | 21 June 2021, with the Iron Label revival ([Guitar World](https://guitarworld.com/news/ibanez-iron-label-2021)); no price or release date given then. [Equipboard](https://equipboard.com/items/ibanez-xptb720) lists the year as 2021. No shipping date found. |
 | Finish | BKF: Black Flat (the only colour listed) |
 | Strings | 7 |
 | Hardware colour | Black |
