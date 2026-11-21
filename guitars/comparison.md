@@ -1,108 +1,138 @@
-# Ibanez XPTB720 vs Solar A1.7ROP-29+
+# Ibanez XPTB720 vs Solar A1.7ROP-29+ vs Ibanez SRMS625EX
 
-Side by side. Specs come from the two manufacturer pages (read 2026-11-21); see `ibanez-xptb720.md` and `solar-a1.7rop-29.md` for the full lists. Sections marked "calculated" are my maths, and "general note" means it is not from either page.
+Side by side. Specs come from the three manufacturer pages (read 2026-11-21); see `ibanez-xptb720.md`, `solar-a1.7rop-29.md` and `ibanez-srms625ex.md` for the full lists. Sections marked "calculated" are my maths, and "general note" means it is not from any page.
+
+The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass, so some rows (strings, EQ) only compare loosely.
 
 ## At a glance
 
-| | Ibanez XPTB720 | Solar A1.7ROP-29+ |
-| --- | --- | --- |
-| Scale | 648 mm (25.5") | 29" (736.6 mm) |
-| Factory tuning | A standard: A D G C F A D | B standard: B E A D G B E |
-| Your current tuning | G standard: G C F Bb Eb G C | B standard (factory) |
-| Construction | Neck-through | Set thru |
-| Body | Okoume | Swamp ash, 45 mm thick |
-| Bridge | Edge-Zero II-7 tremolo, stud-lock | Evertune |
-| Price | Not on the page | $1,399 (list $1,699) |
+| | Ibanez XPTB720 | Solar A1.7ROP-29+ | Ibanez SRMS625EX |
+| --- | --- | --- | --- |
+| Instrument | 7-string guitar | 7-string guitar | 5-string bass |
+| Scale | 648 mm (25.5") | 29" (736.6 mm) | 901.7 mm (35.5") to 864.0 mm (34.0") |
+| Factory tuning | A standard: A D G C F A D | B standard: B E A D G B E | B standard: B E A D G |
+| Your tuning | G standard: G C F Bb Eb G C | B standard | Not stated |
+| Construction | Neck-through | Set thru | Not stated (neck described as "SRMS5 for Multi Scale") |
+| Body | Okoume | Swamp ash, 45 mm thick | Okoume |
+| Bridge | Edge-Zero II-7 tremolo, stud-lock | Evertune | MR5 (Mono-Rail V) |
+| Finish | Black Flat | Red Open Pore Matte | Black Flat |
+| Price | Not on the page | $1,399 (list $1,699) | Not on the page |
 
 ## Full comparison
 
 ### Neck and fretboard
 
-| | Ibanez XPTB720 | Solar A1.7ROP-29+ |
-| --- | --- | --- |
-| Neck wood | Wizard II-7, 5pc maple/walnut | 3 piece maple |
-| Neck shape | Wizard II-7 (thin, flat, per the page) | C Solar |
-| Fretboard | Ebony | Ebony |
-| Radius | 400 mmR | R400 |
-| Frets | 24, jumbo | 24, stainless steel, standard fretting |
-| Nut | Locking | PPS |
-| Width | 48 mm at the nut, 68 mm at fret 24 | 48 mm at fret 1 |
-| Thickness | 19 mm at fret 1, 21 mm at fret 12 | 20 mm at fret 1, 22 mm at fret 12 |
-| Side dots | Luminescent | Luminlay SG30L |
-| Top markers | Not listed | None |
-| Truss rod | Not listed | Dual action, tool included |
+| | Ibanez XPTB720 | Solar A1.7ROP-29+ | Ibanez SRMS625EX |
+| --- | --- | --- | --- |
+| Neck wood | Wizard II-7, 5pc maple/walnut | 3 piece maple | SRMS5 for Multi Scale, 5pc maple/walnut |
+| Neck shape | Wizard II-7 (thin, flat, per the page) | C Solar | Not named |
+| Fretboard | Ebony | Ebony | Ebonol |
+| Radius | 400 mmR | R400 | 305 mmR |
+| Frets | 24, jumbo | 24, stainless steel, standard fretting | 24, medium |
+| Nut | Locking | PPS | Not stated |
+| Width at nut | 48 mm | Not listed (48 mm at fret 1) | 45 mm |
+| Width at fret 24 | 68 mm | Not listed | 68 mm |
+| Thickness at fret 1 | 19 mm | 20 mm | 19.5 mm |
+| Thickness at fret 12 | 21 mm | 22 mm | 23 mm |
+| Side dots | Luminescent | Luminlay SG30L | Not listed |
+| Top markers | Not listed | None | Not listed |
+| Truss rod | Not listed | Dual action, tool included | Not listed |
 
-The width figures are not directly comparable. Ibanez measures at the nut and Solar at fret 1, where a neck is slightly wider. So the Solar nut is at most 48 mm, probably a touch narrower than the Ibanez. Thickness is measured at the same two points on both, and the Solar is 1 mm thicker at each.
+- **Width:** the figures at the nut and at fret 1 are not directly comparable. A neck is slightly wider at fret 1, so the Solar's nut is at most 48 mm, probably a touch narrower than the Ibanez 7-string's.
+- **Calculated:** 305 mm is a 12" radius and 400 mm is about 15.75". The two 7-strings share the flatter radius, and the bass is noticeably rounder.
+- **Fret 24 width:** the two Ibanez necks are both 68 mm there, while the bass starts 3 mm narrower at the nut and carries two fewer strings.
 
 ### Body, bridge and hardware
 
-| | Ibanez XPTB720 | Solar A1.7ROP-29+ |
-| --- | --- | --- |
-| Joint | Neck-through | Set thru |
-| Body | Okoume | Swamp ash, 45 mm |
-| Bridge | Edge-Zero II-7 | Evertune (constant tension) |
-| String space | 10.8 mm | Not listed |
-| Machine heads | Gotoh | Solar Locking, 18:1 |
-| Hardware | Black | Black |
-| Finish | Black Flat | Red Open Pore Matte |
-| Origin | Not listed | Indonesia |
+| | Ibanez XPTB720 | Solar A1.7ROP-29+ | Ibanez SRMS625EX |
+| --- | --- | --- | --- |
+| Joint | Neck-through | Set thru | Not stated |
+| Body | Okoume | Swamp ash, 45 mm | Okoume |
+| Bridge | Edge-Zero II-7 | Evertune (constant tension) | MR5, saddles locked individually |
+| String space | 10.8 mm | Not listed | 16.5 mm |
+| Machine heads | Gotoh | Solar Locking, 18:1 | Not listed |
+| Hardware | Black | Black | Black |
+| Logo | Iron Label | n/a | Iron Label |
+| Origin | Not listed | Indonesia | Not listed |
 
 ### Electronics
 
-| | Ibanez XPTB720 | Solar A1.7ROP-29+ |
-| --- | --- | --- |
-| Pickups | 2 × DiMarzio D Activator 7, passive, ceramic | 2 × Duncan Solar+, passive, Alnico VIII (per the page's description) |
-| Mounting | Not listed | Screwed into wood |
-| Controls | Volume, tone, 3-way switch | Volume, tone, 5-way blade switch |
-| Pots | Not listed | 500k volume, 500k tone, 473K tone cap |
-| Knobs | Not listed | Black metal dome |
+| | Ibanez XPTB720 | Solar A1.7ROP-29+ | Ibanez SRMS625EX |
+| --- | --- | --- | --- |
+| Pickups | 2 × DiMarzio D Activator 7, passive, ceramic | 2 × Duncan Solar+, passive, Alnico VIII (per the page's description) | 2 × Bartolini BH2, passive, dual-coil |
+| Mounting | Not listed | Screwed into wood | Not listed |
+| Controls | Volume, tone, 3-way switch | Volume, tone, 5-way blade switch | Volume, pickup balance, bass/mid/treble, 3-way mid-frequency switch, EQ bypass switch |
+| Pots | Not listed | 500k volume, 500k tone, 473K tone cap | Not listed |
+| Knobs | Not listed | Black metal dome | Not listed |
 
-The Solar page doesn't say what the 5-way switch selects with two pickups.
+- The Solar page doesn't say what the 5-way switch selects with two pickups.
+- The bass EQ is a three-band boost/cut of about ±15 dB per band. The mid band peaks at 250, 450 or 700 Hz. With the EQ bypassed, the treble knob acts as a passive tone control.
 
 ### Strings
 
-| | Ibanez XPTB720 | Solar A1.7ROP-29+ |
-| --- | --- | --- |
-| Brand and set | D'Addario XL-140+ .064 | Blacksmith |
-| Gauges, thin to thick | .010 / .013 / .017 / .030 / .042 / .052 / .064 | .009 / .011 / .016 / .024w / .032w / .044w / .062w |
-| Open notes, thin to thick | D4 A3 F3 C3 G2 D2 A1 | E4 B3 G3 D3 A2 E2 B1 |
+| | Ibanez XPTB720 | Solar A1.7ROP-29+ | Ibanez SRMS625EX |
+| --- | --- | --- | --- |
+| Brand and set | D'Addario XL-140+ .064 | Blacksmith | D'Addario EXL170-5SL |
+| Gauges, thin to thick | .010 / .013 / .017 / .030 / .042 / .052 / .064 | .009 / .011 / .016 / .024w / .032w / .044w / .062w | .045 / .065 / .080 / .100 / .130 |
+| Open notes, thin to thick | D4 A3 F3 C3 G2 D2 A1 | E4 B3 G3 D3 A2 E2 B1 | G2 D2 A1 E1 B0 |
 
 ### In the box
 
-| | Ibanez XPTB720 | Solar A1.7ROP-29+ |
-| --- | --- | --- |
-| Gig bag | Included | None, and the page notes it does not fit hardcase MCAS |
-| Truss rod tool | Not listed | Included |
+| | Ibanez XPTB720 | Solar A1.7ROP-29+ | Ibanez SRMS625EX |
+| --- | --- | --- | --- |
+| Gig bag or case | Gig bag included | None, and the page notes it does not fit hardcase MCAS | Not stated; recommended case MB300C |
+| Truss rod tool | Not listed | Included | Not listed |
 
 ## What the scale difference means (calculated)
 
-- **Length:** 736.6 mm vs 648 mm is 88.6 mm longer, a ratio of 1.137.
-- **Fret spacing:** fret 1 is about 36 mm from the nut on the 25.5" scale and about 41 mm on the 29". The 12th fret sits at 324 mm and 368 mm.
-- **Tension:** at the same string gauge and pitch, tension grows with the square of scale length. The 29" scale carries about 29% more.
+| | Ibanez XPTB720 | Solar A1.7ROP-29+ | Ibanez SRMS625EX |
+| --- | --- | --- | --- |
+| Scale | 648 mm | 736.6 mm | 863.6 mm to 901.7 mm |
+| Fret 1 from the nut | about 36 mm | about 41 mm | about 48.5 mm to 50.6 mm |
+| Fret 12 from the nut | 324 mm | 368 mm | 431.8 mm to 450.9 mm |
 
-### Plain-string tension, estimated
+- **Solar vs Ibanez 7-string:** 736.6 mm vs 648 mm is 88.6 mm longer, a ratio of 1.137.
+- **Bass vs Solar:** the bass's range is 127 to 165 mm longer than the Solar's 29". The page doesn't say which end of the range is the low B.
+- **Tension rule:** at the same string gauge and pitch, tension grows with the square of scale length. The 29" scale carries about 29% more than the 25.5". The same rule applies to the bass, but I haven't estimated its tension, because its strings are not plain wire (see below).
 
-These are for the first three (plain) strings only, using each guitar's factory gauges, A4 = 440 Hz and steel at 7.85 g/cm³. The Solar page marks its wound strings with "w", so its first three are plain. The Ibanez page doesn't mark them, so I assumed .010, .013 and .017 are plain. Wound strings need the maker's unit weights, so I left them out. Treat the values as estimates, probably within a few percent.
+### Plain-string tension, guitars only (estimated)
+
+These are for the first three strings only, using each guitar's factory gauges, A4 = 440 Hz and steel at 7.85 g/cm³. The Solar page marks its wound strings with "w", so its first three are plain. The Ibanez 7-string page doesn't mark them, so I assumed .010, .013 and .017 are plain. Wound strings need the maker's unit weights, so I left them out. The bass page doesn't mark wound strings either. Bass strings at .045 and up are normally wound, so I left the bass out. Treat the values as estimates, probably within a few percent.
 
 | Setup | String 1 | String 2 | String 3 |
 | --- | --- | --- | --- |
-| Ibanez, A standard (D4 .010, A3 .013, F3 .017) | 12.9 lbf (57.6 N) | 12.3 lbf (54.6 N) | 13.2 lbf (58.8 N) |
-| Ibanez, G standard, same gauges (C4, G3, Eb3) | 10.3 lbf (45.7 N) | 9.7 lbf (43.3 N) | 10.5 lbf (46.7 N) |
+| Ibanez 7-string, A standard (D4 .010, A3 .013, F3 .017) | 12.9 lbf (57.6 N) | 12.3 lbf (54.6 N) | 13.2 lbf (58.8 N) |
+| Ibanez 7-string, G standard, same gauges (C4, G3, Eb3) | 10.3 lbf (45.7 N) | 9.7 lbf (43.3 N) | 10.5 lbf (46.7 N) |
 | Solar, B standard (E4 .009, B3 .011, G3 .016) | 17.1 lbf (76.0 N) | 14.3 lbf (63.7 N) | 19.1 lbf (84.9 N) |
 
 - Going from factory A standard to G standard on the Ibanez drops the plain strings by about 20%, to roughly 10 lbf. That is a slack feel unless you go up in gauge.
 - The Solar's plain strings carry about 14–19 lbf, and its tuning is two semitones above the Ibanez's factory tuning.
 
-## Tuning relationship
+## Tuning relationship (calculated)
 
-All three tunings share one interval pattern, 5-5-5-5-4-5. The scale guides in `../scales/pdfs/` are written for B standard, so they match the Solar exactly. On the Ibanez the same fret numbers work but sound lower: a whole tone in A standard, and a major third in G standard. Each tuning's open-string Phrygian root is its lowest string: B on the Solar, A in A standard and G in G standard on the Ibanez.
+All the guitar tunings share one interval pattern, 5-5-5-5-4-5. The bass is B E A D G, which is the same pattern minus the top two strings, with no 4-semitone gap anywhere.
+
+| | Lowest five strings | Relation to the Solar (B standard) |
+| --- | --- | --- |
+| Solar A1.7ROP-29+ | B E A D G | Same notes, same register |
+| Ibanez SRMS625EX | B E A D G | Same notes, one octave lower (B0 to G2 is 31 to 98 Hz, against 62 to 196 Hz) |
+| Ibanez XPTB720, A standard | A D G C F | A whole tone lower |
+| Ibanez XPTB720, G standard | G C F Bb Eb | A major third lower |
+
+- **Scale guides:** the guides in `../scales/pdfs/` are written for B standard, so they match the Solar exactly. On the bass the five open strings match strings 7 to 3 of those tabs, one octave lower. On the Ibanez 7-string the same fret numbers work but sound lower.
+- **Open strings in scales:** B E A D G are all inside B Phrygian and E minor pentatonic. In the Bb dominant bebop collection, B and E are outside.
+- **Phrygian root by lowest string:** B on the Solar and the bass, A in A standard and G in G standard on the Ibanez 7-string.
 
 ## Practical notes (general, not from the pages)
 
-- **Changing tuning on the Ibanez:** a tremolo balances string tension against its springs, so a move to G standard or a change of gauge normally needs the trem re-balanced and the intonation reset. The page mentions a stud-lock function for tuning stability.
+- **Changing tuning on the Ibanez 7-string:** a tremolo balances string tension against its springs, so a move to G standard or a change of gauge normally needs the trem re-balanced and the intonation reset. The page mentions a stud-lock function for tuning stability.
 - **Changing tuning on the Solar:** an Evertune is set up for a specific tuning and gauge set. Ask Solar or the Evertune documentation before changing either.
-- **Fit for the repo's tuning docs:** the Ibanez is the A-standard and G-standard guitar in `tunings/fixes.md` item 7. The Solar is the B-standard baritone there.
+- **Bass in a different tuning:** the page says the multi-scale layout gives equalised tension, which is designed around the factory tuning and gauges. Check string tension and the intonation setup before changing either.
+- **Fit for the repo's tuning docs:** the Ibanez 7-string is the A-standard and G-standard guitar in `tunings/fixes.md` item 7. The Solar is the B-standard baritone there. The bass isn't in that document.
 
-## Things neither page says
+## Things the pages don't say
 
-Weight, pickup output figures, and photos I haven't seen. Ibanez also gives no price or origin, and Solar gives no warranty text on the page.
+- **All three:** weight, and pickup output figures. I haven't seen the photos.
+- **Ibanez 7-string and bass:** price and origin.
+- **Bass only:** joint type, nut material, tuner model, neck profile name, middle-string scale lengths and the fan angle.
+- **Solar only:** no warranty text on the page.
