@@ -99,7 +99,7 @@ The page gives note names only. The octave numbers are my assumption from the us
 ## Not on the page
 
 - Weight, body dimensions, body shape name.
-- Price, stock and availability.
+- Retail price, stock and availability (what you paid is under Ownership).
 - Neck profile name beyond "Wizard II-7".
 - Gig bag model, pickup output or resistance figures, pot values and wiring.
 - Country of origin.

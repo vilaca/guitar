@@ -134,6 +134,6 @@ All the guitar tunings share one interval pattern, 5-5-5-5-4-5. The bass is B E 
 ## Things the pages don't say
 
 - **All three:** weight, and pickup output figures. I haven't seen the photos.
-- **Ibanez 7-string and bass:** price and origin.
+- **Ibanez 7-string and bass:** retail price and origin (what you paid is in the "Paid by you" row).
 - **Bass only:** the tuner model (Thomann says only "Ibanez machine heads"), the middle-string scale lengths and the fan angle.
 - **Solar only:** no warranty text on the page.

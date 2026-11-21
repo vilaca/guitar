@@ -152,7 +152,7 @@ The Ibanez page doesn't use the word "fanned" and says only "multi scale". Thoma
 
 Not in the Ibanez page or the Thomann paste:
 
-- Price (the page and the paste give none), availability, weight and country of origin.
+- Availability, weight and country of origin. Neither source gives a retail price; what you paid is under Ownership.
 - Number of strings as a field, and the tuner model (Thomann says only "Ibanez machine heads").
 - Scale lengths of the middle strings, the fan angle and which end of the scale range is the low B.
 - Pickup output, resistance and wiring, pot values and battery or power details.
