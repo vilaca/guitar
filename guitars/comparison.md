@@ -132,7 +132,7 @@ All the guitar tunings share one interval pattern, 5-5-5-5-4-5. The bass is B E 
 
 ## Practical notes (general, not from the pages)
 
-- **Changing tuning on the Ibanez 7-string:** a tremolo balances string tension against its springs, so a move to G standard or a change of gauge normally needs the trem re-balanced and the intonation reset. The page mentions a stud-lock function for tuning stability.
+- **Changing tuning on the Ibanez 7-string:** a tremolo balances string tension against its springs, so a move to G standard or a change of gauge normally needs the trem re-balanced and the intonation reset. The page mentions a stud-lock function for tuning stability. The Edge-Zero II manual names dropped tunings and gauge changes as reasons to change the spring count; see `ibanez-edge-zero-ii-setup.md`.
 - **Changing tuning on the Solar:** an Evertune is set up for a specific tuning and gauge set. Ask Solar or the Evertune documentation before changing either.
 - **Bass in a different tuning:** the page says the multi-scale layout gives equalised tension, which is designed around the factory tuning and gauges. Check string tension and the intonation setup before changing either.
 - **Fit for the repo's tuning docs:** the Ibanez 7-string is the A-standard and G-standard guitar in `tunings/fixes.md` item 7. The Solar is the B-standard baritone there. The bass isn't in that document.

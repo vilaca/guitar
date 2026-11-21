@@ -25,6 +25,7 @@ guitar/
     ├── solar-a1.7rop-29.md
     ├── comparison.md
     ├── ibanez-srms625ex.md
+    ├── ibanez-edge-zero-ii-setup.md
     └── manuals/
 ```
 

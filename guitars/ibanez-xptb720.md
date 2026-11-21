@@ -156,4 +156,4 @@ The entry shows model XPTB720-BKF, suffix 1P01, production year "2021/05-" and t
 
 ## Manuals
 
-- [`manuals/ibanez-edge-zero-ii-tremolo.pdf`](manuals/ibanez-edge-zero-ii-tremolo.pdf): Ibanez "Edge-Zero2 tremolo bridge" manual, 4 pages, English. Downloaded 2026-11-21 from http://www.hoshinogakki.co.jp/pdf/ibanez/manual/en/eg/03_EN_AUG14978_edgezero2.pdf, which the Ibanez manuals index links. It covers the standard Edge-Zero II, not the Edge-Zero II-7 fitted to this model, and the index has no model-specific manual.
+- [`manuals/ibanez-edge-zero-ii-tremolo.pdf`](manuals/ibanez-edge-zero-ii-tremolo.pdf): Ibanez "Edge-Zero2 tremolo bridge" manual, 4 pages, English. Downloaded 2026-11-21 from http://www.hoshinogakki.co.jp/pdf/ibanez/manual/en/eg/03_EN_AUG14978_edgezero2.pdf, which the Ibanez manuals index links. It covers the standard Edge-Zero II, not the Edge-Zero II-7 fitted to this model, and the index has no model-specific manual. Setup procedures and the implications for G standard are summarised in [`ibanez-edge-zero-ii-setup.md`](ibanez-edge-zero-ii-setup.md).
