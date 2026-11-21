@@ -1,0 +1,249 @@
+#!/usr/bin/env python3
+"""Generate a DOCX and PDF reference to the tunings discussed.
+
+Install: python -m pip install python-docx reportlab
+Run: python generate_tunings_reference.py --output-dir generated
+"""
+from pathlib import Path
+import argparse
+import re
+from xml.sax.saxutils import escape
+
+def pc(note):
+    m=re.fullmatch(r'([A-G])([#b]?)',note)
+    assert m,note
+    return ({'C':0,'D':2,'E':4,'F':5,'G':7,'A':9,'B':11}[m[1]]+
+            {'':0,'#':1,'b':-1}[m[2]])%12
+
+def intervals(notes):
+    pitches=[pc(n) for n in notes.split()]
+    return [(b-a)%12 for a,b in zip(pitches,pitches[1:])]
+
+def tuning(name,notes,expected):
+    assert intervals(notes)==expected,(name,intervals(notes),expected)
+    return [name,notes,'-'.join(map(str,expected))]
+
+PAGES=[]
+def page(title):
+    p={'title':title,'blocks':[]};PAGES.append(p);return p['blocks']
+def para(p,s):p.append(('p',s))
+def heading(p,s):p.append(('h',s))
+def grid(p,heads,rows,weights):p.append(('t',heads,rows,weights))
+def link(p,label,url):p.append(('link',label,url))
+
+p=page('Guitar tunings discussed')
+para(p,'A reference to the standard, all-fourths, drop and repeated-note tunings explored in our discussion, including the Josh Homme and Stephen Carpenter examples. The note order and interval pattern let you compare what changes physically and musically.')
+heading(p,'Reading the tuning tables')
+para(p,'Every tuning runs from thickest to thinnest string. Intervals are ascending semitones between adjacent open strings. 5 = perfect fourth; 4 = major third; 3 = minor third; 7 = perfect fifth; 0 = unison. The # symbol means sharp and b means flat. Octaves are shown only where the register matters; C4 is middle C.')
+heading(p,'The original eight string changes')
+grid(p,['Version','Open notes','Semitones'],[
+ tuning('Original sequence','G# B E A D G B E',[3,5,5,5,5,4,5]),
+ tuning('First interval changed to 5','F# B E A D G B E',[5,5,5,5,5,4,5]),
+ tuning('Same pattern starting on E','E A D G C F A D',[5,5,5,5,5,4,5])],[1.6,2.3,1.7])
+para(p,'Changing G# to F# makes the first gap a perfect fourth. Moving the entire second tuning down a whole tone gives the E-starting version and preserves every interval.')
+heading(p,'Standard reference tunings')
+grid(p,['Strings','Open notes','Semitones'],[
+ tuning('6','E A D G B E',[5,5,5,4,5]),
+ tuning('7','B E A D G B E',[5,5,5,5,4,5]),
+ tuning('8','F# B E A D G B E',[5,5,5,5,5,4,5])],[.65,2.7,2.25])
+para(p,'The 4-semitone gap is G to B. It helps familiar open chords and their movable barre forms. All-fourths tuning removes that exception, making shapes transfer consistently across string groups; many smaller chord voicings remain practical in either system.')
+
+p=page('All fourths and C major')
+para(p,'All-fourths tuning puts exactly 5 semitones between adjacent strings. A conventional drop modification lowers only the thickest string a whole tone, changing its first interval from 5 to 7 semitones.')
+heading(p,'The all fourths examples')
+grid(p,['Strings and layout','Open notes','Semitones'],[
+ tuning('6 all fourths','E A D G C F',[5,5,5,5,5]),
+ tuning('7 all fourths','B E A D G C F',[5,5,5,5,5,5]),
+ tuning('7 custom drop E','E B E A D G C',[7,5,5,5,5,5]),
+ tuning('7 custom drop A','A E A D G C F',[7,5,5,5,5,5])],[1.6,2.3,1.7])
+heading(p,'Seven strings using only C major notes')
+para(p,'With seven strings and every gap fixed at 5 semitones, B E A D G C F is the only pitch-class sequence entirely inside C major. Starting elsewhere reaches F to Bb before filling all seven strings. Choosing another octave changes the register, not that sequence.')
+para(p,'Allowing a 7-semitone first gap and keeping the remaining gaps at 5 gives two C-major-only choices: E B E A D G C and A E A D G C F. Their three lowest strings form root-fifth-octave shapes.')
+heading(p,'How the layouts feel')
+grid(p,['Layout','What it makes convenient'],[
+ ['All fourths','Scales, arpeggios and small voicings move consistently across strings.'],
+ ['Drop plus all fourths','A low root-fifth-octave shape, with regular fourths above it.'],
+ ['Standard with its major third','Conventional open and barre-chord shapes, plus the familiar fretboard layout.']],[1.65,3.95])
+para(p,'The custom seven-string drop E above ends on C. The Deftones eight-string drop E on page 5 ends on E. The lowest note alone does not identify the whole tuning.')
+
+p=page('Lower tunings and open string scales')
+para(p,'For the conventional seven-string family, our Phrygian rule was: use the open thickest string as the scale root in standard tuning; use a root one whole tone above that string in drop tuning. With that rule, every open string fits the selected Phrygian scale.')
+grid(p,['Seven string tuning','Open notes','Phrygian root'],[
+ ['B standard','B E A D G B E','B'],['A standard','A D G C F A D','A'],
+ ['G standard','G C F Bb Eb G C','G'],['Drop A','A E A D G B E','B'],
+ ['Drop G','G D G C F A D','A'],['Drop F','F C F Bb Eb G C','G'],
+ ['Drop Eb','Eb Bb Eb Ab Db F Bb','F']],[1.45,2.8,1.35])
+for row in p[-1][2]:
+    expected=[7,5,5,5,4,5] if row[0].startswith('Drop') else [5,5,5,5,4,5]
+    assert intervals(row[1])==expected
+    root=pc(row[2]);scale={(root+i)%12 for i in [0,1,3,5,7,8,10]}
+    assert all(pc(n) in scale for n in row[1].split())
+para(p,'Standard open-string degrees are 1-4-b7-b3-b6-1-4. In drop tuning they are b7-4-b7-b3-b6-1-4. Lowering the thickest string changes its scale degree from 1 to b7, still inside Phrygian. Drop Eb here means seven strings; a six-string tuning with the same name has a different full note sequence.')
+heading(p,'Other scales from the discussion')
+grid(p,['Scale','Notes','Open pitches outside it'],[
+ ['B Phrygian','B C D E F# G A','None'],
+ ['B minor pentatonic','B D E F# A','G'],
+ ['E minor pentatonic','E G A B D','None'],
+ ['G Phrygian','G Ab Bb C D Eb F','B, E, A'],
+ ['Bb dominant bebop','Bb C D Eb F G Ab A','B, E']],[1.55,2.1,1.95])
+para(p,'This last table applies to B standard and drop A, the seven-string tunings used in the scale guides. A note belonging to a scale can still create tension against a particular chord; scale membership does not make every open drone equally settled.')
+
+p=page('Josh Homme and the G D tuning')
+para(p,'The Queens of the Stone Age example discussed was G G D G D D. The sequence is reported in a viewer transcription of Josh Homme\'s Rick Beato interview [1, 2]. The octave mapping below is the worked realization used in our discussion, rather than an independently verified setup from the video.')
+heading(p,'Discussed six string pitch realization')
+grid(p,['String','Standard reference','G D realization','Change'],[
+ ['6','E2','G2','Up 3 semitones'],['5','A2','G2','Down 2 semitones'],
+ ['4','D3','D3','Unchanged'],['3','G3','G3','Unchanged'],
+ ['2','B3','D4','Up 3 semitones'],['1','E4','D4','Down 2 semitones']],[.55,1.55,1.65,1.85])
+assert intervals('G G D G D D')==[0,7,5,7,0]
+para(p,'Thickest to thinnest: G2 G2 D3 G3 D4 D4. The adjacent intervals are 0-7-5-7-0 semitones. Strings 6 and 5 are in unison; strings 2 and 1 are also in unison. These pairs are not octave doubles.')
+heading(p,'Why this tuning works')
+para(p,'Every open string is either G or D, so the whole guitar forms a G5 power chord. There is no third, leaving the major or minor character for a melody, another instrument or a fretted note. Repeated notes support ringing drones and a doubled texture; slight differences between matching pitches can create beating and a chorus-like shimmer.')
+grid(p,['Shape','Result'],[
+ ['All strings open','G5'],['Barre all strings at fret 3','Bb5'],['Barre all strings at fret 5','C5'],
+ ['Open strings plus string 3 at fret 3','Adds Bb, producing G minor'],
+ ['Open strings plus string 3 at fret 4','Adds B, producing G major']],[2.8,2.8])
+para(p,'The tuning favours repeating notes, drones and large chord textures. It gives up the broad pitch coverage and consistent scale shapes of an all-fourths layout. The interval map above is for the exact unisons shown; different octave choices would change it.')
+
+p=page('Stephen Carpenter and Deftones')
+para(p,'The Deftones examples went beyond lowering a bass string. Stephen Carpenter also used seven-string instruments with a duplicated highest string. Premier Guitar\'s 2013 rig rundown documents both repeated-note tunings and his standard eight-string tuning [3].')
+grid(p,['Layout','Open notes','Semitones'],[
+ tuning('7 strings with doubled high E','E A D G B E E',[5,5,5,4,5,0]),
+ tuning('7 strings with doubled high D','C G C F A D D',[7,5,5,4,5,0]),
+ tuning('8 string standard','F# B E A D G B E',[5,5,5,5,5,4,5]),
+ tuning('8 string drop E','E B E A D G B E',[7,5,5,5,5,4,5])],[1.7,2.2,1.7])
+heading(p,'Doubled high strings')
+para(p,'The seven-string realizations are E2 A2 D3 G3 B3 E4 E4 and C2 G2 C3 F3 A3 D4 D4. The extra string repeats the top pitch instead of extending the bass range. Carpenter described an extra high string as a drone in a later interview [4].')
+heading(p,'Standard eight string and drop E')
+para(p,'For the eight-string examples, F#1 B1 E2 A2 D3 G3 B3 E4 becomes E1 B1 E2 A2 D3 G3 B3 E4 when only the thickest string drops a whole tone. Carpenter described that change in the 2016 interview [4]. The lowest three strings then form E-B-E, a root-fifth-octave shape.')
+heading(p,'Relationship to the Homme example')
+grid(p,['Feature','Homme G D example','Carpenter doubled top'],[
+ ['Repeated pitches','Both outer pairs','Highest pair'],
+ ['All open strings one power chord','Yes, G and D only','No, a wider collection'],
+ ['Familiar standard shapes','Substantially altered','Retained across the original six-string layout']],[1.85,1.8,1.95])
+para(p,'These are the particular setups discussed, not a complete catalogue of either artist\'s tunings.')
+
+p=page('Choosing a layout and checking sources')
+heading(p,'Compare the musical priorities')
+grid(p,['If you want','Relevant tuning family'],[
+ ['Consistent shapes across strings','All fourths: E A D G C F, or B E A D G C F.'],
+ ['A low power-chord shape','A drop tuning, with a 7-semitone first interval.'],
+ ['All-fourths regularity above a dropped bass','The custom seven-string E B E A D G C or A E A D G C F.'],
+ ['A whole guitar built from root and fifth','The discussed G G D G D D realization.'],
+ ['An extra high drone without another bass string','The Deftones E A D G B E E or C G C F A D D examples.']],[2.35,3.25])
+heading(p,'Three distinctions to keep clear')
+para(p,'Pitch classes and octaves are different: G2 and G3 share a note name but are an octave apart. A unison is the same pitch, such as G2 and G2. The register matters whenever you compare actual semitone distances.')
+para(p,'Lowering the whole tuning preserves every interval and transposes the fretboard shapes. Dropping only the thickest string changes the first interval. Neither operation decides the tonal centre of the music by itself.')
+para(p,'A tuning lists available open notes; a scale defines a pitch collection; a tonal centre is the note that feels like home. The same tuning can support many scales and centres.')
+heading(p,'Sources for the artist examples')
+link(p,'1  Rick Beato interview excerpt on Josh Homme tuning','https://www.youtube.com/watch?v=NE81yc52qto')
+link(p,'2  Viewer transcription pointing to G G D G D D around 52 minutes','https://www.guitarristas.info/foros/josh-homme-echopark-signature/349903')
+link(p,'3  Premier Guitar Deftones rig rundown from November 2013','https://www.premierguitar.com/rig-rundown-deftones-stephen-carpenter-sergio-vega')
+link(p,'4  Premier Guitar A Little Darkness interview from March 2016','https://www.premierguitar.com/artists/deftones-a-little-darkness')
+para(p,'The interval patterns and scale-membership statements in this reference are calculated from the listed notes. Artist associations follow the sources above; the Homme octave realization is explicitly identified as a worked example.')
+
+def make_docx(path):
+    from docx import Document
+    from docx.shared import Inches,Pt,RGBColor
+    from docx.enum.table import WD_TABLE_ALIGNMENT,WD_CELL_VERTICAL_ALIGNMENT
+    from docx.oxml import OxmlElement
+    from docx.oxml.ns import qn
+    from docx.opc.constants import RELATIONSHIP_TYPE as RT
+    doc=Document();sec=doc.sections[0]
+    sec.page_width=Inches(8.5);sec.page_height=Inches(11)
+    sec.top_margin=sec.bottom_margin=Inches(.65)
+    sec.left_margin=sec.right_margin=Inches(.7)
+    normal=doc.styles['Normal'];normal.font.name='Calibri';normal.font.size=Pt(10.5)
+    normal.paragraph_format.space_after=Pt(7);normal.paragraph_format.line_spacing=1.08
+    for name,size in [('Title',23),('Heading 1',16),('Heading 2',12)]:
+        st=doc.styles[name];st.font.name='Calibri';st.font.size=Pt(size);st.font.color.rgb=RGBColor(0,0,0)
+        st.paragraph_format.space_after=Pt(8)
+        st.paragraph_format.space_before=Pt(10 if name=='Heading 2' else 0)
+    for idx,page in enumerate(PAGES):
+        if idx:doc.add_page_break()
+        doc.add_paragraph(page['title'],'Title' if idx==0 else 'Heading 1')
+        for block in page['blocks']:
+            if block[0]=='p':doc.add_paragraph(block[1])
+            elif block[0]=='h':doc.add_paragraph(block[1],'Heading 2')
+            elif block[0]=='link':
+                p=doc.add_paragraph();p.paragraph_format.space_after=Pt(6)
+                h=OxmlElement('w:hyperlink');h.set(qn('r:id'),p.part.relate_to(block[2],RT.HYPERLINK,is_external=True))
+                r=OxmlElement('w:r');props=OxmlElement('w:rPr');color=OxmlElement('w:color');color.set(qn('w:val'),'000000');props.append(color);r.append(props)
+                t=OxmlElement('w:t');t.text=block[1];r.append(t);h.append(r);p._p.append(h)
+            else:
+                _,heads,rows,weights=block
+                table=doc.add_table(rows=1,cols=len(heads));table.alignment=WD_TABLE_ALIGNMENT.CENTER;table.autofit=False
+                widths=[7.1*w/sum(weights) for w in weights]
+                for col,width in zip(table.columns,widths):col.width=Inches(width)
+                for i,row in enumerate([heads]+rows):
+                    cells=table.rows[0].cells if i==0 else table.add_row().cells
+                    for j,(cell,s) in enumerate(zip(cells,row)):
+                        cell.width=Inches(widths[j]);cell.vertical_alignment=WD_CELL_VERTICAL_ALIGNMENT.CENTER
+                        cell.text=str(s);pr=cell._tc.get_or_add_tcPr()
+                        shade=OxmlElement('w:shd');shade.set(qn('w:fill'),'404040' if i==0 else ('F4F4F4' if i%2==0 else 'FFFFFF'));pr.append(shade)
+                        borders=OxmlElement('w:tcBorders')
+                        for edge in ['top','left','bottom','right']:
+                            e=OxmlElement('w:'+edge);e.set(qn('w:val'),'single');e.set(qn('w:sz'),'4');e.set(qn('w:color'),'D9D9D9');borders.append(e)
+                        pr.append(borders)
+                        margins=OxmlElement('w:tcMar')
+                        for edge in ['top','left','bottom','right']:
+                            e=OxmlElement('w:'+edge);e.set(qn('w:w'),'65');e.set(qn('w:type'),'dxa');margins.append(e)
+                        pr.append(margins)
+                        for pp in cell.paragraphs:
+                            pp.paragraph_format.space_after=Pt(0);pp.paragraph_format.line_spacing=1.03
+                            for rr in pp.runs:rr.font.size=Pt(9.4);rr.bold=i==0;rr.font.color.rgb=RGBColor(255,255,255) if i==0 else RGBColor(0,0,0)
+                    if i==0:
+                        repeat=OxmlElement('w:tblHeader');table.rows[0]._tr.get_or_add_trPr().append(repeat)
+                    no_split=OxmlElement('w:cantSplit');table.rows[i]._tr.get_or_add_trPr().append(no_split)
+                doc.add_paragraph().paragraph_format.space_after=Pt(0)
+    foot=sec.footer.paragraphs[0];foot.alignment=2
+    field=OxmlElement('w:fldSimple');field.set(qn('w:instr'),'PAGE');foot._p.append(field)
+    # Some Word templates carry a coloured rule in the Title style.
+    for root in [doc.styles.element,doc._element]:
+        for border in root.xpath('.//w:pBdr'):
+            border.getparent().remove(border)
+    doc.core_properties.title='Guitar tunings discussed';doc.core_properties.author=''
+    doc.save(path)
+
+def make_pdf(path):
+    import reportlab
+    from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Table,TableStyle,PageBreak,KeepTogether
+    from reportlab.lib.styles import getSampleStyleSheet,ParagraphStyle
+    from reportlab.lib import colors
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.ttfonts import TTFont
+    font_dir=Path(reportlab.__file__).resolve().parent/'fonts'
+    for name,filename in [('RefBody','Vera.ttf'),('RefBold','VeraBd.ttf')]:pdfmetrics.registerFont(TTFont(name,str(font_dir/filename)))
+    styles=getSampleStyleSheet()
+    styles.add(ParagraphStyle('RefP',fontName='RefBody',fontSize=10,leading=13.3,spaceAfter=8))
+    styles.add(ParagraphStyle('RefH',fontName='RefBold',fontSize=12,leading=15,spaceBefore=8,spaceAfter=7,keepWithNext=True))
+    styles.add(ParagraphStyle('RefTitle',fontName='RefBold',fontSize=21,leading=25,spaceAfter=15))
+    styles.add(ParagraphStyle('RefCell',fontName='RefBody',fontSize=8.8,leading=11.4))
+    styles.add(ParagraphStyle('RefTH',parent=styles['RefCell'],fontName='RefBold',textColor=colors.white))
+    styles.add(ParagraphStyle('RefLink',parent=styles['RefP'],fontSize=9,leading=12,spaceAfter=6))
+    story=[];inner=7.1*72
+    for idx,page in enumerate(PAGES):
+        if idx:story.append(PageBreak())
+        story.append(Paragraph(escape(page['title']),styles['RefTitle']))
+        for b in page['blocks']:
+            if b[0]=='p':story.append(Paragraph(escape(b[1]),styles['RefP']))
+            elif b[0]=='h':story.append(Paragraph(escape(b[1]),styles['RefH']))
+            elif b[0]=='link':story.append(Paragraph('<link href="'+escape(b[2],{'"':'&quot;'})+'">'+escape(b[1])+'</link>',styles['RefLink']))
+            else:
+                _,heads,rows,weights=b
+                data=[[Paragraph(escape(str(s)),styles['RefTH'] if i==0 else styles['RefCell']) for s in row] for i,row in enumerate([heads]+rows)]
+                t=Table(data,colWidths=[inner*w/sum(weights) for w in weights],repeatRows=1,hAlign='LEFT')
+                t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),colors.HexColor('#404040')),('ROWBACKGROUNDS',(0,1),(-1,-1),[colors.white,colors.HexColor('#f4f4f4')]),('GRID',(0,0),(-1,-1),.4,colors.HexColor('#d9d9d9')),('VALIGN',(0,0),(-1,-1),'MIDDLE'),('LEFTPADDING',(0,0),(-1,-1),6),('RIGHTPADDING',(0,0),(-1,-1),6),('TOPPADDING',(0,0),(-1,-1),5),('BOTTOMPADDING',(0,0),(-1,-1),5)]))
+                story.extend([t,Spacer(1,9)])
+    def footer(c,doc):
+        c.setFont('RefBody',8);c.drawRightString(8.5*72-.7*72,25,str(doc.page))
+    SimpleDocTemplate(str(path),pagesize=(8.5*72,11*72),leftMargin=.7*72,rightMargin=.7*72,topMargin=.65*72,bottomMargin=.65*72,title='Guitar tunings discussed',author='').build(story,onFirstPage=footer,onLaterPages=footer)
+
+if __name__=='__main__':
+    ap=argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--output-dir',default='generated_tunings')
+    ap.add_argument('--format',choices=['docx','pdf','both'],default='both')
+    args=ap.parse_args();dest=Path(args.output_dir).expanduser().resolve();dest.mkdir(parents=True,exist_ok=True)
+    for fmt,writer in [('docx',make_docx),('pdf',make_pdf)]:
+        if args.format in [fmt,'both']:
+            out=dest/('guitar_tunings_discussed.'+fmt);writer(out);print(out)

@@ -47,7 +47,7 @@ The PDFs say "guitar + piano", but chords appear only as piano diagrams. Guitari
 
 ## B. Share one template across the generators (M)
 
-The generator source is now in `generators/` (done), so fixes can be made there and the PDFs regenerated into `pdfs/`. The three scripts are still standalone copies.
+The generator source is now in `scales/generators/` (done), so fixes can be made there and the PDFs regenerated into `scales/pdfs/`. The three scripts are still standalone copies.
 
 - Move the shared layout code into one module used by all three scripts.
 - This also fixes the font mismatch.
