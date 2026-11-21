@@ -1,6 +1,6 @@
 # Ibanez XPTB720 vs Solar A1.7ROP-29+ vs Ibanez SRMS625EX
 
-Side by side. Specs come from the three manufacturer pages (read 2026-11-21), plus a Thomann listing for the bass (marked "Thomann") and the Ibanez parts catalogue entry for the XPTB720 (marked "parts catalogue"); see `ibanez-xptb720.md`, `solar-a1.7rop-29.md` and `ibanez-srms625ex.md` for the full lists. Sections marked "calculated" are derived from the listed specs, and "general note" means it is not from any page.
+Side by side. Specs come from the three manufacturer pages (read 2026-11-21), plus a Thomann listing for the bass (marked "Thomann") and the Ibanez parts catalogue entries for the XPTB720 and the SRMS625EX (marked "parts catalogue"); see `ibanez-xptb720.md`, `solar-a1.7rop-29.md` and `ibanez-srms625ex.md` for the full lists. Sections marked "calculated" are derived from the listed specs, and "general note" means it is not from any page.
 
 The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass, so some rows (strings, EQ) only compare loosely.
 
@@ -17,7 +17,7 @@ The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass
 | Bridge | Edge-Zero II-7 tremolo, stud-lock | Evertune | MR5 (Mono-Rail V) |
 | Finish | Black Flat | Red Open Pore Matte | Black Flat |
 | Announced | 21 June 2021 | 7 July 2023 | 21 June 2021 |
-| Production start | 2021/05 (parts catalogue) | Not found | Not found |
+| Production start | 2021/05 (parts catalogue) | Not found | 2023/08, revision 1P03 (parts catalogue) |
 | Price on the page | Not on the page | $1,399 (list $1,699) | Not on the page |
 | Price paid | 1268 € on 18.11.2023 | 1359 € on 16.11.2026 | 1019 € on 16.04.2025 |
 
@@ -33,7 +33,7 @@ The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass
 | Neck shape | Wizard II-7 (thin, flat, per the page) | C Solar | SRMS5 Multi Scale (Thomann) |
 | Fretboard | Ebony | Ebony | Ebonol |
 | Radius | 400 mmR | R400 | 305 mmR |
-| Nut radius | R430 (parts catalogue; see `ibanez-xptb720.md`) | Not listed | Not listed |
+| Nut radius | R430 (parts catalogue; see `ibanez-xptb720.md`) | Not listed | R305 (parts catalogue; matches the fretboard) |
 | Frets | 24, jumbo | 24, stainless steel, standard fretting | 24, medium, fanned (Thomann) |
 | Nut | Locking | PPS | Plastic (Thomann) |
 | Width at nut | 48 mm | Not listed (48 mm at fret 1) | 45 mm |
@@ -56,7 +56,7 @@ The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass
 | Body | Okoume | Swamp ash, 45 mm | Okoume |
 | Bridge | Edge-Zero II-7 | Evertune (constant tension) | MR5, saddles locked individually |
 | String space | 10.8 mm | Not listed | 16.5 mm |
-| Machine heads | Gotoh (code SG381 in the parts catalogue) | Solar Locking, 18:1 | Ibanez, no model (Thomann) |
+| Machine heads | Gotoh (code SG381 in the parts catalogue) | Solar Locking, 18:1 | Ibanez, no model (Thomann); die-cast, flat black, 3 right and 2 left (parts catalogue) |
 | Hardware | Black | Black | Black |
 | Line | Ibanez Iron Label | Solar A1 / 29+ | Ibanez Iron Label |
 | Origin | Not listed | Indonesia | Not listed |
@@ -69,10 +69,11 @@ The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass
 | Mounting | Not listed | Screwed into wood | Not listed |
 | Controls | Volume, tone, 3-way switch | Volume, tone, 5-way blade switch | Volume, pickup balance, bass/mid/treble, 3-way mid-frequency switch, EQ bypass switch |
 | Pots | B500K volume, A500K tone, 0.022 µF tone cap (parts catalogue) | 500k volume, 500k tone, 473K tone cap | Not listed |
-| Knobs | Ibanez metal round head, large, black (parts catalogue) | Black metal dome | Not listed |
+| Knobs | Ibanez metal round head, large, black (parts catalogue) | Black metal dome | Ibanez metal round head, black: 2 large, 3 small (parts catalogue) |
+| Battery | None listed (passive pickups) | None listed (passive pickups) | 9 V 6LR6 in a snap-type box (parts catalogue) |
 
 - The Solar page doesn't say what the 5-way switch selects with two pickups.
-- The bass EQ is a three-band boost/cut of about ±15 dB per band. The mid band peaks at 250, 450 or 700 Hz. With the EQ bypassed, the treble knob acts as a passive tone control.
+- The bass EQ is a three-band boost/cut of about ±15 dB per band. The mid band peaks at 250, 450 or 700 Hz. With the EQ bypassed, the treble knob acts as a passive tone control. The EQ preamp is battery-powered (9 V, per the parts catalogue).
 
 ### Strings
 
@@ -86,7 +87,7 @@ The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass
 
 | | Ibanez XPTB720 | Solar A1.7ROP-29+ | Ibanez SRMS625EX |
 | --- | --- | --- | --- |
-| Gig bag or case | Gig bag included | None, and the page notes it does not fit hardcase MCAS | Not stated; recommended case MB300C |
+| Gig bag or case | Gig bag included | None, and the page notes it does not fit hardcase MCAS | Not stated; recommended case MB300C and bag IBB540-BK |
 | Truss rod tool | Not listed | Included | Not listed |
 
 ## What the scale difference means (calculated)
