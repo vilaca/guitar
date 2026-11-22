@@ -114,7 +114,7 @@ lines(H-110,['B Phrygian: B  C  D  E  F#  G  A',
 lines(H-150,['Phrygian is a minor sound with a lowered second: C sits a half-step above B.',
              'That half-step pull from C back to B is the scale\'s signature. B is home.'],9.5,15)
 txt(M, H-210, 'STANDARD 7-STRING | FRETS 0-12', 12, 'Bold')
-txt(M, H-228, 'Dark cells mark B roots. A dash marks a note outside B Phrygian.', 9)
+txt(M, H-228, 'Dark cells mark B roots. A dash marks a note outside the scale.', 9)
 left = M + 38
 cell_width = (W - M - left) / 13
 row_height = 29

@@ -59,6 +59,11 @@ def header(page,title,subtitle):
     txt(M,25,'E MINOR PENTATONIC | guitar + piano / synth',7)
     txt(W-M-30,25,f'{page}/{TOTAL}',7)
 
+def lines(y,rows,size=9,leading=15):
+    for r in rows:
+        txt(M,y,r,size);y-=leading
+    return y
+
 def table(y,heads,widths,rows,height=26,size=9):
     xs=[M]
     for w in widths:xs.append(xs[-1]+w)
@@ -76,17 +81,20 @@ def table(y,heads,widths,rows,height=26,size=9):
 
 
 header(1,'E MINOR PENTATONIC','Standard seven-string tuning | B E A D G B E')
+def section(y,title,paras):
+    txt(M,y,title,11,'Bold');y-=20
+    for p in paras:y=paragraph(y,p,9.5,15)-3
+    return y-12
 y=H-110
-for text,size in [
- ('Scale: E G A B D',12),('Formula from E: 1  b3  4  5  b7',10),
- ('E is the tonal centre: the note or chord where a phrase feels settled. The first note you play does not have to be E.',9.5),
- ('All seven open strings belong to the scale in standard tuning (B E A D G B E). Strings 6 and 1 are both E roots.',9.5),
- ('Unlike a seven-note minor scale, this collection has neither C nor F#. Those notes can appear in an accompaniment, but they are outside E minor pentatonic.',9.5)]:
-    y=paragraph(y,text,size)
-txt(M,560,'STANDARD 7-STRING | FRETS 0-12',12,'Bold')
-txt(M,542,'Dark cells = E roots. Other named cells = remaining scale notes.',9)
+y=paragraph(y,'E minor pentatonic: E  G  A  B  D',11,18)
+y=paragraph(y,'Formula from E: 1  b3  4  5  b7',11,18)
+y=H-150
+y=paragraph(y,'E is the tonal centre: the note where a phrase feels settled. The first note you play need not be E.',9.5,15)
+y=paragraph(y,'It leaves out F# and C from E natural minor; both can still appear in the accompaniment.',9.5,15)
+txt(M,H-210,'STANDARD 7-STRING | FRETS 0-12',12,'Bold')
+txt(M,H-228,'Dark cells mark E roots. A dash marks a note outside the scale.',9)
 opens=[64,59,55,50,45,40,35];labels=['1 e','2 B','3 G','4 D','5 A','6 E','7 B']
-x0=M+37;cw=(INNER-37)/13;rh=29;top=511
+x0=M+37;cw=(INNER-37)/13;rh=29;top=H-262
 for fret in range(13):center(x0+(fret+.5)*cw,top+9,str(fret),8,'Bold')
 for row,(op,label) in enumerate(zip(opens,labels)):
     yy=top-(row+1)*rh;txt(M,yy+10,label,9,'Bold')
@@ -97,12 +105,9 @@ for row,(op,label) in enumerate(zip(opens,labels)):
         c.setFillColor(white if root else black);c.setFont('Bold' if root else 'Body',9)
         c.drawCentredString(x0+(fret+.5)*cw,yy+10,NAMES[n] if n in ALLOWED else '-')
 y=top-7*rh-28
-y=paragraph(y,'Thinnest string at the top. A dash marks a note outside the scale. The map repeats 12 frets higher.',9)-12
-txt(M,y,'HOW TO READ THE PROGRESSION LABELS',11,'Bold');y-=20
-for t in ['[P] = every chord note belongs to the five-note pentatonic collection.',
-          '[H] = wider harmony. Chords marked * add outside notes, listed on page 5 or 12.',
-          'Example: Em-C*-G-D* is common E minor harmony. C adds C natural; D adds F#. The melody can still begin with E-G-A-B-D, but listen to how each note meets the current chord.']:
-    y=paragraph(y,t,9.3)-6
+y=paragraph(y,'Thinnest string at the top. The map repeats 12 frets higher.',9)-14
+y=section(y,'Root rule',['E is the root on open strings 6 and 1, and on string 7 at fret 5. All seven open strings fit E minor pentatonic.'])
+y=section(y,'How to read the progression labels',['[P] = every chord note belongs to the five-note pentatonic collection.','[H] = wider harmony. Chords marked * add outside notes, listed on page 5 or 12.','Example: Em-C*-G-D* is common E minor harmony. C adds C natural; D adds F#.'])
 assert y>45
 c.showPage()
 
@@ -205,19 +210,20 @@ basic=[('Em','E2','G3 B3 E4'),('G','G2','G3 B3 D4'),('Esus4','E2','A3 B3 E4'),
        ('Asus2','A2','A3 B3 E4'),('Dsus4','D3','A3 D4 G4'),('Asus4','A2','A3 D4 E4'),
        ('C','C3','G3 C4 E4'),('D','D3','A3 D4 F#4')]
 header(3,'PIANO KEYS | BASIC CHORDS','L = left-hand bass | R = right-hand chord | C4 = middle C')
-txt(M,H-103,'The first six chords are [P]. C* and D* add outside notes, visibly shown below.',8.8)
+txt(M,H-105,'Play each L and all three R keys together. Shading also marks the selected white keys.',9)
 for i,(ch,lh,rh) in enumerate(basic):
     verify(ch,lh,rh);top=H-128-i*80;star='*' if OUTSIDE[ch] else ''
     txt(M,top,ch+star,11,'Bold');txt(M+96,top,'LH: '+lh+'     RH: '+rh,9)
     piano(top-48,lh,rh)
-txt(M,48,'C* adds C natural. D* adds F#. Suspended chords replace a third with another note.',8.5)
+txt(M,49,'The first six chords are [P]. C* adds C natural; D* adds F#. Suspended chords replace the third.',9)
 c.showPage()
 
 full=[('Em7','E2 B2','D4 E4 G4 B4'),('G6','G2 D3','B3 D4 E4 G4'),
       ('Gadd9','G2 D3','A3 B3 D4 G4'),('A7sus4','A2 E3','G3 A3 D4 E4'),
       ('D6sus4','D3 A3','B3 D4 G4 A4'),('Em7(add11)','E2 B2','D4 E4 G4 A4')]
 header(4,'PIANO KEYS | FULLER CHORDS','L = left-hand root + fifth | R = right-hand chord | C4 = middle C')
-txt(M,H-103,'[P] Every played note belongs to E minor pentatonic. Em7(add11) uses all five scale notes.',8.8)
+lines(H-103,['Use these richer chords in loops 05-10 and wherever their symbols appear.','The keyboard shows every played key. Move a voicing up an octave if the bass gets muddy.'],9,15)
+txt(M,60,'[P] Every played note belongs to E minor pentatonic. Em7(add11) uses all five scale notes.',9)
 for i,(ch,lh,rh) in enumerate(full):
     verify(ch,lh,rh);assert ch in STRICT
     top=H-137-i*95;txt(M,top,ch,10.2,'Bold')
@@ -260,15 +266,16 @@ core=[('01  [P] Open pentatonic motion',['Em','Dsus4','Asus2','Em'],
        'C* adds C; D* adds F#. The lead melody can still start with E minor pentatonic.'),
       ('04  [H] Stronger return',['Em9','Cmaj7','Am7','B7'],
        'B7* adds D# and F#. Let D# rise to E when the loop returns to Em9*.')]
-yy = H-108
+txt(M,H-104,'One chord per bar in 4/4. Follow the roots in the bass and resolve to Em or Em7.',10)
+yy = H-126
 for title,seq,desc in core:
     txt(M,yy,title,10.8,'Bold');sequence(yy-21,seq)
     txt(M,yy-33,desc,8.6)
     yy = draw_variation(yy-46, title) - 12
-txt(M,414,'WIDER-HARMONY REFERENCE',11,'Bold')
+txt(M,398,'WIDER-HARMONY REFERENCE',11,'Bold')
 extra=['C','D','Am','Am7','Bm7','B7','Cmaj7','Em9','Gmaj7','F','C5','B5']
-table(394,['Chord','Complete notes','Outside E minor pentatonic'],[87,170,INNER-257],
-      [(ch+'*',CH[ch],', '.join(n for n in CH[ch].split() if midi(n+'3')%12 not in ALLOWED)) for ch in extra],height=22,size=8.5)
+table(378,['Chord','Complete notes','Outside E minor pentatonic'],[87,170,INNER-257],
+      [(ch+'*',CH[ch],', '.join(n for n in CH[ch].split() if midi(n+'3')%12 not in ALLOWED)) for ch in extra],height=20,size=8.5)
 paragraph(82,'An asterisk marks added notes, not an augmented chord. These harmonies expand the accompaniment; the pentatonic scale remains a useful starting palette for the melody. Match the current chord when a clash sounds unwanted.',8.5,12)
 c.showPage()
 
@@ -354,8 +361,8 @@ style_page(11,'DUB & DUBSTEP','E minor pentatonic loops | Leave space for bass, 
 
 header(12,'BLUES | SCALE EXCEPTIONS','E minor pentatonic blues | Expanded chords and the blue note are clearly marked')
 y=H-108
-y=paragraph(y,'E minor pentatonic is a common starting palette for E blues. Adding Bb gives E G A Bb B D, the E minor blues scale. Bb is outside the five-note pentatonic collection.',9.3)
-y=paragraph(y,'Example 41 keeps every chord note pentatonic. Examples 42-43 use wider blues harmony; a melody note can rub against a chord tone, so listen to the current chord.',9.3)
+y=paragraph(y,'Only example 41 stays entirely inside E minor pentatonic. Examples 42-43 borrow notes.',9,16)
+y=paragraph(y,'E minor blues melody: E G A Bb B D. Bb is outside the five-note scale.',9,16)
 txt(M,H-184,'41  [P] Pentatonic blues-inspired loop | 65-95 BPM',11,'Bold')
 sequence(H-209,['Em7','A7sus4','Em7','Dsus4','Em7','Em7'])
 paragraph(H-231,'This is a six-bar modal sketch, not a traditional 12-bar blues. Try a long-short shuffle and short phrases that answer each other.',9)

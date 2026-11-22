@@ -59,6 +59,11 @@ def header(page,title,subtitle):
     txt(M,25,'Bb DOMINANT BEBOP | guitar + piano / synth',7)
     txt(W-M-30,25,f'{page}/{TOTAL}',7)
 
+def lines(y,rows,size=9,leading=15):
+    for r in rows:
+        txt(M,y,r,size);y-=leading
+    return y
+
 def table(y,heads,widths,rows,height=26,size=9):
     xs=[M]
     for w in widths:xs.append(xs[-1]+w)
@@ -75,18 +80,22 @@ def table(y,heads,widths,rows,height=26,size=9):
 
 # Page 1: pitch collection, original riff and map.
 header(1,'Bb DOMINANT BEBOP WITH A G-CENTRED RIFF','Standard seven-string tuning | B E A D G B E')
+def section(y,title,paras):
+    txt(M,y,title,11,'Bold');y-=20
+    for p in paras:y=paragraph(y,p,9.5,15)-3
+    return y-12
 y=H-110
-y=paragraph(y,'Scale: Bb C D Eb F G Ab A',11)
-y=paragraph(y,'Formula from Bb: 1  2  3  4  5  6  b7  7',10)
-y=paragraph(y,'Your riff: low E frets 3-4 = G-Ab; A frets 0-3-5-6 = A-C-D-Eb.',9.5)
-y=paragraph(y,'G felt like home to you. Starting this same collection on G gives G Ab A Bb C D Eb F: G Phrygian with an added natural 2nd (A).',9.5)
-y=paragraph(y,'The name Bb dominant bebop identifies the collection; it does not force your riff to resolve to Bb. Most progressions here keep G as the point of rest.',9.5)
-txt(M,566,'STANDARD 7-STRING | FRETS 0-12',12,'Bold')
-txt(M,548,'Dark cells = your exact fret positions. Bold G = your tonal centre.',9)
+y=paragraph(y,'Bb dominant bebop: Bb  C  D  Eb  F  G  Ab  A',11,18)
+y=paragraph(y,'Formula from Bb: 1  2  3  4  5  6  b7  7',11,18)
+y=H-150
+y=paragraph(y,'Starting this collection on G gives G Ab A Bb C D Eb F: G Phrygian with an added natural 2nd (A).',9.5,15)
+y=paragraph(y,'The name identifies the collection; most loops keep G, the centre of your riff, as the point of rest.',9.5,15)
+txt(M,H-210,'STANDARD 7-STRING | FRETS 0-12',12,'Bold')
+txt(M,H-228,'Dark cells mark your riff positions; bold G marks the tonal centre. A dash marks a note outside the scale.',9)
 opens=[64,59,55,50,45,40,35]
 labels=['1 e','2 B','3 G','4 D','5 A','6 E','7 B']
 highlights={(5,0),(5,3),(5,5),(5,6),(6,3),(6,4)}
-x0=M+37;cw=(INNER-37)/13;rh=29;top=517
+x0=M+37;cw=(INNER-37)/13;rh=29;top=H-262
 for fret in range(13):center(x0+(fret+.5)*cw,top+9,str(fret),8,'Bold')
 for row,(op,label) in enumerate(zip(opens,labels)):
     yy=top-(row+1)*rh
@@ -100,11 +109,9 @@ for row,(op,label) in enumerate(zip(opens,labels)):
         c.setFont('Bold' if selected or n==7 else 'Body',9)
         c.drawCentredString(x0+(fret+.5)*cw,yy+10,s)
 y=top-7*rh-28
-y=paragraph(y,'Read the thinnest string at the top. A dash marks a note outside the scale. The map repeats 12 frets higher.',9)
-y-=12
-y=paragraph(y,'Using A natural intentionally',11)
-y=paragraph(y,'Over a Bb7 vamp, A is often used briefly between Bb and Ab rather than held as a resting note. In G-centred music, A can also be the 9th of Gm9, or a chord tone in Dm and F.',9.5)
-y=paragraph(y,'Ab and A are different colours: Ab is G\'s dark b2; A is its natural 2. You do not need every scale note in every chord.',9.5)
+y=paragraph(y,'Thinnest string at the top. The map repeats 12 frets higher.',9)-14
+y=section(y,'Your riff',['Low E frets 3-4 = G-Ab; A string frets 0-3-5-6 = A-C-D-Eb.'])
+y=section(y,'Using A natural intentionally',['Over a Bb7 vamp, A is often used briefly between Bb and Ab rather than held as a resting note. In G-centred music, A can also be the 9th of Gm9, or a chord tone in Dm and F.','Ab is G\'s dark b2; A is its natural 2. You do not need every scale note in every chord.'])
 assert y>50
 c.showPage()
 
@@ -198,19 +205,20 @@ triads=[('Gm','G2','Bb3 D4 G4'),('Ab','Ab2','C4 Eb4 Ab4'),('Bb','Bb2','Bb3 D4 F4
         ('Cm','C3','C4 Eb4 G4'),('Dm','D3','A3 D4 F4'),('Eb','Eb3','Bb3 Eb4 G4'),
         ('Fm','F2','Ab3 C4 F4'),('F','F2','A3 C4 F4')]
 header(3,'PIANO KEYS | BASIC CHORDS','L = left-hand bass | R = right-hand chord | C4 = middle C')
-txt(M,H-103,'Play all marked keys together. Fm uses Ab; F uses A natural. Both fit the scale.',8.8)
+txt(M,H-105,'Play each L and all three R keys together. Shading also marks the selected white keys.',9)
 for i,(ch,lh,rh) in enumerate(triads):
     verify_voicing(ch,lh,rh);top=H-128-i*80
     txt(M,top,ch,11,'Bold');txt(M+92,top,'LH: '+lh+'     RH: '+rh,9)
     piano(top-48,lh,rh)
-txt(M,48,'The chord symbol names the harmony, regardless of guitar tuning.',8.5)
+txt(M,49,'All notes fit Bb dominant bebop. Fm uses Ab; F uses A natural.',9)
 c.showPage()
 
 full=[('Gm7','G2 D3','Bb3 D4 F4 G4'),('Abmaj7','Ab2 Eb3','C4 Eb4 G4 Ab4'),
       ('Bb7','Bb2 F3','Ab3 Bb3 D4 F4'),('Cm7','C3 G3','Bb3 C4 Eb4 G4'),
       ('F7','F2 C3','A3 C4 Eb4 F4'),('Gm9','G2 D3','A3 Bb3 D4 F4')]
 header(4,'PIANO KEYS | FULLER CHORDS','L = left-hand root + fifth | R = right-hand chord | C4 = middle C')
-txt(M,H-103,'All notes belong to the scale. Gm9 makes A natural audible as an added colour above G minor.',9)
+lines(H-103,['Use these richer chords in loops 05-10 and wherever their symbols appear.','The keyboard shows every played key. Move a voicing up an octave if the bass gets muddy.'],9,15)
+txt(M,60,'All notes belong to the scale. Gm9 makes A natural audible as an added colour above G minor.',9)
 for i,(ch,lh,rh) in enumerate(full):
     verify_voicing(ch,lh,rh);top=H-137-i*95
     txt(M,top,ch,11,'Bold');txt(M+93,top,'LH: '+lh+'     RH: '+rh,9)
@@ -255,12 +263,13 @@ def sequence(y,seq,size=10):
     while pdfmetrics.stringWidth(s,'Courier',size)>INNER:size-=.3
     txt(M,y,s,size,'Courier')
 
-yy = H - 119
+txt(M,H-104,'One chord per bar in 4/4. Follow the roots in the bass and resolve to Gm or Gm7.',10)
+yy = H - 128
 for title,seq,desc in core:
     assert all(ch in CH for ch in seq)
     txt(M,yy,title,11,'Bold');sequence(yy-23,seq)
     txt(M,yy-43,desc,8.8)
-    yy = draw_variation(yy-58, title) - 16
+    yy = draw_variation(yy-56, title) - 12
 txt(M,389,'ADDITIONAL CHORD SPELLINGS',12,'Bold')
 table(368,['Chord','Notes','Useful colour'],[94,160,INNER-254],[
  ('Dm7','D F A C','A natural'),('Ebmaj7','Eb G Bb D','Soft major seventh'),
@@ -354,7 +363,8 @@ style_page(11,'DUB & DUBSTEP','Bb dominant bebop loops | Leave space for bass, r
 
 header(12,'BLUES | SCALE EXCEPTIONS','Bb dominant bebop blues | Outside notes are explicitly marked')
 y=H-108
-y=paragraph(y,'Only example 41 stays inside Bb dominant bebop. Examples 42-43 use borrowed dominant chords. The G minor blues melody G Bb C Db D F also adds Db, which is outside this collection.',9.3)
+y=paragraph(y,'Only example 41 stays entirely inside Bb dominant bebop. Examples 42-43 borrow notes.',9,16)
+y=paragraph(y,'G minor blues melody: G Bb C Db D F. Db is outside the scale.',9,16)
 txt(M,H-173,'41  Scale-based blues-inspired loop | 65-95 BPM',11,'Bold')
 sequence(H-198,['Gm7','Cm7','Gm7','Ab','Gm7','Gm7'])
 paragraph(H-220,'This is a six-bar modal sketch, not a traditional 12-bar blues. Use a long-short shuffle rhythm and short melody phrases that answer each other.',9)

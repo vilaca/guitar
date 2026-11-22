@@ -122,7 +122,7 @@ lines(H-110,['B Phrygian dominant: B  C  D#  E  F#  G  A',
 lines(H-150,['Phrygian dominant is Phrygian with a major third: D# turns the tonic into a B major chord.',
              'Keep the half-step pull from C to B; this is the fifth mode of E harmonic minor. B is home.'],9.5,15)
 txt(M, H-210, 'STANDARD 7-STRING | FRETS 0-12', 12, 'Bold')
-txt(M, H-228, 'Dark cells mark B roots. A dash marks a note outside B Phrygian dominant.', 9)
+txt(M, H-228, 'Dark cells mark B roots. A dash marks a note outside the scale.', 9)
 left = M + 38
 cell_width = (W - M - left) / 13
 row_height = 29
