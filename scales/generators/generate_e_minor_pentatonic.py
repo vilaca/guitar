@@ -191,17 +191,17 @@ def piano(y,lh,rh):
     for j,n in enumerate(whites):
         x=x0+j*kw;c.setFillColor(HexColor('#dddddd') if n in targets else white)
         c.setStrokeColor(black);c.setLineWidth(.4);c.rect(x,y,kw,kh,fill=1,stroke=1)
-        center(x+kw/2,y-9,NAMES[n%12]+str(n//12-1),6.2)
+        center(x+kw/2,y-9,NAMES[n%12]+str(n//12-1),7)
         if n in targets:
-            c.setFillColor(white);c.circle(x+kw/2,y+10,5.5,fill=1,stroke=1)
-            center(x+kw/2,y+7,targets[n],6.8,'Bold')
+            c.setFillColor(white);c.circle(x+kw/2,y+11,6.5,fill=1,stroke=1)
+            center(x+kw/2,y+8,targets[n],8,'Bold')
     for j,n in enumerate(whites[:-1]):
         if n%12 not in {0,2,5,7,9}:continue
         nn=n+1;x=x0+(j+1)*kw-bw/2
         c.setFillColor(black);c.rect(x,y+kh-bh,bw,bh,fill=1,stroke=1)
         if nn in targets:
-            c.setFillColor(white);c.circle(x+bw/2,y+kh-bh+8,5,fill=1,stroke=0)
-            center(x+bw/2,y+kh-bh+5.5,targets[nn],6.8,'Bold')
+            c.setFillColor(white);c.circle(x+bw/2,y+kh-bh+9,6,fill=1,stroke=0)
+            center(x+bw/2,y+kh-bh+6,targets[nn],8,'Bold')
 
 def verify(ch,lh,rh):
     assert {midi(n)%12 for n in (lh+' '+rh).split()}==pcs(CH[ch]),ch
