@@ -1,20 +1,18 @@
 # Fixes for the 7-string scale PDFs
 
-Review of `b_flat_dominant_bebop_7_string_and_piano.pdf`, `e_minor_pentatonic_7_string_and_piano.pdf` and `phrygian_7_string_standard_and_drop.pdf`.
+Review of `b_flat_dominant_bebop_7_string_and_piano.pdf`, `e_minor_pentatonic_7_string_and_piano.pdf` and `phrygian_7_string_standard.pdf`.
 
 All notes, frets, chord spellings, keyboard diagrams and `[P]`/`[H]` labels checked out. Only the items below need changing.
 
 ## 1. Phrygian: piano-key page reference is incomplete
 
-- **Where:** `phrygian_7_string_standard_and_drop.pdf`, loop pages 4-6 and 8-10, 12 (the "Piano keys: p7." line).
+- **Where:** `phrygian_7_string_standard.pdf`, loop pages 4-6 and 8-10, 12 (the "Piano keys: p7." line).
 - **Problem:** The triad diagrams (Bm, C, D, Em, F#dim, G, Am) are on p2. Page 7 has only Bm7, Cmaj7, Em7, Gmaj7, Am7 and Dadd9. Loops 14-16, 17-19 and others use only triads, so p7 doesn't show their chords.
 - **Fix:** Change "Piano keys: p7." to "Piano keys: pp2, 7." on every loop page.
 
-## 2. Bb bebop: ambiguous "first string"
+## 2. Bb bebop slide (fixed)
 
-- **Where:** `b_flat_dominant_bebop_7_string_and_piano.pdf`, p2, third paragraph.
-- **Problem:** "Slide along the first string rather than stretching to hold all six frets at once." Strings are numbered 1 (high e) to 7 (low B), and the six-note string is string 7. String 1 has four notes.
-- **Fix:** "Slide along string 7 rather than stretching to hold all six frets at once."
+Page 2 identifies string 7 as the string for the six-note slide.
 
 ## 3. Bb bebop: Gm9 voicing contradicts its caption
 
@@ -22,11 +20,9 @@ All notes, frets, chord spellings, keyboard diagrams and `[P]`/`[H]` labels chec
 - **Problem:** The caption says A natural is "an added colour above G minor", but the voicing (RH A3 Bb3 D4 F4) puts A3 below Bb3. That leaves a minor 2nd at the bottom of the right hand.
 - **Fix:** Change the right hand to Bb3 D4 F4 A4. Update the "RH:" line and the R markers. Then the 9th is on top, matching the caption.
 
-## 4. E minor: 22-fret fallback skips a note
+## 4. E minor 22-fret fingering (fixed)
 
-- **Where:** `e_minor_pentatonic_7_string_and_piano.pdf`, p2, last paragraph.
-- **Problem:** "On a 22-fret guitar, stop at D6 (string 1, fret 22)" implies the run is unbroken up to D6. B5 is at string 2, fret 24, which a 22-fret guitar doesn't have, so the run has a gap there.
-- **Fix:** Add: "B5 (string 2, fret 24) isn't available; play it on string 1, fret 19."
+On a 22-fret guitar, stop one note before the end of the seventh-string diagonal on page 2. Play B5 at fret 19 and D6 at fret 22.
 
 ## Optional polish
 
@@ -42,8 +38,7 @@ Roughly in order of value. Effort: S = small, M = medium, L = large.
 
 The PDFs say "guitar + piano", but chords appear only as piano diagrams. Guitarists get scale tabs and chord names with no fingerings.
 
-- Add power-chord shapes in drop A (one finger on string 7).
-- Add a few triad and seventh shapes for standard and drop A.
+- Add a few triad and seventh shapes for B standard.
 
 ## B. Share one template across the generators (M)
 
@@ -61,13 +56,6 @@ The last two pages of each PDF (playing tips, terms 1-11) are almost word-for-wo
 - This saves about 2 pages per PDF.
 - Each future fix is then made once.
 
-## D. Add a drop A row to the fretboard grids (S)
-
-Bb bebop and E minor show only the standard B string 7. E minor mentions drop A in one sentence. Drop A players have to translate it themselves.
-
-- Add a "7 A" row to each grid.
-- The Phrygian PDF has no grid at all (see Optional polish).
-
 ## E. Add fixed-position boxes next to the long diagonal (M)
 
 One diagonal across four octaves needs big hand shifts, especially on the pentatonic.
@@ -75,12 +63,9 @@ One diagonal across four octaves needs big hand shifts, especially on the pentat
 - Add two or three 3-notes-per-string positions per scale.
 - They are easier to practice and improvise from.
 
-## F. Fix the Bb bebop naming (S)
+## F. Bb bebop title (fixed)
 
-The title says Bb dominant bebop, but every loop is G-centred. The page 1 text explains this, but the filename and header don't show it.
-
-- Retitle it, for example "G Phrygian ♮2 (Bb dominant bebop collection)".
-- Rename the file to match.
+The title identifies the Bb dominant bebop collection and the G-centred riff. The riff uses both Ab and A. Loop 03 uses Bb7 as its tonal anchor.
 
 ## G. Make the loops consistent across PDFs (M)
 

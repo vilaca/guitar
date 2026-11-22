@@ -86,7 +86,7 @@ grid(p,['Scale','Notes','Open pitches outside it'],[
  ['E minor pentatonic','E G A B D','None'],
  ['G Phrygian','G Ab Bb C D Eb F','B, E, A'],
  ['Bb dominant bebop','Bb C D Eb F G Ab A','B, E']],[1.55,2.1,1.95])
-para(p,'This last table applies to B standard and drop A, the seven-string tunings used in the scale guides. A note belonging to a scale can still create tension against a particular chord; scale membership does not make every open drone equally settled.')
+para(p,'This last table applies to B standard and drop A, which share the same open pitch classes. A note belonging to a scale can still create tension against a particular chord; scale membership does not make every open drone equally settled.')
 
 p=page('Josh Homme and the G D tuning')
 para(p,'The Queens of the Stone Age example discussed was G G D G D D. The sequence is reported in a viewer transcription of Josh Homme\'s Rick Beato interview [1, 2]. The octave mapping below is the worked realization used in our discussion, rather than an independently verified setup from the video.')

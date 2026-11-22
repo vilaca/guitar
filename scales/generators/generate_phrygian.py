@@ -13,14 +13,14 @@ from pathlib import Path
 import argparse
 
 parser = argparse.ArgumentParser(description='7-string Phrygian: guitar, piano and 49 progressions')
-parser.add_argument('--output', default='phrygian_7_string_standard_and_drop.pdf',
+parser.add_argument('--output', default='phrygian_7_string_standard.pdf',
                     help='Output PDF path (default: %(default)s)')
 args = parser.parse_args()
 OUT = Path(args.output).expanduser().resolve()
 OUT.parent.mkdir(parents=True, exist_ok=True)
 
 c = canvas.Canvas(str(OUT), pagesize=A4)
-c.setTitle('7-string Phrygian - Standard and Drop Tunings')
+c.setTitle('7-string Phrygian - B Standard')
 c.setAuthor('')
 W,H = A4
 M=40
@@ -29,53 +29,60 @@ def txt(x,y,s,size=10,font='Helvetica'):
     c.setFillColor(black); c.setFont(font,size); c.drawString(x,y,s)
 
 txt(M, H-48, '7-STRING PHRYGIAN', 23, 'Helvetica-Bold')
-txt(M, H-69, 'Diagonal ascending scale | Four notes per string', 11)
+txt(M, H-69, 'Three notes per string and a wide diagonal | B E A D G B E', 11)
 txt(M, H-95, 'Formula: 1  b2  b3  4  5  b6  b7', 11, 'Helvetica-Bold')
 txt(M, H-113, 'B Phrygian: B  C  D  E  F#  G  A', 10)
 
-standard = [[0,1,3,5],[2,3,5,7],[3,5,7,9],[5,7,9,10],[7,9,11,12],[10,12,13,15],[12,14,15,17]]
-drop = [[2,3,5,7]] + standard[1:]
-opens_standard = [35,40,45,50,55,59,64]
-opens_drop = [33] + opens_standard[1:]
-allowed = {11,0,2,4,6,7,9}
+allowed = {11, 0, 2, 4, 6, 7, 9}
+compact = [[0, 1, 3], [0, 2, 3], [0, 2, 3], [0, 2, 4], [0, 2, 4], [1, 3, 5], [2, 3, 5]]
+wide = [[0, 1, 3, 5], [2, 3, 5, 7], [3, 5, 7, 9], [5, 7, 9, 10], [7, 9, 11, 12], [10, 12, 13, 15], [12, 14, 15, 17]]
+assert all(len(row) == 3 for row in compact)
 
-def diagram(top, title, tuning, frets, opens, labels):
-    txt(M,top,title,15,'Helvetica-Bold')
-    txt(M,top-21,tuning,10)
-    ytop=top-58
-    xstart=83; xend=W-M
-    step=(xend-xstart-20)/27
-    seq=[]
-    for s, row in enumerate(frets):
-        y=ytop-(6-s)*18
-        txt(M,y-3,str(7-s),8)
-        txt(M+18,y-4,labels[s],10,'Helvetica-Bold')
-        c.setStrokeColor(HexColor('#777777')); c.setLineWidth(.5)
-        c.line(xstart-6,y,xend,y)
-        for j,f in enumerate(row):
-            pitch=opens[s]+f; seq.append(pitch)
-            assert pitch%12 in allowed
-            x=xstart+(s*4+j)*step
-            c.setFillColor(white); c.rect(x-7,y-6,14,12,fill=1,stroke=0)
+def pattern(top, title, frets):
+    txt(M, top, title, 13, 'Helvetica-Bold')
+    opens = [35, 40, 45, 50, 55, 59, 64]
+    labels = ['7 B', '6 E', '5 A', '4 D', '3 G', '2 B', '1 e']
+    left = M + 38
+    step = (W - M - 12 - left) / (sum(map(len, frets)) + 1)
+    played = []
+
+    def draw_row(y, label, open_pitch, row, start):
+        txt(M, y - 3, label, 8, 'Helvetica-Bold')
+        c.setStrokeColor(HexColor('#888888'))
+        c.setLineWidth(.5)
+        c.line(left - 10, y, W - M, y)
+        scale_frets = [f for f in range(25) if (open_pitch + f) % 12 in allowed]
+        first = scale_frets.index(row[0])
+        assert row == scale_frets[first:first + len(row)]
+        for i in range(max(0, first - 1), min(len(scale_frets), first + len(row) + 1)):
+            fret = scale_frets[i]
+            neighbor = i < first or i >= first + len(row)
+            label = f'({fret})' if neighbor else str(fret)
+            size = 8 if neighbor else 9
+            font = 'Helvetica-Bold' if (open_pitch + fret) % 12 == 11 else 'Helvetica'
+            x = left + (start + 1 + i - first) * step
+            width = c.stringWidth(label, font, size) + 1
+            c.setFillColor(white)
+            c.rect(x - width / 2, y - 6, width, 12, fill=1, stroke=0)
             c.setFillColor(black)
-            c.setFont('Helvetica-Bold' if pitch%12==11 else 'Helvetica',10)
-            c.drawCentredString(x,y-3.4,str(f))
-    assert all(a<b for a,b in zip(seq,seq[1:]))
-    txt(M,ytop-135,'Read from string 7 (bottom line) upward; play each group left to right.',9)
-    return seq
+            c.setFont(font, size)
+            c.drawCentredString(x, y - 3, label)
 
-s1=diagram(H-154,'STANDARD | B Phrygian','Tuning, thickest to thinnest: B E A D G B E',standard,opens_standard,['B','E','A','D','G','B','e'])
-s2=diagram(H-390,'DROP | B Phrygian','Drop A tuning, thickest to thinnest: A E A D G B E',drop,opens_drop,['A','E','A','D','G','B','e'])
-assert s1 == s2
-assert [b-a for a,b in zip(s1,s1[1:])] == ([1,2,2,2,1,2,2]*4)[:27]
+    for string, row in enumerate(frets):
+        y = top - 32 - (6 - string) * 19
+        draw_row(y, labels[string], opens[string], row, len(played))
+        played.extend(opens[string] + f for f in row)
+    return played
+
+assert pattern(H-158, 'THREE NOTES PER STRING | B1 to A4', compact) == [n for n in range(35, 70) if n % 12 in allowed]
+assert pattern(H-384, 'WIDE DIAGONAL | B1 to A5', wide) == [n for n in range(35, 82) if n % 12 in allowed]
+txt(M, 247, 'Read left to right. Parentheses show the neighboring scale frets on the same string. Skip them in the run.', 9)
 
 c.setStrokeColor(HexColor('#AAAAAA')); c.line(M,174,W-M,174)
 txt(M,154,'Root rule',11,'Helvetica-Bold')
 txt(M,136,'Standard: root = open thickest string.',10)
-txt(M,119,'Drop: root = two frets above the open thickest string.',10)
-txt(M,96,'Both tabs play the same pitches. In drop tuning, only string 7 shifts up two frets.',9)
-txt(M,80,'Bold fret numbers mark the root, B. All open strings fit the scale in both tunings.',9)
-txt(M,45,'Transpose to lower tunings: keep the fret numbers and apply the same root rule.',9)
+txt(M,80,'Bold fret numbers mark the root, B. All open strings fit the scale.',9)
+txt(M,45,'Transpose to lower standard tunings: keep the fret numbers and apply the same root rule.',9)
 txt(W-65,27,'1/14',8); c.showPage()
 
 
@@ -85,7 +92,7 @@ def header(title, subtitle, page):
     txt(M,H-48,title,21,'Helvetica-Bold')
     txt(M,H-70,subtitle,10)
     c.setStrokeColor(HexColor('#aaaaaa')); c.line(M,H-85,W-M,H-85)
-    txt(M,27,'7-STRING PHRYGIAN | B standard / drop A',8)
+    txt(M,27,'7-STRING PHRYGIAN | B standard',8)
     txt(W-65,27,str(page)+'/14',8)
 
 def lines(y, rows, size=10, leading=16):

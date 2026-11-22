@@ -75,12 +75,12 @@ def table(y,heads,widths,rows,height=26,size=9):
 
 
 
-header(1,'E MINOR PENTATONIC','Five-note scale | Standard 7-string, drop A and piano / synth')
+header(1,'E MINOR PENTATONIC','Five-note scale | Standard 7-string guitar and piano / synth')
 y=H-110
 for text,size in [
  ('Scale: E G A B D',12),('Formula from E: 1  b3  4  5  b7',10),
  ('E is the tonal centre: the note or chord where a phrase feels settled. The first note you play does not have to be E.',9.5),
- ('All open strings fit: standard B E A D G B E and drop A A E A D G B E use only these five pitch classes.',9.5),
+ ('All seven open strings belong to the scale in standard tuning (B E A D G B E). Strings 6 and 1 are both E roots.',9.5),
  ('Unlike a seven-note minor scale, this collection has neither C nor F#. Those notes can appear in an accompaniment, but they are outside E minor pentatonic.',9.5)]:
     y=paragraph(y,text,size)
 txt(M,560,'STANDARD 7-STRING | FRETS 0-12',12,'Bold')
@@ -97,7 +97,7 @@ for row,(op,label) in enumerate(zip(opens,labels)):
         c.setFillColor(white if root else black);c.setFont('Bold' if root else 'Body',9)
         c.drawCentredString(x0+(fret+.5)*cw,yy+10,NAMES[n] if n in ALLOWED else '-')
 y=top-7*rh-28
-y=paragraph(y,'Thinnest string at the top. A dash marks a note outside the scale. The map repeats 12 frets higher. In drop A, string 7 has scale notes at frets 0, 2, 5, 7, 10 and 12; E is at fret 7.',9)-12
+y=paragraph(y,'Thinnest string at the top. A dash marks a note outside the scale. The map repeats 12 frets higher.',9)-12
 txt(M,y,'HOW TO READ THE PROGRESSION LABELS',11,'Bold');y-=20
 for t in ['[P] = every chord note belongs to the five-note pentatonic collection.',
           '[H] = wider harmony. Chords marked * add outside notes, listed on page 5 or 12.',
@@ -106,35 +106,61 @@ for t in ['[P] = every chord note belongs to the five-note pentatonic collection
 assert y>45
 c.showPage()
 
-header(2,'DIAGONAL GUITAR PATTERNS','Standard: B E A D G B E | Drop A: A E A D G B E')
-standard=[[5,8,10,12],[10,12,15],[12,14,17],[14,17,19],[16,19,21],[20,22,24],[22,24]]
-dropped=[[f+2 for f in standard[0]]]+standard[1:]
-os=[35,40,45,50,55,59,64];od=[33]+os[1:]
+header(2,'E MINOR PENTATONIC PATTERNS','Standard tuning, low to high: B E A D G B E | Bold fret numbers mark E.')
+standard = [[5, 8, 10], [7, 10, 12], [10, 12, 14], [12, 14, 17], [14, 16, 19], [17, 20, 22], [19, 22, 24]]
+assert len(standard) == 7 and all(len(row) == 3 for row in standard)
+open_e_diagonal = [[], [0, 3, 5], [2, 5, 7], [5, 7, 9], [7, 9, 12], [10, 12, 15], [12]]
 
-def tab(top,title,frets,tuning,lab):
-    txt(M,top,title,13,'Bold');xt=M+37;step=(INNER-52)/20;seq=[];idx=0
-    for s,row in enumerate(frets):
-        yy=top-42-(6-s)*20
-        txt(M,yy-3,str(7-s)+' '+lab[s],8,'Bold')
-        c.setLineWidth(.5);c.setStrokeColor(HexColor('#888888'));c.line(xt-5,yy,W-M,yy)
-        for f in row:
-            n=tuning[s]+f;seq.append(n);x=xt+idx*step;idx+=1
-            c.setFillColor(white);c.rect(x-7,yy-6,14,12,fill=1,stroke=0)
-            center(x,yy-3.2,str(f),9,'Bold' if n%12==4 else 'Body')
+def tab(top,title,frets):
+    txt(M, top, title, 13, 'Bold')
+    left = M + 37
+    step = (W - M - 12 - left) / (sum(map(len, frets)) + 1)
+    seq = []
+    for s, row in enumerate(frets):
+        yy = top - 42 - (6 - s) * 20
+        txt(M, yy - 3, labels[6 - s], 8, 'Bold')
+        c.setLineWidth(.5)
+        c.setStrokeColor(HexColor('#888888'))
+        c.line(left - 10, yy, W - M, yy)
+
+        open_pitch = opens[6 - s]
+        start_x = left + (len(seq) + 1) * step
+        markers = [(i, fret, False) for i, fret in enumerate(row)]
+        if len(row) == 3:
+            scale_frets = [f for f in range(25) if (open_pitch + f) % 12 in ALLOWED]
+            first = scale_frets.index(row[0])
+            assert scale_frets[first:first + 3] == row
+            if first > 0:
+                markers.insert(0, (-1, scale_frets[first - 1], True))
+            if first + 3 < len(scale_frets):
+                markers.append((3, scale_frets[first + 3], True))
+
+        for offset, fret, neighbor in markers:
+            x = start_x + offset * step
+            label = f'({fret})' if neighbor else str(fret)
+            font = 'Bold' if (open_pitch + fret) % 12 == 4 else 'Body'
+            size = 8 if neighbor else 9
+            width = pdfmetrics.stringWidth(label, font, size) + 4
+            c.setFillColor(white)
+            c.rect(x - width / 2, yy - 6, width, 12, fill=1, stroke=0)
+            center(x, yy - 3.2, label, size, font)
+        seq.extend(open_pitch + fret for fret in row)
     assert all(n%12 in ALLOWED for n in seq)
     assert all(a<b for a,b in zip(seq,seq[1:]))
-    assert all(a[0]<b[0] for a,b in zip(frets,frets[1:]))
     return seq
 
-s1=tab(H-120,'STANDARD | start on E at string 7, fret 5',standard,os,['B','E','A','D','G','B','e'])
-s2=tab(H-366,'DROP A | start on E at string 7, fret 7',dropped,od,['A','E','A','D','G','B','e'])
-assert s1==s2
-assert s1==[n for n in range(40,89) if n%12 in ALLOWED]
+open_run = tab(H-120,'DIAGONAL | start on open E, string 6',open_e_diagonal)
+diagonal_run = tab(H-366,'DIAGONAL | start on E at string 7, fret 5',standard)
+assert open_run == [n for n in range(midi('E2'), midi('E5') + 1) if n % 12 in ALLOWED]
+assert diagonal_run == [n for n in range(midi('E2'), midi('E6') + 1) if n % 12 in ALLOWED]
+for pattern in (open_e_diagonal, standard):
+    starting_frets = [row[0] for row in pattern if row]
+    assert all(a < b for a, b in zip(starting_frets, starting_frets[1:]))
 y=H-594
-for p in ['Read from the bottom line upward, each group left to right. Both tabs play E2 through E6, four complete octaves, without missing any scale notes. Bold numbers mark E.',
-          'Four notes on string 7, three on each middle string, two on string 1. Shift your hand along the neck instead of trying to hold the whole pattern in one position.',
-          'Each next string begins at a higher fret. Standard starting frets: 5-10-12-14-16-20-22. Drop A starts: 7-10-12-14-16-20-22.',
-          'The full run needs 24 frets. On a 22-fret guitar, stop at D6 (string 1, fret 22), or end earlier on E5 (string 3, fret 21).']:
+for p in ['Play the plain fret numbers from left to right (0 = open). Parentheses mark the nearest scale fret on either side of a three-note group on that string, wherever it falls within frets 0-24. Skip these markers when playing the run.',
+          'Open-E run: start on open E2 (string 6). Play three notes per string from string 6 through string 2, shifting up the neck at each crossing. Finish three octaves higher on E5 (string 1, fret 12).',
+          'Seventh-string run: start on the same E2 at string 7, fret 5. Play three notes on each of the seven strings. The full four-octave run ends on E6 at fret 24.',
+          'On a 22-fret guitar, play B5 on string 1 at fret 19, then finish with D6 at fret 22 on the same string. For a three-octave run, finish on E5 (string 2, fret 17).']:
     y=paragraph(y,p,9.3)-10
 assert y>45
 c.showPage()

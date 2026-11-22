@@ -126,7 +126,7 @@ All the guitar tunings share one interval pattern, 5-5-5-5-4-5. The bass is B E 
 | Ibanez XPTB720, A standard | A D G C F | A whole tone lower |
 | Ibanez XPTB720, G standard | G C F Bb Eb | A major third lower |
 
-- **Scale guides:** the guides in `../scales/pdfs/` are written for B standard, so they match the Solar exactly. On the bass the five open strings match strings 7 to 3 of those tabs, one octave lower. On the Ibanez 7-string the same fret numbers work but sound lower.
+- **Scale guides:** use the B-standard tabs in `../scales/pdfs/` for all three instruments. They match the Solar exactly. On the bass the five open strings match strings 7 to 3 of those tabs, one octave lower. On the Ibanez 7-string the same fret numbers work but sound lower.
 - **Open strings in scales:** B E A D G are all inside B Phrygian and E minor pentatonic. In the Bb dominant bebop collection, B and E are outside.
 - **Phrygian root by lowest string:** B on the Solar and the bass, A in A standard and G in G standard on the Ibanez 7-string.
 

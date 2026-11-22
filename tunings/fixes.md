@@ -67,7 +67,7 @@ All three have the same interval pattern, so the same shapes and fret numbers wo
 | E minor pentatonic | E G A B D | C, F | C, F, Bb, Eb |
 
   The G Phrygian row is the natural match for G standard, and A Phrygian for A standard. The other rows show what changes if the other scales are played on that tuning. These values and the 5-5-5-5-4-5 interval string were checked with a short script.
-- **Link to the scale guides:** the guides in `scales/pdfs/` are written for B standard and drop A. On the Xiphos the same fret numbers work, but they sound lower: a whole tone lower in A standard (A Phrygian instead of B Phrygian), and a major third lower in G standard (G Phrygian). Say this once on p3, using the Phrygian PDF's rule: keep the fret numbers and apply the same root rule.
+- **Link to the scale guides:** On p3, point Xiphos players to the B-standard tab in the [Phrygian guide](../scales/pdfs/phrygian_7_string_standard.pdf). Keep its fret numbers in A standard for A Phrygian or in G standard for G Phrygian. In each case the root is the open seventh string.
 - **Where to change it:** add the new tunings to the tuning data in `generators/generate_tunings_reference.py`. Its assertions check the intervals and the Phrygian open-string rule.
 - **Not verified:** the instrument labels and the tunings are as supplied and have not been checked against manufacturer specifications.
 

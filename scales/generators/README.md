@@ -4,7 +4,7 @@ Three standalone Python generators for the guides from this conversation:
 
 | Script | Guide | Pages |
 | --- | --- | --- |
-| `generate_phrygian.py` | 7-string B Phrygian, standard/drop A, piano/synth, 49 progressions | 14 |
+| `generate_phrygian.py` | 7-string B Phrygian, B standard, piano/synth, 49 progressions | 14 |
 | `generate_b_flat_dominant_bebop.py` | Bb dominant bebop, G-centred riff, guitar/piano, 49 progressions | 15 |
 | `generate_e_minor_pentatonic.py` | E minor pentatonic, guitar/piano, 49 progressions | 15 |
 

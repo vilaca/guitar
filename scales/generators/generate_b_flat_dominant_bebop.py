@@ -28,7 +28,7 @@ font_dir = Path(reportlab.__file__).resolve().parent / 'fonts'
 for family, filename in [('Body', 'Vera.ttf'), ('Bold', 'VeraBd.ttf')]:
     pdfmetrics.registerFont(TTFont(family, str(font_dir / filename)))
 c=canvas.Canvas(str(OUT),pagesize=A4)
-c.setTitle('Bb Dominant Bebop - 7-string guitar, piano and 49 progressions')
+c.setTitle('Bb Dominant Bebop with a G-centred Riff - 7-string guitar, piano and 49 progressions')
 W,H=A4; M=38; INNER=W-2*M; TOTAL=15
 ALLOWED={10,0,2,3,5,7,8,9}
 NAMES={0:'C',1:'Db',2:'D',3:'Eb',4:'E',5:'F',6:'F#',7:'G',8:'Ab',9:'A',10:'Bb',11:'B'}
@@ -74,7 +74,7 @@ def table(y,heads,widths,rows,height=26,size=9):
     return y-(len(rows)+1)*height
 
 # Page 1: pitch collection, original riff and map.
-header(1,'Bb DOMINANT BEBOP','Eight-note scale | Your original riff, mapped onto a standard 7-string')
+header(1,'Bb DOMINANT BEBOP WITH A G-CENTRED RIFF','Eight-note scale for standard 7-string guitar')
 y=H-110
 y=paragraph(y,'Scale: Bb C D Eb F G Ab A',11)
 y=paragraph(y,'Formula from Bb: 1  2  3  4  5  6  b7  7',10)
@@ -108,40 +108,57 @@ y=paragraph(y,'Ab and A are different colours: Ab is G\'s dark b2; A is its natu
 assert y>50
 c.showPage()
 
-# Page 2: strictly rising starting frets; exact same pitches in standard/drop.
-header(2,'DIAGONAL GUITAR PATTERNS','Standard: B E A D G B E | Drop A: A E A D G B E')
-standard=[[8,9,10,11,13,15],[11,13,15,16],[12,13,15,17],[13,15,17,18],[14,15,17,19],[16,18,20,21],[17,18,20,22]]
-dropped=[[n+2 for n in standard[0]]]+standard[1:]
-os=[35,40,45,50,55,59,64]; od=[33]+os[1:]
+header(2, 'GUITAR PATTERNS', 'G-centred riff | Standard B E A D G B E')
+compact = [[8, 9, 10], [6, 8, 10], [6, 8, 10], [6, 7, 8], [5, 7, 8], [6, 8, 9], [5, 6, 8]]
+wide = [[8, 9, 10, 11, 13, 15], [11, 13, 15, 16], [12, 13, 15, 17], [13, 15, 17, 18], [14, 15, 17, 19], [16, 18, 20, 21], [17, 18, 20, 22]]
+assert all(len(row) == 3 for row in compact)
 
-def tab(top,title,frets,tuning,lab):
-    txt(M,top,title,13,'Bold')
-    xt=M+35;step=(INNER-48)/29;seq=[];idx=0
-    for s,row in enumerate(frets):
-        yy=top-42-(6-s)*20
-        txt(M,yy-3,str(7-s)+' '+lab[s],8,'Bold')
-        c.setLineWidth(.5);c.setStrokeColor(HexColor('#888888'));c.line(xt-5,yy,W-M,yy)
-        for f in row:
-            n=tuning[s]+f;seq.append(n);x=xt+idx*step;idx+=1
-            c.setFillColor(white);c.rect(x-7,yy-6,14,12,fill=1,stroke=0)
-            center(x,yy-3.2,str(f),9,'Bold' if n%12==7 else 'Body')
-    assert all(n%12 in ALLOWED for n in seq)
-    assert all(a<b for a,b in zip(seq,seq[1:]))
-    assert all(a[0]<b[0] for a,b in zip(frets,frets[1:]))
-    return seq
+def pattern(top, title, frets):
+    txt(M, top, title, 13, 'Bold')
+    opens = [35, 40, 45, 50, 55, 59, 64]
+    labels = ['7 B', '6 E', '5 A', '4 D', '3 G', '2 B', '1 e']
+    left = M + 38
+    step = (W - M - 12 - left) / (sum(map(len, frets)) + 1)
+    played = []
 
-s1=tab(H-120,'STANDARD | start on G at string 7, fret 8',standard,os,['B','E','A','D','G','B','e'])
-s2=tab(H-366,'DROP A | start on G at string 7, fret 10',dropped,od,['A','E','A','D','G','B','e'])
-assert s1==s2
-expected_seq=[n for n in range(s1[0],s1[-1]+1) if n%12 in ALLOWED]
-assert s1==expected_seq
-y=H-594
-for p in ['Play from the bottom line upward, each group left to right. Both tabs play G2 through D6 with no missing scale notes. Bold fret numbers are G.',
-          'There are six notes on string 7, then four on each remaining string. Slide along the first string rather than stretching to hold all six frets at once.',
-          'Every next string begins at a higher fret. The standard starting frets are 8-11-12-13-14-16-17; drop A starts 10-11-12-13-14-16-17.',
-          'Maximum fret: 22. If you transpose the whole tuning down, the shape still works but the pitch collection and chord names transpose with it.']:
-    y=paragraph(y,p,9.3)-10
-assert y>45
+    def draw_row(y, label, open_pitch, row, start):
+        txt(M, y - 3, label, 8, 'Bold')
+        c.setStrokeColor(HexColor('#888888'))
+        c.setLineWidth(.5)
+        c.line(left - 10, y, W - M, y)
+        scale_frets = [f for f in range(25) if (open_pitch + f) % 12 in ALLOWED]
+        first = scale_frets.index(row[0])
+        assert row == scale_frets[first:first + len(row)]
+        for i in range(max(0, first - 1), min(len(scale_frets), first + len(row) + 1)):
+            fret = scale_frets[i]
+            neighbor = i < first or i >= first + len(row)
+            label = f'({fret})' if neighbor else str(fret)
+            size = 8 if neighbor else 9
+            font = 'Bold' if (open_pitch + fret) % 12 == 7 else 'Body'
+            x = left + (start + 1 + i - first) * step
+            width = c.stringWidth(label, font, size) + 1
+            c.setFillColor(white)
+            c.rect(x - width / 2, y - 6, width, 12, fill=1, stroke=0)
+            c.setFillColor(black)
+            c.setFont(font, size)
+            c.drawCentredString(x, y - 3, label)
+
+    for string, row in enumerate(frets):
+        y = top - 32 - (6 - string) * 19
+        draw_row(y, labels[string], opens[string], row, len(played))
+        played.extend(opens[string] + f for f in row)
+    return played
+
+assert pattern(H-120, 'THREE NOTES PER STRING | G2 to C5', compact) == [n for n in range(43, 73) if n % 12 in ALLOWED]
+assert pattern(H-361, 'WIDE DIAGONAL | G2 to D6', wide) == [n for n in range(43, 87) if n % 12 in ALLOWED]
+y = H-576
+for instruction in [
+    'Read left to right. Bold numbers mark G. Parentheses show the neighboring scale frets on the same string. Skip them when playing the run.',
+    'Three notes per string: stay around frets 5-10 in standard tuning. Hear the opening G-Ab-A and continue to Bb on string 6.',
+    'Wide diagonal: slide along string 7 for its six notes, then play four per string. Finish on D6 at string 1, fret 22.'
+]:
+    y = paragraph(y, instruction, 9.3) - 10
+assert y > 45
 c.showPage()
 
 # Chord spelling checks underpin all diagrams and original progressions.
