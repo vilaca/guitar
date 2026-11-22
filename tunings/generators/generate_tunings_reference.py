@@ -123,7 +123,7 @@ grid(p,['Shape','Result'],[
 para(p,'The tuning favours repeating notes, drones and large chord textures. It gives up the broad pitch coverage and consistent scale shapes of an all-fourths layout. The interval map above is for the exact unisons shown; different octave choices would change it.')
 
 p=page('Stephen Carpenter and Deftones')
-para(p,'The Deftones examples went beyond lowering a bass string. Stephen Carpenter also used seven-string instruments with a duplicated highest string. The 2013 rig rundown lists the open pitches for all three instruments [3]. In 2016 Carpenter identified the F# eight-string tuning as standard, described lowering its bass to E, and explained his extra high-E drone [4].')
+para(p,'The seven-string tunings and the F# eight-string pitches come from the 2013 rig rundown [3]. Carpenter explains his tuning choices in the 2016 interview [4].')
 grid(p,['Layout','Open notes','Semitones'],[
  tuning('7 strings with doubled high E','E A D G B E E',[5,5,5,4,5,0]),
  tuning('7 strings with doubled high D','C G C F A D D',[7,5,5,4,5,0]),
@@ -132,7 +132,7 @@ grid(p,['Layout','Open notes','Semitones'],[
 heading(p,'Doubled high strings')
 para(p,'The seven-string realizations are E2 A2 D3 G3 B3 E4 E4 and C2 G2 C3 F3 A3 D4 D4. The extra string repeats the top pitch instead of extending the bass range. Carpenter described an extra high string as a drone in a later interview [4].')
 heading(p,'Standard eight-string tuning and drop E')
-para(p,'For the eight-string examples, F#1 B1 E2 A2 D3 G3 B3 E4 becomes E1 B1 E2 A2 D3 G3 B3 E4 when only the thickest string drops a whole tone. Carpenter described that change in the 2016 interview [4]. The lowest three strings then form E-B-E, a root-fifth-octave shape.')
+para(p,'For the eight-string examples, F#1 B1 E2 A2 D3 G3 B3 E4 becomes E1 B1 E2 A2 D3 G3 B3 E4 when only the thickest string drops a whole tone. Carpenter identifies the first as standard tuning and describes the change for the next record [4]. The lowest three strings then form E-B-E, a root-fifth-octave shape.')
 heading(p,'Relationship to the Homme example')
 grid(p,['Feature','Homme G D example','Carpenter doubled top'],[
  ['Repeated pitches','Both outer pairs','Highest pair'],

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bb dominant bebop: guitar, piano and 49 progressions
+"""Bb dominant bebop: guitar, piano and 45 progressions
 
 Install: python -m pip install reportlab
 Run: python generate_b_flat_dominant_bebop.py --output my_guide.pdf
@@ -16,7 +16,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 
 import argparse
 
-parser = argparse.ArgumentParser(description='Bb dominant bebop: guitar, piano and 49 progressions')
+parser = argparse.ArgumentParser(description='Bb dominant bebop: guitar, piano and 45 progressions')
 parser.add_argument('--output', default='b_flat_dominant_bebop_7_string_and_piano.pdf',
                     help='Output PDF path (default: %(default)s)')
 args = parser.parse_args()
@@ -28,8 +28,8 @@ font_dir = Path(reportlab.__file__).resolve().parent / 'fonts'
 for family, filename in [('Body', 'Vera.ttf'), ('Bold', 'VeraBd.ttf')]:
     pdfmetrics.registerFont(TTFont(family, str(font_dir / filename)))
 c=canvas.Canvas(str(OUT),pagesize=A4)
-c.setTitle('Bb Dominant Bebop with a G-centred Riff - 7-string guitar, piano and 49 progressions')
-W,H=A4; M=38; INNER=W-2*M; TOTAL=15
+c.setTitle('Bb Dominant Bebop with a G-centred Riff - 7-string guitar, piano and 45 progressions')
+W,H=A4; M=38; INNER=W-2*M; TOTAL=14
 ALLOWED={10,0,2,3,5,7,8,9}
 NAMES={0:'C',1:'Db',2:'D',3:'Eb',4:'E',5:'F',6:'F#',7:'G',8:'Ab',9:'A',10:'Bb',11:'B'}
 PITCH={'C':0,'D':2,'E':4,'F':5,'G':7,'A':9,'B':11}
@@ -108,9 +108,8 @@ y=paragraph(y,'Ab and A are different colours: Ab is G\'s dark b2; A is its natu
 assert y>50
 c.showPage()
 
-header(2, 'GUITAR PATTERNS', 'G-centred riff | Standard B E A D G B E')
+header(2, 'GUITAR PATTERN', 'G-centred riff | Standard B E A D G B E')
 compact = [[8, 9, 10], [6, 8, 10], [6, 8, 10], [6, 7, 8], [5, 7, 8], [6, 8, 9], [5, 6, 8]]
-wide = [[8, 9, 10, 11, 13, 15], [11, 13, 15, 16], [12, 13, 15, 17], [13, 15, 17, 18], [14, 15, 17, 19], [16, 18, 20, 21], [17, 18, 20, 22]]
 assert all(len(row) == 3 for row in compact)
 
 def pattern(top, title, frets):
@@ -133,7 +132,7 @@ def pattern(top, title, frets):
             fret = scale_frets[i]
             neighbor = i < first or i >= first + len(row)
             label = f'({fret})' if neighbor else str(fret)
-            size = 8 if neighbor else 9
+            size = 9 if neighbor else 11
             font = 'Bold' if (open_pitch + fret) % 12 == 7 else 'Body'
             x = left + (start + 1 + i - first) * step
             width = c.stringWidth(label, font, size) + 1
@@ -144,18 +143,17 @@ def pattern(top, title, frets):
             c.drawCentredString(x, y - 3, label)
 
     for string, row in enumerate(frets):
-        y = top - 32 - (6 - string) * 19
+        y = top - 42 - (6 - string) * 32
         draw_row(y, labels[string], opens[string], row, len(played))
         played.extend(opens[string] + f for f in row)
     return played
 
-assert pattern(H-120, 'THREE NOTES PER STRING | G2 to C5', compact) == [n for n in range(43, 73) if n % 12 in ALLOWED]
-assert pattern(H-361, 'WIDE DIAGONAL | G2 to D6', wide) == [n for n in range(43, 87) if n % 12 in ALLOWED]
-y = H-576
+played = pattern(H-120, 'THREE NOTES PER STRING | G2 to C5', compact)
+assert played == [n for n in range(43, 73) if n % 12 in ALLOWED]
+y = H-396
 for instruction in [
     'Read left to right. Bold numbers mark G. Parentheses show the neighboring scale frets on the same string. Skip them when playing the run.',
     'Three notes per string: stay around frets 5-10 in standard tuning. Hear the opening G-Ab-A and continue to Bb on string 6.',
-    'Wide diagonal: slide along string 7 for its six notes, then play four per string. Finish on D6 at string 1, fret 22.'
 ]:
     y = paragraph(y, instruction, 9.3) - 10
 assert y > 45
@@ -221,6 +219,28 @@ paragraph(77,'For more weight, replace a left-hand fifth with a bass octave, suc
 c.showPage()
 
 header(5,'START HERE | FOUR LOOPS','Each box is one bar in 4/4. Try 70-100 BPM and repeat each loop.')
+variations = {
+    '22': ('Variation 31 - Digital bloom / Hyperpop | 140-180 BPM, or half-time feel',
+           'Layer a pluck with a pad; strip back to bass before the final chord.'),
+    '19': ('Variation 33 - Ash descent / Black metal | 140-200 BPM, or slower atmospheric feel',
+           'Use fast repeated notes; let each moving bass root sustain below them.'),
+    '02': ('Variation 39 - Broken signal / Dubstep | around 140 BPM, half-time feel',
+           'Use a sparse half-time groove and syncopated bass replies between chords.'),
+    '32': ('Variation 44 - Techno | 125-140 BPM',
+           'Repeat short chord stabs over eight bars.'),
+}
+
+def draw_variation(y, title):
+    variation = variations.get(title[:2])
+    if variation:
+        name, direction = variation
+        txt(M + 10, y, name, 8.5, 'Bold')
+        y -= 12
+        for line in simpleSplit(direction, 'Body', 8.5, W - 2 * M - 10):
+            txt(M + 10, y, line, 8.5)
+            y -= 12
+    return y
+
 core=[('01  Your original dark centre',['Gm','Ab','Gm','Gm'],
        'G is home. Emphasize Ab-G in the melody when Ab returns to Gm.'),
       ('02  Hear A natural',['Gm','Dm','Ab','Gm'],
@@ -235,10 +255,12 @@ def sequence(y,seq,size=10):
     while pdfmetrics.stringWidth(s,'Courier',size)>INNER:size-=.3
     txt(M,y,s,size,'Courier')
 
-for i,(title,seq,desc) in enumerate(core):
+yy = H - 119
+for title,seq,desc in core:
     assert all(ch in CH for ch in seq)
-    yy=H-119-i*76;txt(M,yy,title,11,'Bold');sequence(yy-23,seq)
+    txt(M,yy,title,11,'Bold');sequence(yy-23,seq)
     txt(M,yy-43,desc,8.8)
+    yy = draw_variation(yy-58, title) - 16
 txt(M,389,'ADDITIONAL CHORD SPELLINGS',12,'Bold')
 table(368,['Chord','Notes','Useful colour'],[94,160,INNER-254],[
  ('Dm7','D F A C','A natural'),('Ebmaj7','Eb G Bb D','Soft major seventh'),
@@ -252,20 +274,21 @@ for p in ['Power chords: G5 = G D; Ab5 = Ab Eb; Bb5 = Bb F; Eb5 = Eb Bb; F5 = F 
 assert y>45
 c.showPage()
 
-def style_page(page,title,subtitle,groups):
+def style_page(page,title,subtitle,groups,variation_guide=None):
     header(page,title,subtitle)
-    txt(M,H-105,'One box = one bar in 4/4. Tempos are starting points, not genre rules.',8.8)
-    txt(M,H-122,'Keys: pp3-4. Extra chord notes: p5. Plain-language playing tips: pp14-15.',8.8)
-    y=H-160
+    txt(M,H-105,'1 bar per chord | Keys pp3-4 | Chords p5 | Tips p14',8.8)
+    y=H-140
     for group,loops in groups:
         txt(M,y,group,12,'Bold');y-=27
         for label,seq,desc in loops:
             assert all(ch in CH for ch in seq),seq
             assert pdfmetrics.stringWidth(desc,'Body',8.7)<=INNER,desc
             txt(M,y,label,10,'Bold');sequence(y-22,seq)
-            txt(M,y-42,desc,8.7);y-=83
+            txt(M,y-42,desc,8.7)
+            y = draw_variation(y-58, label) - 18
         y-=23
-    paragraph(83,'These are production sketches, not fixed genre formulas. For the G-centred loops, end on Gm or Gm9 and make G feel settled; the first chord alone does not establish the centre.',8.5,13)
+    if variation_guide:
+        txt(M, 60, variation_guide, 9)
     assert y>60
     c.showPage()
 
@@ -281,13 +304,13 @@ style_page(6,'AMBIENT & ETHEREAL','G-centred loops using the Bb dominant bebop p
 
 style_page(7,'METAL & ROCK','G-centred loops | Short attacks, silence and clear chord returns',[
  ('Metal | 85-140 BPM',[
-  ('11  Half-step pressure',['G5','Ab5','G5','F5'],'Strike root-plus-fifth pairs briefly, then release. Clipped fifths: tip 4, p14.'),
-  ('12  Climb and collapse',['G5','Ab5','Bb5','Ab5','G5','G5'],'Hit twice per beat, then stop early before returning to G5. Tip 7, p15.'),
-  ('13  Heavy descent',['G5','Eb5','F5','Ab5','G5','G5'],'Use a strong snare on beat 3; add low bass octaves. Half-time: tip 8, p15.')]),
+  ('11  Half-step pressure',['G5','Ab5','G5','F5'],'Strike root-plus-fifth pairs briefly, then release. Tip 2, p14.'),
+  ('12  Climb and collapse',['G5','Ab5','Bb5','Ab5','G5','G5'],'Hit twice per beat, then stop early before returning to G5. Glossary: eighth-note hits.'),
+  ('13  Heavy descent',['G5','Eb5','F5','Ab5','G5','G5'],'Use a strong snare on beat 3; add low bass octaves. Glossary: half-time feel.')]),
  ('Rock | 95-140 BPM',[
-  ('14  Open drive',['Gm','Eb','Bb','Ab','Gm','Gm'],'Play all three chord notes together, twice per beat. Full triads: tip 9, p15.'),
-  ('15  Angular lift',['Gm','Dm','F','Ab','Gm','Gm'],'Repeat a melody ending Ab-G when Ab returns to Gm. Hook: tip 10, p15.'),
-  ('16  Dark release',['Gm','Cm','Eb','Ab','Gm','Gm'],'Start with G3-Bb3; later spread Gm as G2-D3-Bb3-G4. Tip 11, p15.')])])
+  ('14  Open drive',['Gm','Eb','Bb','Ab','Gm','Gm'],'Play all three chord notes together, twice per beat. Tip 3, p14.'),
+  ('15  Angular lift',['Gm','Dm','F','Ab','Gm','Gm'],'Repeat a melody ending Ab-G when Ab returns to Gm. Tip 4, p14.'),
+  ('16  Dark release',['Gm','Cm','Eb','Ab','Gm','Gm'],'Start with G3-Bb3; later spread Gm as G2-D3-Bb3-G4. Tip 5, p14.')])])
 
 style_page(8,'POP & CINEMATIC','G-centred loops | Brighter A natural and darker Ab can coexist',[
  ('Pop / dark pop | 85-120 BPM',[
@@ -313,11 +336,11 @@ style_page(10,'HYPERPOP & BLACK METAL','G-centred loops | Sound and articulation
  ('Hyperpop | 140-180 BPM, or half-time feel',[
   ('29  Sugar and static',['Gm9','Ebmaj7','Bbadd9','Abmaj7'],'Use bright layered synths, sudden stops and a melody doubled an octave higher.'),
   ('30  Pixel jump',['Gm','Ab','Bb','F','Ab','Gm'],'Chop the chords into quick bursts; jump registers between phrases.'),
-  ('31  Digital bloom',['Gm9','Dm7','Abmaj7','Cm7','Abmaj7','Gm9'],'Layer a pluck with a pad; strip back to bass before the final chord.')]),
+  ]),
  ('Black metal | 140-200 BPM, or slower atmospheric feel',[
   ('32  Frost line',['Gm','Ab','Gm','Cm'],'Rapidly repeat upper chord tones over a thin pad and relentless drums.'),
-  ('33  Ash descent',['Gm','Fm','Eb','Ab'],'Use fast repeated notes; let each moving bass root sustain below them.'),
-  ('34  Distant ruin',['Gm','Ddim','Cm','Ab','Gm','Gm'],'Use the diminished chord for friction; contrast fast notes with a long final Gm.')])])
+  ('34  Distant ruin',['Gm','Ddim','Cm','Ab','Gm','Gm'],'Use the diminished chord for friction; contrast fast notes with a long final Gm.')])],
+    variation_guide='Hyperpop and black metal variations: 31 and 33 on p8.')
 
 style_page(11,'DUB & DUBSTEP','G-centred loops | Give bass, rhythm and effects their own space',[
  ('Dub | 65-85 BPM',[
@@ -326,8 +349,8 @@ style_page(11,'DUB & DUBSTEP','G-centred loops | Give bass, rhythm and effects t
   ('37  Empty space',['Gm9','Fm7','Cm7','Abmaj7'],'Omit some chord hits on later repeats; let bass and echoes fill the gaps.')]),
  ('Dubstep | around 140 BPM, half-time feel',[
   ('38  Sub pressure',['G5','Ab5','G5','Eb5'],'Keep the deep sub simple; put rhythmic filter changes on a separate mid bass.'),
-  ('39  Broken signal',['Gm','Dm','Ab','Gm'],'Use a sparse half-time groove and syncopated bass replies between chords.'),
-  ('40  Weightless drop',['Gm9','Ebmaj7','F7','Abmaj7'],'Begin with airy pads, then shorten the chords to open room for the bass drop.')])])
+  ('40  Weightless drop',['Gm9','Ebmaj7','F7','Abmaj7'],'Begin with airy pads, then shorten the chords to open room for the bass drop.')])],
+    variation_guide='Dubstep variation: 39 on p5.')
 
 header(12,'BLUES | SCALE EXCEPTIONS','G-centred blues | Outside notes are explicitly marked')
 y=H-108
@@ -353,45 +376,39 @@ table(190,['Chord','Notes','Outside this scale'],[90,180,INNER-270],[('G7','G B 
 paragraph(61,'The scale-only rule is relaxed on this page: match the harmony rather than forcing every note into the original collection.',8.7,12)
 c.showPage()
 
-style_page(13,'MORE ELECTRONIC DIRECTIONS','G-centred sketches | One loop for each additional production direction',[
+style_page(13,'MORE ELECTRONIC DIRECTIONS','G-centred sketches | Techno, house, industrial and breakbeat arrangements',[
  ('Techno / house / industrial',[
-  ('44  Techno | 125-140 BPM',['Gm','Ab','Gm','Cm'],'Repeat a short chord; open the synth filter gradually over eight bars. Tip 1, p14.'),
-  ('45  House | 118-128 BPM',['Gm9','Cm7','F7','Abmaj7'],'Delay offbeat stabs slightly; move bass on each beat. Tips 2-3, p14.'),
-  ('46  Industrial | 100-135 BPM',['G5','Ab5','Eb5','G5'],'Play G+D as clipped stabs; add metallic percussion and repeating bass. Tip 4, p14.')]),
+  ('45  House | 118-128 BPM',['Gm9','Cm7','F7','Abmaj7'],'Delay offbeat stabs; move bass each beat. Glossary: swung offbeats. Bass: tip 1, p14.'),
+  ('46  Industrial | 100-135 BPM',['G5','Ab5','Eb5','G5'],'Play G+D as clipped stabs; add metallic percussion and repeating bass. Tip 2, p14.')]),
  ('Drum & bass / UK garage / trip-hop',[
   ('47  Drum & bass | 165-175 BPM',['Gm9','Bbadd9','Cm7','Abmaj7'],'Let chords last a bar or two over fast breaks, with space for a clean sub bass.'),
-  ('48  UK garage | 128-138 BPM',['Gm7','Dm7','Cm7','Abmaj7'],'Delay offbeat stabs; add syncopated kicks and snares on 2 and 4. Tip 5, p14.'),
-  ('49  Trip-hop | 65-95 BPM',['Gm9','Abmaj7','Fm7','Gm9'],'Relax drums; use mellow keys, sparse bass and small sound changes. Tip 6, p14.')])])
+  ('48  UK garage | 128-138 BPM',['Gm7','Dm7','Cm7','Abmaj7'],'Delay offbeat stabs; add syncopated kicks and snares on 2 and 4. Glossary: two-step groove.'),
+  ('49  Trip-hop | 65-95 BPM',['Gm9','Abmaj7','Fm7','Gm9'],'Loosen drums; vary mellow keys over sparse bass. Glossary: loose drums and warm keys.')])],
+    variation_guide='Techno variation: 44 on p10.')
 
-def explain(y,title,texts):
-    txt(M,y,title,11,'Bold');y-=19
-    for p in texts:y=paragraph(y,p,9.3,14)-5
-    return y-13
+header(14,'PLAYING EXAMPLES','Bass, chords and melodic phrasing for G-centred loops')
+tips = [
 
-header(14,'PLAYING TIPS | SOUND & GROOVE','Terms 1-6 | Plain-language instructions with specific examples')
-y=H-110
-for title,texts in [
- ('1  Automate timbre slowly',['Timbre is the character of the sound. Automation changes a synth setting over time. Repeat the same notes while you gradually open a filter over eight bars, making the sound brighter without changing the chord.']),
- ('2  Swung offbeat chords',['Count "1 & 2 & 3 & 4 &". The numbers are the main beats; the & counts fall between them. Play short chords on the & counts. For swing, place those hits slightly later than the exact midpoint, giving a long-short bounce.']),
- ('3  Walking bass phrase',['Here this means a moving bass line rather than a held root. Play G-Ab-Bb-D, one note per beat over Gm7, then land on C when Cm7 arrives. These notes all fit. Traditional jazz walking bass is a more specific technique.']),
- ('4  Clipped fifths',['Strike a root and fifth together, then stop quickly. For G5 use G+D; for Ab5 use Ab+Eb. Release after each short stab and leave silence. "Clipped" describes the duration; it does not change the interval.']),
- ('5  Shuffled chord chops and a two-step beat',['Chops are short chord stabs. Shuffled timing has a long-short bounce with delayed offbeats. A UK garage starting point uses snares on beats 2 and 4, syncopated kicks, and gaps instead of a kick on every beat. Let bass phrases answer the chord hits.']),
- ('6  Loose drums, warm keys, sparse bass, evolving textures',['Loose drums have small timing and volume variations. Warm keys use a mellow sound with softer high frequencies. Sparse bass uses fewer notes and more silence.',
-  'Let textures evolve by making small changes over several bars: fade in an echo, alter the filter, add a high note or introduce a background sound. Keep the main pulse recognizable.'])]:
-    y=explain(y,title,texts)
-assert y>45
+    ('1  Walking bass', 'Play one note per beat: G-Ab-Bb-D over Gm7, landing on C for Cm7.'),
+    ('2  Clipped fifths', 'Strike G and D together and release immediately.'),
+
+
+    ('3  Full triads', 'Sound all three chord tones together: G-Bb-D for Gm. A power chord leaves out the third.'),
+    ('4  Melodic hook', 'Repeat a short phrase ending Ab-G as Ab returns to Gm.'),
+    ('5  Wider voicings', 'Begin with G3-Bb3, add D4, then spread Gm across G2-D3-Bb3-G4.'),
+]
+y = H - 111
+for title, direction in tips:
+    txt(M, y, title, 11, 'Bold')
+    y -= 17
+    for line in simpleSplit(direction, 'Body', 9.3, W - 2 * M):
+        txt(M, y, line, 9.3)
+        y -= 13
+    y -= 22
+txt(M, y - 12, 'Shared rhythm and production terms', 11, 'Bold')
+txt(M, y - 32, 'See Playing glossary (playing_glossary.pdf), supplied with the scale guides.', 9)
+c.linkURL('playing_glossary.pdf', (M, y - 36, M + 320, y - 20), relative=0, kind='GoToR')
+assert y > 85
 c.showPage()
-
-header(15,'PLAYING TIPS | NOTES & SPACE','Terms 7-11 | Count the rhythm, hear the return, spread the chord')
-y=H-110
-for title,texts in [
- ('7  Repeat eighth-note hits, then leave space',['Eighth notes give two hits per beat: "1 & 2 & 3 & 4 &". Repeat the current chord on those counts. In the last bar before G5 returns, play only "1 & 2 &", then rest for "3 & 4 &". Strike G5 on beat 1 of the next bar. The silence makes the return stand out.']),
- ('8  Half-time drum feel',['Keep the song tempo the same but make the drum accents feel slower. A common starting point replaces snares on beats 2 and 4 with one strong snare on beat 3. At 140 BPM, this can feel like a 70 BPM groove, even while other parts play fast notes.']),
- ('9  Full triads',['A triad has three different chord notes: Gm = G-Bb-D; Ab = Ab-C-Eb; Bb = Bb-D-F. Play all three together. G5 uses only G-D, leaving out Bb, the minor third that gives Gm its minor character.']),
- ('10  Use the Ab-to-Gm return as the hook',['A hook is a short idea repeated so listeners recognize and anticipate it. Each time Ab changes to Gm, repeat a melody ending Ab-G. Make it stand out with a stronger attack, a short pause beforehand or a distinctive repeating rhythm.']),
- ('11  Begin with fewer notes, then widen the voicing',['A voicing is the arrangement of chord notes across registers. Start with G3-Bb3. Add D4 to complete Gm. Later spread the chord as G2-D3-Bb3-G4. C4 means middle C.',
-  'Adding notes makes a chord fuller; spacing them farther apart makes it wider. Change these separately if you like. Try the widest version only on the last repeat while keeping the bass rhythm steady.'])]:
-    y=explain(y,title,texts)
-assert y>45
-c.showPage();c.save()
+c.save()
 print(OUT)

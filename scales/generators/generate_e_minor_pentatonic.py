@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""E minor pentatonic: guitar, piano and 49 progressions
+"""E minor pentatonic: guitar, piano and 46 progressions
 
 Install: python -m pip install reportlab
 Run: python generate_e_minor_pentatonic.py --output my_guide.pdf
@@ -16,7 +16,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 
 import argparse
 
-parser = argparse.ArgumentParser(description='E minor pentatonic: guitar, piano and 49 progressions')
+parser = argparse.ArgumentParser(description='E minor pentatonic: guitar, piano and 46 progressions')
 parser.add_argument('--output', default='e_minor_pentatonic_7_string_and_piano.pdf',
                     help='Output PDF path (default: %(default)s)')
 args = parser.parse_args()
@@ -28,8 +28,8 @@ font_dir = Path(reportlab.__file__).resolve().parent / 'fonts'
 for family, filename in [('Body', 'Vera.ttf'), ('Bold', 'VeraBd.ttf')]:
     pdfmetrics.registerFont(TTFont(family, str(font_dir / filename)))
 c=canvas.Canvas(str(OUT),pagesize=A4)
-c.setTitle('E Minor Pentatonic - 7-string guitar, piano and 49 progressions')
-W,H=A4; M=38; INNER=W-2*M; TOTAL=15
+c.setTitle('E Minor Pentatonic - 7-string guitar, piano and 46 progressions')
+W,H=A4; M=38; INNER=W-2*M; TOTAL=14
 ALLOWED={4,7,9,11,2}
 NAMES={0:'C',1:'Db',2:'D',3:'Eb',4:'E',5:'F',6:'F#',7:'G',8:'Ab',9:'A',10:'Bb',11:'B'}
 PITCH={'C':0,'D':2,'E':4,'F':5,'G':7,'A':9,'B':11}
@@ -233,6 +233,26 @@ def sequence(y,seq,size=10):
     txt(M,y,s,size,'Courier')
 
 header(5,'START HERE | FOUR LOOPS','[P] = pentatonic-only chords | [H] = wider harmony | * = outside notes')
+variations = {
+    '02': ('Variation 05 - Slow drift / Ambient | 50-75 BPM',
+           'Sustain soft pads; give each chord two bars if you want slower harmony.'),
+    '01': ('Variation 23 - Machine steps / Electro | 110-135 BPM',
+           'Use syncopated drum-machine kicks, short chord stabs and a dry octave bass.'),
+    '04': ('Variation 47 - Drum & bass | 165-175 BPM',
+           'Let chords last a bar or two over fast breaks, with space for a clean sub bass.'),
+}
+
+def draw_variation(y, title):
+    variation = variations.get(title[:2])
+    if variation:
+        name, direction = variation
+        txt(M + 10, y, name, 8.5, 'Bold')
+        y -= 12
+        for line in simpleSplit(direction, 'Body', 8.5, W - 2 * M - 10):
+            txt(M + 10, y, line, 8.5)
+            y -= 12
+    return y
+
 core=[('01  [P] Open pentatonic motion',['Em','Dsus4','Asus2','Em'],
        'Move bass E-D-A-E. Let the last Em feel settled.'),
       ('02  [P] Fuller colour',['Em7','G6','A7sus4','Em7'],
@@ -241,9 +261,11 @@ core=[('01  [P] Open pentatonic motion',['Em','Dsus4','Asus2','Em'],
        'C* adds C; D* adds F#. The lead melody can still start with E minor pentatonic.'),
       ('04  [H] Stronger return',['Em9','Cmaj7','Am7','B7'],
        'B7* adds D# and F#. Let D# rise to E when the loop returns to Em9*.')]
-for i,(title,seq,desc) in enumerate(core):
-    yy=H-116-i*66;txt(M,yy,title,10.8,'Bold');sequence(yy-21,seq)
-    txt(M,yy-40,desc,8.6)
+yy = H-108
+for title,seq,desc in core:
+    txt(M,yy,title,10.8,'Bold');sequence(yy-21,seq)
+    txt(M,yy-33,desc,8.6)
+    yy = draw_variation(yy-46, title) - 12
 txt(M,414,'WIDER-HARMONY REFERENCE',11,'Bold')
 extra=['C','D','Am','Am7','Bm7','B7','Cmaj7','Em9','Gmaj7','F','C5','B5']
 table(394,['Chord','Complete notes','Outside E minor pentatonic'],[87,170,INNER-257],
@@ -251,11 +273,10 @@ table(394,['Chord','Complete notes','Outside E minor pentatonic'],[87,170,INNER-
 paragraph(82,'An asterisk marks added notes, not an augmented chord. These harmonies expand the accompaniment; the pentatonic scale remains a useful starting palette for the melody. Match the current chord when a clash sounds unwanted.',8.5,12)
 c.showPage()
 
-def style_page(page,title,subtitle,groups):
+def style_page(page,title,subtitle,groups,variation_guide=None):
     header(page,title,subtitle)
-    txt(M,H-105,'[P] = all chord notes fit. [H] = expanded harmony; * marks outside notes.',8.7)
-    txt(M,H-122,'One box = one bar in 4/4. Keys: pp3-4. Chord notes: p5. Playing tips: pp14-15.',8.7)
-    y=H-160
+    txt(M,H-105,'1 bar per chord | [P] within scale, * outside | Keys pp3-4 | Chords p5 | Tips p14',8.8)
+    y=H-140
     for group,loops in groups:
         txt(M,y,group,12,'Bold');y-=27
         for label,seq,desc in loops:
@@ -265,30 +286,32 @@ def style_page(page,title,subtitle,groups):
             if '[H]' in label:assert kind=='H',label
             assert pdfmetrics.stringWidth(desc,'Body',8.7)<=INNER,desc
             txt(M,y,label,10,'Bold');sequence(y-22,seq)
-            txt(M,y-42,desc,8.7);y-=83
+            txt(M,y-42,desc,8.7)
+            y = draw_variation(y-58, label) - 18
         y-=23
-    paragraph(83,'Tempos and moods are starting points, not genre rules. Give E a sense of rest through phrasing, bass and the final Em chord. Use E-G-A-B-D as the initial melody palette.',8.5,13)
+    if variation_guide:
+        txt(M, 60, variation_guide, 9)
     assert y>60;c.showPage()
 
 style_page(6,'AMBIENT & ETHEREAL','Original E-centred sketches | Space, sustain and changing registers',[
  ('Ambient | 50-75 BPM',[
-  ('05  [P] Slow drift',['Em7','G6','A7sus4','Em7'],'Sustain soft pads; give each chord two bars if you want slower harmony.'),
   ('06  [P] Quiet return',['Em7(add11)','D6sus4','Gadd9','Em7(add11)'],'Use soft attacks and leave gaps; let the E bass settle at the end.'),
   ('07  [H] Wide horizon',['Em9','Cmaj7','Am7','Em9'],'Spread the chords across octaves, with a gentle moving bass below.')]),
  ('Ethereal | 65-95 BPM',[
   ('08  [P] Floating light',['Em7','Gadd9','D6sus4','Em7'],'Play right-hand notes one at a time, with quiet delay and reverb.'),
   ('09  [H] Falling through',['Em7','Bm7','Am7','Cmaj7','Em7','Em7'],'Use a sparse high melody; let the final Em7 last two bars.'),
-  ('10  [P] Glass motion',['Em7(add11)','G6','A7sus4','D6sus4','Em7','Em7'],'Let shared notes ring; keep the moving bass roots distinct.')])])
+  ('10  [P] Glass motion',['Em7(add11)','G6','A7sus4','D6sus4','Em7','Em7'],'Let shared notes ring; keep the moving bass roots distinct.')])],
+    variation_guide='Ambient variation: 05 on p5.')
 
 style_page(7,'METAL & ROCK','E-centred sketches | Fifths, full triads and clear rhythmic returns',[
  ('Metal | 85-140 BPM',[
-  ('11  [P] Short pressure',['E5','G5','A5','E5'],'Strike root-plus-fifth pairs briefly, then release. Clipped fifths: tip 4, p14.'),
-  ('12  [H] Climb and collapse',['E5','D5','C5','B5','E5','E5'],'Hit twice per beat, then stop early before returning to E5. Tip 7, p15.'),
-  ('13  [P] Heavy descent',['E5','G5','D5','A5','E5','E5'],'Use a strong snare on beat 3 and low bass octaves. Half-time: tip 8, p15.')]),
+  ('11  [P] Short pressure',['E5','G5','A5','E5'],'Strike root-plus-fifth pairs briefly, then release. Tip 2, p14.'),
+  ('12  [H] Climb and collapse',['E5','D5','C5','B5','E5','E5'],'Hit twice per beat, then stop early before returning to E5. Glossary: eighth-note hits.'),
+  ('13  [P] Heavy descent',['E5','G5','D5','A5','E5','E5'],'Use a strong snare on beat 3 and low bass octaves. Glossary: half-time feel.')]),
  ('Rock | 95-140 BPM',[
-  ('14  [H] Open drive',['Em','C','G','D','Em','Em'],'Play all three chord notes together, twice per beat. Full triads: tip 9, p15.'),
-  ('15  [P] Angular lift',['Em','G','Asus2','Dsus4','Em','Em'],'Repeat a melody ending D-E when Dsus4 returns to Em. Hook: tip 10, p15.'),
-  ('16  [H] Dark release',['Em','Am','C','B7','Em','Em'],'Start with E3-G3; later spread Em as E2-B2-G3-E4. Tip 11, p15.')])])
+  ('14  [H] Open drive',['Em','C','G','D','Em','Em'],'Play all three chord notes together, twice per beat. Tip 3, p14.'),
+  ('15  [P] Angular lift',['Em','G','Asus2','Dsus4','Em','Em'],'Repeat a melody ending D-E when Dsus4 returns to Em. Tip 4, p14.'),
+  ('16  [H] Dark release',['Em','Am','C','B7','Em','Em'],'Start with E3-G3; later spread Em as E2-B2-G3-E4. Tip 5, p14.')])])
 
 style_page(8,'POP & CINEMATIC','E-centred sketches | Compare open pentatonic and wider minor harmony',[
  ('Pop / dark pop | 85-120 BPM',[
@@ -302,13 +325,13 @@ style_page(8,'POP & CINEMATIC','E-centred sketches | Compare open pentatonic and
 
 style_page(9,'ELECTRO & ELECTROPOP','E-centred sketches | Short attacks, offbeats and moving bass lines',[
  ('Electro | 110-135 BPM',[
-  ('23  [P] Machine steps',['Em','Dsus4','Asus2','Em'],'Use syncopated drum-machine kicks, short chord stabs and a dry octave bass.'),
   ('24  [P] Metallic circuit',['E5','G5','D5','E5'],'Sequence short bass bursts, leaving gaps around the snare hits.'),
   ('25  [H] Cold transmission',['Em7','Bm7','Cmaj7','Em9'],'Use a glassy pluck or vocal-like pad; play stabs between the main beats.')]),
  ('Electropop | 100-125 BPM',[
   ('26  [H] Neon refrain',['Em','C','D','G'],'Use a steady kick and bright chords; make E feel like home in the melody.'),
   ('27  [P] Glass chorus',['Em7','Gadd9','D6sus4','A7sus4'],'Repeat a clear melody over the open chords, then return to E.'),
-  ('28  [H] Night drive',['Em','Am','D','B7'],'Try octave bass pulses and a wide pad behind a simple lead melody.')])])
+  ('28  [H] Night drive',['Em','Am','D','B7'],'Try octave bass pulses and a wide pad behind a simple lead melody.')])],
+    variation_guide='Electro variation: 23 on p5.')
 
 style_page(10,'HYPERPOP & BLACK METAL','E-centred sketches | Texture and articulation create the contrast',[
  ('Hyperpop | 140-180 BPM, or half-time feel',[
@@ -361,41 +384,39 @@ table(187,['Chord','Complete notes','Outside the pentatonic scale'],[87,170,INNE
 paragraph(61,'Holding G against the G# in E7 creates a familiar blues clash. That can be intentional; it does not mean every pentatonic note will sound equally settled.',8.7,12)
 c.showPage()
 
-style_page(13,'MORE ELECTRONIC DIRECTIONS','E-centred sketches | One loop for each additional production direction',[
+style_page(13,'MORE ELECTRONIC DIRECTIONS','E-centred sketches | Techno, house, industrial and breakbeat arrangements',[
  ('Techno / house / industrial',[
-  ('44  [P] Techno | 125-140 BPM',['Em','Dsus4','Em','Asus2'],'Repeat a short chord; open the synth filter slowly over eight bars. Tip 1, p14.'),
-  ('45  [P] House | 118-128 BPM',['Em7','G6','A7sus4','Dsus4'],'Delay offbeat stabs slightly; move the bass on each beat. Tips 2-3, p14.'),
-  ('46  [P] Industrial | 100-135 BPM',['E5','D5','G5','E5'],'Play E+B as clipped stabs; add metallic percussion and repeating bass. Tip 4, p14.')]),
+  ('44  [P] Techno | 125-140 BPM',['Em','Dsus4','Em','Asus2'],'Repeat short chord stabs over eight bars.'),
+  ('45  [P] House | 118-128 BPM',['Em7','G6','A7sus4','Dsus4'],'Delay offbeat stabs slightly; move the bass on each beat. Glossary: swung offbeats. Bass: tip 1, p14.'),
+  ('46  [P] Industrial | 100-135 BPM',['E5','D5','G5','E5'],'Play E+B as clipped stabs; add metallic percussion and repeating bass. Tip 2, p14.')]),
  ('Drum & bass / UK garage / trip-hop',[
-  ('47  [H] Drum & bass | 165-175 BPM',['Em9','Cmaj7','Am7','B7'],'Let chords last a bar or two over fast breaks, with space for a clean sub bass.'),
-  ('48  [P] UK garage | 128-138 BPM',['Em7','G6','A7sus4','D6sus4'],'Delay offbeat stabs; add syncopated kicks and snares on 2 and 4. Tip 5, p14.'),
-  ('49  [H] Trip-hop | 65-95 BPM',['Em7','Cmaj7','Am7','Em7'],'Relax drums; use mellow keys, sparse bass and small sound changes. Tip 6, p14.')])])
+  ('48  [P] UK garage | 128-138 BPM',['Em7','G6','A7sus4','D6sus4'],'Delay offbeat stabs; add syncopated kicks and snares on 2 and 4. Glossary: two-step groove.'),
+  ('49  [H] Trip-hop | 65-95 BPM',['Em7','Cmaj7','Am7','Em7'],'Loosen drums; vary mellow keys over sparse bass. Glossary: loose drums and warm keys.')])],
+    variation_guide='Drum & bass variation: 47 on p5.')
 
-def explain(y,title,texts):
-    txt(M,y,title,11,'Bold');y-=19
-    for p in texts:y=paragraph(y,p,9.3,14)-5
-    return y-13
+header(14,'PLAYING EXAMPLES','Bass, chords and melodic phrasing for E-centred loops')
+tips = [
 
-header(14,'PLAYING TIPS | SOUND & GROOVE','Terms 1-6 | Plain-language instructions with specific examples')
-y=H-110
-for title,texts in [
- ('1  Automate timbre slowly',['Timbre is the character of the sound. Automation changes a synth setting over time. Repeat the same notes while you gradually open a filter over eight bars, making the sound brighter without changing the chord.']),
- ('2  Swung offbeat chords',['Count "1 & 2 & 3 & 4 &". The numbers are the main beats; the & counts fall between them. Play short chords on the & counts. For swing, place those hits slightly later than the exact midpoint, giving a long-short bounce.']),
- ('3  Walking bass phrase',['Here this means a moving bass line rather than a held root. Play E-G-A-B, one note per beat over Em7, then land on A when A7sus4 arrives. Every note fits. Traditional jazz walking bass is a more specific technique.']),
- ('4  Clipped fifths',['Strike a root and fifth together, then stop quickly. For E5 use E+B; for A5 use A+E. Release after each short stab and leave silence. "Clipped" describes duration. B5 contains F#, so it needs an asterisk in this guide.']),
- ('5  Shuffled chord chops and a two-step beat',['Chops are short chord stabs. Shuffled timing has a long-short bounce with delayed offbeats. A UK garage starting point uses snares on beats 2 and 4, syncopated kicks, and gaps instead of a kick on every beat. Let bass phrases answer the chords.']),
- ('6  Loose drums, warm keys, sparse bass, evolving textures',['Loose drums have small timing and volume variations. Warm keys use a mellow sound with softer high frequencies. Sparse bass uses fewer notes and more silence.',
-  'Let textures evolve by making small changes over several bars: fade in an echo, alter the filter, add a high note or introduce a background sound. Keep the main pulse recognizable.'])]:y=explain(y,title,texts)
-assert y>45;c.showPage()
+    ('1  Walking bass', 'Play one note per beat: E-G-A-B over Em7, landing on A for A7sus4.'),
+    ('2  Clipped fifths', 'Strike E and B together and release immediately. B5 adds F# outside E minor pentatonic.'),
 
-header(15,'PLAYING TIPS | NOTES & SPACE','Terms 7-11 | Count the rhythm, hear the return, spread the chord')
-y=H-110
-for title,texts in [
- ('7  Repeat eighth-note hits, then leave space',['Eighth notes give two hits per beat: "1 & 2 & 3 & 4 &". Repeat the current chord on those counts. In the last bar before E5 returns, play only "1 & 2 &", then rest for "3 & 4 &". Strike E5 on beat 1 of the next bar. Silence makes the return stand out.']),
- ('8  Half-time drum feel',['Keep the song tempo the same but make the drum accents feel slower. A common starting point replaces snares on beats 2 and 4 with one strong snare on beat 3. At 140 BPM, this can feel like a 70 BPM groove, even while other parts play fast notes.']),
- ('9  Full triads',['A triad has three different chord notes: Em = E-G-B; G = G-B-D. Both fit the pentatonic scale. E5 uses only E-B, leaving out G, the minor third that gives Em its minor character. The suspended chords shown earlier use another note in place of a third.']),
- ('10  Use the Dsus4-to-Em return as the hook',['A hook is a short idea repeated so listeners recognize and anticipate it. Each time Dsus4 changes to Em, repeat a melody ending D-E. Make it stand out with a stronger attack, a short pause beforehand or a distinctive repeating rhythm.']),
- ('11  Begin with fewer notes, then widen the voicing',['A voicing is the arrangement of chord notes across registers. Start with E3-G3. Add B3 to complete Em. Later spread it as E2-B2-G3-E4. C4 means middle C.',
-  'Adding notes makes a chord fuller; spacing them farther apart makes it wider. Change these separately if you like. Try the widest version only on the final repeat while keeping the bass rhythm steady.'])]:y=explain(y,title,texts)
-assert y>45;c.showPage();c.save()
+
+    ('3  Full triads', 'Sound all three chord tones together: E-G-B for Em. A power chord leaves out the third.'),
+    ('4  Melodic hook', 'Repeat a short phrase ending D-E as Dsus4 returns to Em.'),
+    ('5  Wider voicings', 'Begin with E3-G3, add B3, then spread Em across E2-B2-G3-E4.'),
+]
+y = H - 111
+for title, direction in tips:
+    txt(M, y, title, 11, 'Bold')
+    y -= 17
+    for line in simpleSplit(direction, 'Body', 9.3, W - 2 * M):
+        txt(M, y, line, 9.3)
+        y -= 13
+    y -= 22
+txt(M, y - 12, 'Shared rhythm and production terms', 11, 'Bold')
+txt(M, y - 32, 'See Playing glossary (playing_glossary.pdf), supplied with the scale guides.', 9)
+c.linkURL('playing_glossary.pdf', (M, y - 36, M + 320, y - 20), relative=0, kind='GoToR')
+assert y > 85
+c.showPage()
+c.save()
 print(OUT)
