@@ -213,7 +213,7 @@ header(3,'PIANO KEYS | BASIC CHORDS','L = left-hand bass | R = right-hand chord 
 txt(M,H-105,'Play each L and all three R keys together. Shading also marks the selected white keys.',9)
 for i,(ch,lh,rh) in enumerate(basic):
     verify(ch,lh,rh);top=H-128-i*80;star='*' if OUTSIDE[ch] else ''
-    txt(M,top,ch+star,11,'Bold');txt(M+96,top,'LH: '+lh+'     RH: '+rh,9)
+    txt(M,top,ch+star,11,'Bold');txt(M+96,top,'LH: '+lh+'     RH: '+rh,10)
     piano(top-48,lh,rh)
 txt(M,49,'The first six chords are [P]. C* adds C natural; D* adds F#. Suspended chords replace the third.',9)
 c.showPage()
@@ -226,8 +226,8 @@ lines(H-103,['Use these richer chords in loops 05-10 and wherever their symbols 
 txt(M,60,'[P] Every played note belongs to E minor pentatonic. Em7(add11) uses all five scale notes.',9)
 for i,(ch,lh,rh) in enumerate(full):
     verify(ch,lh,rh);assert ch in STRICT
-    top=H-137-i*95;txt(M,top,ch,10.2,'Bold')
-    txt(M+115,top,'LH: '+lh+'     RH: '+rh,8.8);piano(top-49,lh,rh)
+    top=H-137-i*95;txt(M,top,ch,11,'Bold')
+    txt(M+115,top,'LH: '+lh+'     RH: '+rh,10);piano(top-49,lh,rh)
 paragraph(77,'For more weight, use a left-hand octave such as E2-E3. Keep dense chords above the low bass. C4 is middle C; octave names can vary between synth manufacturers.',9)
 c.showPage()
 
