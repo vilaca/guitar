@@ -292,7 +292,7 @@ c.showPage()
 
 def styles_page(page,title,subtitle,groups,variation_guide=None):
     header(title,subtitle,page)
-    txt(M,H-108,'1 bar per chord | Keys pp3-4 | Tips p14',9)
+    txt(M,H-108,'1 bar per chord | Keys pp3-4 | Chords p5 | Tips p14',9)
     y=H-140
     for group,loops in groups:
         txt(M,y,group,14,'Bold');y-=29

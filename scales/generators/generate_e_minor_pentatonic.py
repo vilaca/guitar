@@ -266,10 +266,10 @@ core=[('01  [P] Open pentatonic motion',['Em','Dsus4','Asus2','Em'],
        'C* adds C; D* adds F#. The lead melody can still start with E minor pentatonic.'),
       ('04  [H] Stronger return',['Em9','Cmaj7','Am7','B7'],
        'B7* adds D# and F#. Let D# rise to E when the loop returns to Em9*.')]
-txt(M,H-104,'One chord per bar in 4/4. Follow the roots in the bass and resolve to Em or Em7.',10)
+txt(M,H-110,'One chord per bar in 4/4. Follow the roots in the bass and resolve to Em or Em7.',10)
 yy = H-126
 for title,seq,desc in core:
-    txt(M,yy,title,10.8,'Bold');sequence(yy-21,seq)
+    txt(M,yy,title,11,'Bold');sequence(yy-21,seq)
     txt(M,yy-33,desc,8.6)
     yy = draw_variation(yy-46, title) - 12
 txt(M,398,'WIDER-HARMONY REFERENCE',11,'Bold')
@@ -281,10 +281,10 @@ c.showPage()
 
 def style_page(page,title,subtitle,groups,variation_guide=None):
     header(page,title,subtitle)
-    txt(M,H-105,'1 bar per chord | [P] within scale, * outside | Keys pp3-4 | Chords p5 | Tips p14',8.8)
+    txt(M,H-108,'1 bar per chord | [P] within scale, * outside | Keys pp3-4 | Chords p5 | Tips p14',9)
     y=H-140
     for group,loops in groups:
-        txt(M,y,group,12,'Bold');y-=27
+        txt(M,y,group,14,'Bold');y-=29
         for label,seq,desc in loops:
             assert all(ch in CH for ch in seq),seq
             kind='H' if any(OUTSIDE[ch] for ch in seq) else 'P'
@@ -319,7 +319,7 @@ style_page(7,'METAL & ROCK','E minor pentatonic loops | Make the rhythm carry th
   ('15  [P] Angular lift',['Em','G','Asus2','Dsus4','Em','Em'],'Repeat a melody ending D-E when Dsus4 returns to Em. Tip 4, p14.'),
   ('16  [H] Dark release',['Em','Am','C','B7','Em','Em'],'Start with E3-G3; later spread Em as E2-B2-G3-E4. Tip 5, p14.')])])
 
-style_page(8,'POP & CINEMATIC','E minor pentatonic loops | Compare open pentatonic and wider minor harmony',[
+style_page(8,'POP & CINEMATIC','E minor pentatonic loops | Compare open pentatonic and wider minor harmony.',[
  ('Pop / dark pop | 85-120 BPM',[
   ('17  [H] Dark chorus',['Em','G','D','C','Am','Em'],'Use a steady groove and a repeating melody that settles on E.'),
   ('18  [P] Bright surface',['Em','G','Dsus4','Asus2'],'Build a short E-G-B melody; let the loop resolve back to Em.'),

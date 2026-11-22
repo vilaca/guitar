@@ -272,7 +272,7 @@ def sequence(y,seq,size=10):
     while pdfmetrics.stringWidth(s,'Courier',size)>INNER:size-=.3
     txt(M,y,s,size,'Courier')
 
-txt(M,H-104,'One chord per bar in 4/4. Follow the roots in the bass and resolve to Gm or Gm7.',10)
+txt(M,H-110,'One chord per bar in 4/4. Follow the roots in the bass and resolve to Gm or Gm7.',10)
 yy = H - 128
 for title,seq,desc in core:
     assert all(ch in CH for ch in seq)
@@ -294,10 +294,10 @@ c.showPage()
 
 def style_page(page,title,subtitle,groups,variation_guide=None):
     header(page,title,subtitle)
-    txt(M,H-105,'1 bar per chord | Keys pp3-4 | Chords p5 | Tips p14',8.8)
+    txt(M,H-108,'1 bar per chord | Keys pp3-4 | Chords p5 | Tips p14',9)
     y=H-140
     for group,loops in groups:
-        txt(M,y,group,12,'Bold');y-=27
+        txt(M,y,group,14,'Bold');y-=29
         for label,seq,desc in loops:
             assert all(ch in CH for ch in seq),seq
             assert pdfmetrics.stringWidth(desc,'Body',8.7)<=INNER,desc
@@ -330,7 +330,7 @@ style_page(7,'METAL & ROCK','Bb dominant bebop loops | Make the rhythm carry the
   ('15  Angular lift',['Gm','Dm','F','Ab','Gm','Gm'],'Repeat a melody ending Ab-G when Ab returns to Gm. Tip 4, p14.'),
   ('16  Dark release',['Gm','Cm','Eb','Ab','Gm','Gm'],'Start with G3-Bb3; later spread Gm as G2-D3-Bb3-G4. Tip 5, p14.')])])
 
-style_page(8,'POP & CINEMATIC','Bb dominant bebop loops | Brighter A natural and darker Ab can coexist',[
+style_page(8,'POP & CINEMATIC','Bb dominant bebop loops | Brighter A natural and darker Ab can coexist.',[
  ('Pop / dark pop | 85-120 BPM',[
   ('17  Dark chorus',['Gm','Eb','Bb','F','Ab','Gm'],'Use a steady groove and repeating melody; save Ab-G for the closing turn.'),
   ('18  Bright surface',['Gm','Dm','Eb','Ab'],'Build a short hook around G-Bb-A; resolve the melody to G on the repeat.'),
