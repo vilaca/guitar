@@ -75,7 +75,7 @@ def table(y,heads,widths,rows,height=26,size=9):
 
 
 
-header(1,'E MINOR PENTATONIC','Five-note scale | Standard 7-string guitar and piano / synth')
+header(1,'E MINOR PENTATONIC','Standard seven-string tuning | B E A D G B E')
 y=H-110
 for text,size in [
  ('Scale: E G A B D',12),('Formula from E: 1  b3  4  5  b7',10),
@@ -106,7 +106,7 @@ for t in ['[P] = every chord note belongs to the five-note pentatonic collection
 assert y>45
 c.showPage()
 
-header(2,'GUITAR PATTERNS','Standard tuning, low to high: B E A D G B E | Bold fret numbers mark E.')
+header(2,'GUITAR PATTERNS','E minor pentatonic | Standard B E A D G B E')
 standard = [[5, 8, 10], [7, 10, 12], [10, 12, 14], [12, 14, 17], [14, 16, 19], [17, 20, 22], [19, 22, 24]]
 assert len(standard) == 7 and all(len(row) == 3 for row in standard)
 open_e_diagonal = [[], [0, 3, 5], [2, 5, 7], [5, 7, 9], [7, 9, 12], [10, 12, 15], [12]]
@@ -216,8 +216,8 @@ c.showPage()
 full=[('Em7','E2 B2','D4 E4 G4 B4'),('G6','G2 D3','B3 D4 E4 G4'),
       ('Gadd9','G2 D3','A3 B3 D4 G4'),('A7sus4','A2 E3','G3 A3 D4 E4'),
       ('D6sus4','D3 A3','B3 D4 G4 A4'),('Em7(add11)','E2 B2','D4 E4 G4 A4')]
-header(4,'PIANO KEYS | FULLER CHORDS','[P] Every played note belongs to E minor pentatonic')
-txt(M,H-103,'L = root + fifth. R = upper chord notes. Em7(add11) uses all five scale notes.',8.8)
+header(4,'PIANO KEYS | FULLER CHORDS','L = left-hand root + fifth | R = right-hand chord | C4 = middle C')
+txt(M,H-103,'[P] Every played note belongs to E minor pentatonic. Em7(add11) uses all five scale notes.',8.8)
 for i,(ch,lh,rh) in enumerate(full):
     verify(ch,lh,rh);assert ch in STRICT
     top=H-137-i*95;txt(M,top,ch,10.2,'Bold')
@@ -231,7 +231,7 @@ def sequence(y,seq,size=10):
     while pdfmetrics.stringWidth(s,'Courier',size)>INNER:size-=.3
     txt(M,y,s,size,'Courier')
 
-header(5,'START HERE | FOUR LOOPS','[P] = pentatonic-only chords | [H] = wider harmony | * = outside notes')
+header(5,'START HERE | FOUR LOOPS','Each box is one bar in 4/4. Try 70-100 BPM and repeat each loop.')
 variations = {
     '02': ('Variation 05 - Slow drift / Ambient | 50-75 BPM',
            'Sustain soft pads; give each chord two bars if you want slower harmony.'),
@@ -292,7 +292,7 @@ def style_page(page,title,subtitle,groups,variation_guide=None):
         txt(M, 60, variation_guide, 9)
     assert y>60;c.showPage()
 
-style_page(6,'AMBIENT & ETHEREAL','Original E-centred sketches | Space, sustain and changing registers',[
+style_page(6,'AMBIENT & ETHEREAL','E minor pentatonic loops | Let the harmony breathe.',[
  ('Ambient | 50-75 BPM',[
   ('06  [P] Quiet return',['Em7(add11)','D6sus4','Gadd9','Em7(add11)'],'Use soft attacks and leave gaps; let the E bass settle at the end.'),
   ('07  [H] Wide horizon',['Em9','Cmaj7','Am7','Em9'],'Spread the chords across octaves, with a gentle moving bass below.')]),
@@ -302,7 +302,7 @@ style_page(6,'AMBIENT & ETHEREAL','Original E-centred sketches | Space, sustain 
   ('10  [P] Glass motion',['Em7(add11)','G6','A7sus4','D6sus4','Em7','Em7'],'Let shared notes ring; keep the moving bass roots distinct.')])],
     variation_guide='Ambient variation: 05 on p5.')
 
-style_page(7,'METAL & ROCK','E-centred sketches | Fifths, full triads and clear rhythmic returns',[
+style_page(7,'METAL & ROCK','E minor pentatonic loops | Make the rhythm carry the weight.',[
  ('Metal | 85-140 BPM',[
   ('11  [P] Short pressure',['E5','G5','A5','E5'],'Strike root-plus-fifth pairs briefly, then release. Tip 2, p14.'),
   ('12  [H] Climb and collapse',['E5','D5','C5','B5','E5','E5'],'Hit twice per beat, then stop early before returning to E5. Glossary: eighth-note hits.'),
@@ -312,7 +312,7 @@ style_page(7,'METAL & ROCK','E-centred sketches | Fifths, full triads and clear 
   ('15  [P] Angular lift',['Em','G','Asus2','Dsus4','Em','Em'],'Repeat a melody ending D-E when Dsus4 returns to Em. Tip 4, p14.'),
   ('16  [H] Dark release',['Em','Am','C','B7','Em','Em'],'Start with E3-G3; later spread Em as E2-B2-G3-E4. Tip 5, p14.')])])
 
-style_page(8,'POP & CINEMATIC','E-centred sketches | Compare open pentatonic and wider minor harmony',[
+style_page(8,'POP & CINEMATIC','E minor pentatonic loops | Compare open pentatonic and wider minor harmony',[
  ('Pop / dark pop | 85-120 BPM',[
   ('17  [H] Dark chorus',['Em','G','D','C','Am','Em'],'Use a steady groove and a repeating melody that settles on E.'),
   ('18  [P] Bright surface',['Em','G','Dsus4','Asus2'],'Build a short E-G-B melody; let the loop resolve back to Em.'),
@@ -322,7 +322,7 @@ style_page(8,'POP & CINEMATIC','E-centred sketches | Compare open pentatonic and
   ('21  [H] Long scene',['Em','Em','Am','C','G','Bm7','B7','Em'],'Build layers over eight bars, then return to a clear E bass.'),
   ('22  [P] Suspended scene',['Em7','G6','D6sus4','A7sus4','Em7(add11)','Em7(add11)'],'Use slow broken chords and sustain the final E-centred harmony.')])])
 
-style_page(9,'ELECTRO & ELECTROPOP','E-centred sketches | Short attacks, offbeats and moving bass lines',[
+style_page(9,'ELECTRO & ELECTROPOP','E minor pentatonic loops | Suggested starting tempos, not genre rules.',[
  ('Electro | 110-135 BPM',[
   ('24  [P] Metallic circuit',['E5','G5','D5','E5'],'Sequence short bass bursts, leaving gaps around the snare hits.'),
   ('25  [H] Cold transmission',['Em7','Bm7','Cmaj7','Em9'],'Use a glassy pluck or vocal-like pad; play stabs between the main beats.')]),
@@ -332,7 +332,7 @@ style_page(9,'ELECTRO & ELECTROPOP','E-centred sketches | Short attacks, offbeat
   ('28  [H] Night drive',['Em','Am','D','B7'],'Try octave bass pulses and a wide pad behind a simple lead melody.')])],
     variation_guide='Electro variation: 23 on p5.')
 
-style_page(10,'HYPERPOP & BLACK METAL','E-centred sketches | Texture and articulation create the contrast',[
+style_page(10,'HYPERPOP & BLACK METAL','E minor pentatonic loops | Let texture and articulation define the contrast.',[
  ('Hyperpop | 140-180 BPM, or half-time feel',[
   ('29  [H] Sugar and static',['Em9','Cmaj7','Gmaj7','D'],'Use bright layered synths, sudden stops and a melody doubled an octave higher.'),
   ('30  [P] Pixel jump',['Em','G','Dsus4','Asus2','G','Em'],'Chop the chords into quick bursts; jump registers between phrases.'),
@@ -342,7 +342,7 @@ style_page(10,'HYPERPOP & BLACK METAL','E-centred sketches | Texture and articul
   ('33  [H] Ash descent',['Em','D','C','Bm7'],'Use fast repeated notes while the bass follows E-D-C-B.'),
   ('34  [H] Distant ruin',['Em','F','Em','C','B7','Em'],'F* adds a borrowed half-step colour; contrast fast notes with a long final Em.')])])
 
-style_page(11,'DUB & DUBSTEP','E-centred sketches | Give bass, rhythm and effects their own space',[
+style_page(11,'DUB & DUBSTEP','E minor pentatonic loops | Leave space for bass, rhythm and effects.',[
  ('Dub | 65-85 BPM',[
   ('35  [P] Echo chamber',['Em7','A7sus4','G6','Em7'],'Play short offbeat chords, melodic bass and occasional echo repeats.'),
   ('36  [H] Moving skank',['Em','Am','Em','B7'],'Keep the chords brief; answer them with bass phrases rather than held roots.'),
@@ -352,7 +352,7 @@ style_page(11,'DUB & DUBSTEP','E-centred sketches | Give bass, rhythm and effect
   ('39  [H] Broken signal',['Em','Bm7','C','Em'],'Use sparse half-time drums and syncopated bass replies between the chords.'),
   ('40  [H] Weightless drop',['Em9','Cmaj7','Gmaj7','B7'],'Begin with airy pads, then shorten the chords to open room for the bass drop.')])])
 
-header(12,'BLUES | SCALE EXCEPTIONS','E-centred blues | Expanded chords and the blue note are clearly marked')
+header(12,'BLUES | SCALE EXCEPTIONS','E minor pentatonic blues | Expanded chords and the blue note are clearly marked')
 y=H-108
 y=paragraph(y,'E minor pentatonic is a common starting palette for E blues. Adding Bb gives E G A Bb B D, the E minor blues scale. Bb is outside the five-note pentatonic collection.',9.3)
 y=paragraph(y,'Example 41 keeps every chord note pentatonic. Examples 42-43 use wider blues harmony; a melody note can rub against a chord tone, so listen to the current chord.',9.3)
@@ -383,7 +383,7 @@ table(187,['Chord','Complete notes','Outside the pentatonic scale'],[87,170,INNE
 paragraph(61,'Holding G against the G# in E7 creates a familiar blues clash. That can be intentional; it does not mean every pentatonic note will sound equally settled.',8.7,12)
 c.showPage()
 
-style_page(13,'MORE ELECTRONIC DIRECTIONS','E-centred sketches | Techno, house, industrial and breakbeat arrangements',[
+style_page(13,'MORE ELECTRONIC DIRECTIONS','E minor pentatonic loops | Techno, house, industrial and breakbeat arrangements.',[
  ('Techno / house / industrial',[
   ('44  [P] Techno | 125-140 BPM',['Em','Dsus4','Em','Asus2'],'Repeat short chord stabs over eight bars.'),
   ('45  [P] House | 118-128 BPM',['Em7','G6','A7sus4','Dsus4'],'Delay offbeat stabs slightly; move the bass on each beat. Glossary: swung offbeats. Bass: tip 1, p14.'),
@@ -393,7 +393,7 @@ style_page(13,'MORE ELECTRONIC DIRECTIONS','E-centred sketches | Techno, house, 
   ('49  [H] Trip-hop | 65-95 BPM',['Em7','Cmaj7','Am7','Em7'],'Loosen drums; vary mellow keys over sparse bass. Glossary: loose drums and warm keys.')])],
     variation_guide='Drum & bass variation: 47 on p5.')
 
-header(14,'PLAYING EXAMPLES','Bass, chords and melodic phrasing for E-centred loops')
+header(14,'PLAYING EXAMPLES','Bass, chords and melodic phrasing for E minor pentatonic')
 tips = [
 
     ('1  Walking bass', 'Play one note per beat: E-G-A-B over Em7, landing on A for A7sus4.'),

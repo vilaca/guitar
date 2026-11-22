@@ -74,7 +74,7 @@ def table(y,heads,widths,rows,height=26,size=9):
     return y-(len(rows)+1)*height
 
 # Page 1: pitch collection, original riff and map.
-header(1,'Bb DOMINANT BEBOP WITH A G-CENTRED RIFF','Eight-note scale for standard 7-string guitar')
+header(1,'Bb DOMINANT BEBOP WITH A G-CENTRED RIFF','Standard seven-string tuning | B E A D G B E')
 y=H-110
 y=paragraph(y,'Scale: Bb C D Eb F G Ab A',11)
 y=paragraph(y,'Formula from Bb: 1  2  3  4  5  6  b7  7',10)
@@ -108,7 +108,7 @@ y=paragraph(y,'Ab and A are different colours: Ab is G\'s dark b2; A is its natu
 assert y>50
 c.showPage()
 
-header(2, 'GUITAR PATTERNS', 'G-centred riff | Standard B E A D G B E')
+header(2, 'GUITAR PATTERNS', 'Bb dominant bebop | Standard B E A D G B E')
 compact = [[8, 9, 10], [6, 8, 10], [6, 8, 10], [6, 7, 8], [5, 7, 8], [6, 8, 9], [5, 6, 8]]
 assert all(len(row) == 3 for row in compact)
 
@@ -209,8 +209,8 @@ c.showPage()
 full=[('Gm7','G2 D3','Bb3 D4 F4 G4'),('Abmaj7','Ab2 Eb3','C4 Eb4 G4 Ab4'),
       ('Bb7','Bb2 F3','Ab3 Bb3 D4 F4'),('Cm7','C3 G3','Bb3 C4 Eb4 G4'),
       ('F7','F2 C3','A3 C4 Eb4 F4'),('Gm9','G2 D3','A3 Bb3 D4 F4')]
-header(4,'PIANO KEYS | FULLER CHORDS','L = root + fifth | R = upper chord notes | All notes belong to the scale')
-txt(M,H-103,'Gm9 makes A natural audible as an added colour above G minor.',9)
+header(4,'PIANO KEYS | FULLER CHORDS','L = left-hand root + fifth | R = right-hand chord | C4 = middle C')
+txt(M,H-103,'All notes belong to the scale. Gm9 makes A natural audible as an added colour above G minor.',9)
 for i,(ch,lh,rh) in enumerate(full):
     verify_voicing(ch,lh,rh);top=H-137-i*95
     txt(M,top,ch,11,'Bold');txt(M+93,top,'LH: '+lh+'     RH: '+rh,9)
@@ -292,7 +292,7 @@ def style_page(page,title,subtitle,groups,variation_guide=None):
     assert y>60
     c.showPage()
 
-style_page(6,'AMBIENT & ETHEREAL','G-centred loops using the Bb dominant bebop pitch collection',[
+style_page(6,'AMBIENT & ETHEREAL','Bb dominant bebop loops | Let the harmony breathe.',[
  ('Ambient | 50-75 BPM',[
   ('05  Slow drift',['Gm7','Abmaj7','Cm7','Gm7'],'Sustain soft pads; let each chord last two bars if you want a slower change.'),
   ('06  Quiet return',['Gm9','Cm7','Abmaj7','Gm9'],'Use soft attacks and leave gaps; hear A natural in Gm9.'),
@@ -302,7 +302,7 @@ style_page(6,'AMBIENT & ETHEREAL','G-centred loops using the Bb dominant bebop p
   ('09  Falling through',['Gm7','Dm7','Cm7','Abmaj7','Gm9','Gm9'],'Use a high, sparse melody; let the final Gm9 last two bars.'),
   ('10  Glass motion',['Gm9','Ebmaj7','F7','Abmaj7','Gm9','Gm9'],'Let shared notes ring; keep the bass changes distinct.')])])
 
-style_page(7,'METAL & ROCK','G-centred loops | Short attacks, silence and clear chord returns',[
+style_page(7,'METAL & ROCK','Bb dominant bebop loops | Make the rhythm carry the weight.',[
  ('Metal | 85-140 BPM',[
   ('11  Half-step pressure',['G5','Ab5','G5','F5'],'Strike root-plus-fifth pairs briefly, then release. Tip 2, p14.'),
   ('12  Climb and collapse',['G5','Ab5','Bb5','Ab5','G5','G5'],'Hit twice per beat, then stop early before returning to G5. Glossary: eighth-note hits.'),
@@ -312,7 +312,7 @@ style_page(7,'METAL & ROCK','G-centred loops | Short attacks, silence and clear 
   ('15  Angular lift',['Gm','Dm','F','Ab','Gm','Gm'],'Repeat a melody ending Ab-G when Ab returns to Gm. Tip 4, p14.'),
   ('16  Dark release',['Gm','Cm','Eb','Ab','Gm','Gm'],'Start with G3-Bb3; later spread Gm as G2-D3-Bb3-G4. Tip 5, p14.')])])
 
-style_page(8,'POP & CINEMATIC','G-centred loops | Brighter A natural and darker Ab can coexist',[
+style_page(8,'POP & CINEMATIC','Bb dominant bebop loops | Brighter A natural and darker Ab can coexist',[
  ('Pop / dark pop | 85-120 BPM',[
   ('17  Dark chorus',['Gm','Eb','Bb','F','Ab','Gm'],'Use a steady groove and repeating melody; save Ab-G for the closing turn.'),
   ('18  Bright surface',['Gm','Dm','Eb','Ab'],'Build a short hook around G-Bb-A; resolve the melody to G on the repeat.'),
@@ -322,7 +322,7 @@ style_page(8,'POP & CINEMATIC','G-centred loops | Brighter A natural and darker 
   ('21  Long scene',['Gm','Gm','Cm','Ab','Eb','Fm','Ab','Gm'],'Build layers over eight bars, then return to a clear G bass.'),
   ('22  Suspended scene',['Gm9','Dm7','Abmaj7','Cm7','Abmaj7','Gm9'],'Use slow broken chords and sustain the final Gm9 before repeating.')])])
 
-style_page(9,'ELECTRO & ELECTROPOP','G-centred loops | Short synth attacks and moving bass lines',[
+style_page(9,'ELECTRO & ELECTROPOP','Bb dominant bebop loops | Suggested starting tempos, not genre rules.',[
  ('Electro | 110-135 BPM',[
   ('23  Machine steps',['Gm','Ab','Cm','Gm'],'Use syncopated drum-machine kicks, short chord stabs and a dry octave bass.'),
   ('24  Metallic circuit',['G5','Bb5','Ab5','G5'],'Sequence short bass bursts, leaving gaps around the snare hits.'),
@@ -332,7 +332,7 @@ style_page(9,'ELECTRO & ELECTROPOP','G-centred loops | Short synth attacks and m
   ('27  Glass chorus',['Gm9','Bbadd9','Dm7','Abmaj7'],'Repeat a clear melody; let A in Dm7 contrast with Ab before returning to Gm9.'),
   ('28  Night drive',['Gm','Cm','F','Ab'],'Try octave bass pulses and a wide pad behind a simple lead melody.')])])
 
-style_page(10,'HYPERPOP & BLACK METAL','G-centred loops | Sound and articulation create the contrast',[
+style_page(10,'HYPERPOP & BLACK METAL','Bb dominant bebop loops | Let texture and articulation define the contrast.',[
  ('Hyperpop | 140-180 BPM, or half-time feel',[
   ('29  Sugar and static',['Gm9','Ebmaj7','Bbadd9','Abmaj7'],'Use bright layered synths, sudden stops and a melody doubled an octave higher.'),
   ('30  Pixel jump',['Gm','Ab','Bb','F','Ab','Gm'],'Chop the chords into quick bursts; jump registers between phrases.'),
@@ -342,7 +342,7 @@ style_page(10,'HYPERPOP & BLACK METAL','G-centred loops | Sound and articulation
   ('34  Distant ruin',['Gm','Ddim','Cm','Ab','Gm','Gm'],'Use the diminished chord for friction; contrast fast notes with a long final Gm.')])],
     variation_guide='Hyperpop and black metal variations: 31 and 33 on p8.')
 
-style_page(11,'DUB & DUBSTEP','G-centred loops | Give bass, rhythm and effects their own space',[
+style_page(11,'DUB & DUBSTEP','Bb dominant bebop loops | Leave space for bass, rhythm and effects.',[
  ('Dub | 65-85 BPM',[
   ('35  Echo chamber',['Gm7','Cm7','Abmaj7','Gm7'],'Play short offbeat chord chops, melodic bass and occasional echo repeats.'),
   ('36  Half-step skank',['Gm','Ab','Gm','F7'],'Keep the chords brief; answer them with bass phrases rather than held roots.'),
@@ -352,7 +352,7 @@ style_page(11,'DUB & DUBSTEP','G-centred loops | Give bass, rhythm and effects t
   ('40  Weightless drop',['Gm9','Ebmaj7','F7','Abmaj7'],'Begin with airy pads, then shorten the chords to open room for the bass drop.')])],
     variation_guide='Dubstep variation: 39 on p5.')
 
-header(12,'BLUES | SCALE EXCEPTIONS','G-centred blues | Outside notes are explicitly marked')
+header(12,'BLUES | SCALE EXCEPTIONS','Bb dominant bebop blues | Outside notes are explicitly marked')
 y=H-108
 y=paragraph(y,'Only example 41 stays inside Bb dominant bebop. Examples 42-43 use borrowed dominant chords. The G minor blues melody G Bb C Db D F also adds Db, which is outside this collection.',9.3)
 txt(M,H-173,'41  Scale-based blues-inspired loop | 65-95 BPM',11,'Bold')
@@ -376,7 +376,7 @@ table(190,['Chord','Notes','Outside this scale'],[90,180,INNER-270],[('G7','G B 
 paragraph(61,'The scale-only rule is relaxed on this page: match the harmony rather than forcing every note into the original collection.',8.7,12)
 c.showPage()
 
-style_page(13,'MORE ELECTRONIC DIRECTIONS','G-centred sketches | Techno, house, industrial and breakbeat arrangements',[
+style_page(13,'MORE ELECTRONIC DIRECTIONS','Bb dominant bebop loops | Techno, house, industrial and breakbeat arrangements.',[
  ('Techno / house / industrial',[
   ('45  House | 118-128 BPM',['Gm9','Cm7','F7','Abmaj7'],'Delay offbeat stabs; move bass each beat. Glossary: swung offbeats. Bass: tip 1, p14.'),
   ('46  Industrial | 100-135 BPM',['G5','Ab5','Eb5','G5'],'Play G+D as clipped stabs; add metallic percussion and repeating bass. Tip 2, p14.')]),
@@ -386,7 +386,7 @@ style_page(13,'MORE ELECTRONIC DIRECTIONS','G-centred sketches | Techno, house, 
   ('49  Trip-hop | 65-95 BPM',['Gm9','Abmaj7','Fm7','Gm9'],'Loosen drums; vary mellow keys over sparse bass. Glossary: loose drums and warm keys.')])],
     variation_guide='Techno variation: 44 on p10.')
 
-header(14,'PLAYING EXAMPLES','Bass, chords and melodic phrasing for G-centred loops')
+header(14,'PLAYING EXAMPLES','Bass, chords and melodic phrasing for Bb dominant bebop')
 tips = [
 
     ('1  Walking bass', 'Play one note per beat: G-Ab-Bb-D over Gm7, landing on C for Cm7.'),

@@ -321,7 +321,7 @@ def styles_page(page,title,subtitle,groups,variation_guide=None):
     assert y>60
     c.showPage()
 
-styles_page(6,'AMBIENT & ETHEREAL','Original B Phrygian dominant loops | Let the harmony breathe.',[
+styles_page(6,'AMBIENT & ETHEREAL','B Phrygian dominant loops | Let the harmony breathe.',[
  ('Ambient | 50-75 BPM',[
   ('05  Slow drift',['B7','Cmaj7','Emadd9','B7'],'Sustain pads; give each chord two bars if you want a slower harmonic rhythm.'),
   ('06  Quiet return',['B7','Emadd9','Cmaj7','B7'],'Use soft attacks and sparse notes; let Cmaj7 settle back into B7.'),
@@ -331,7 +331,7 @@ styles_page(6,'AMBIENT & ETHEREAL','Original B Phrygian dominant loops | Let the
   ('09  Falling through',['B7','Am7','Emadd9','Cmaj7','B7','B'],'Use a high, sparse melody; hold the final B7 for the last two bars.'),
   ('10  Glass motion',['B7','F#m7b5','Emadd9','Cmaj7','B7','B'],'Keep common tones ringing with a synth release; change bass notes cleanly.')])])
 
-styles_page(7,'METAL & ROCK','Original B Phrygian dominant loops | Make the rhythm carry the weight.',[
+styles_page(7,'METAL & ROCK','B Phrygian dominant loops | Make the rhythm carry the weight.',[
  ('Metal | 85-140 BPM',[
   ('11  Half-step pressure',['B5','C5','B5','A5'],'Play B+F# briefly and release; leave silence after each hit. Tip 2, p14.'),
   ('12  Climb and collapse',['B5','C5','E5','C5','B5','B5'],'Strike twice per beat; stop early before the return to B5. Glossary: eighth-note hits.'),
@@ -341,7 +341,7 @@ styles_page(7,'METAL & ROCK','Original B Phrygian dominant loops | Make the rhyt
   ('15  Angular lift',['B','D#dim','Am','C','B','B7'],'Repeat a melody ending C-B as C changes to B. Tip 4, p14.'),
   ('16  Dark release',['B','Em','Am','C','B','B7'],'Start with B3-D#4; later spread B as B2-F#3-D#4-B4. Tip 5, p14.')])])
 
-styles_page(8,'POP & CINEMATIC','Original B Phrygian dominant loops | Familiar motion with a darker half-step.',[
+styles_page(8,'POP & CINEMATIC','B Phrygian dominant loops | Familiar motion with a darker half-step.',[
  ('Pop / dark pop | 85-120 BPM',[
   ('17  Dark chorus',['B','Em','D#dim','Am','C','B'],'Use a regular drum groove and a repeating melody; save C for the final turn.'),
   ('18  Bright surface',['B','D#dim','Em','C'],'Keep a simple hook around B and D#; the loop returns from C to B.'),
@@ -351,7 +351,7 @@ styles_page(8,'POP & CINEMATIC','Original B Phrygian dominant loops | Familiar m
   ('21  Long scene',['B','B7','Em','C','G+','Am','C','B'],'Build over eight bars: start sparse, add layers, then return to a clear B bass.'),
   ('22  Suspended scene',['B7','Am7','Cmaj7','Emadd9','Cmaj7','B7'],'Use slow broken chords; let the final B7 ring before repeating.')])])
 
-styles_page(9,'ELECTRO & ELECTROPOP','B Phrygian dominant sketches | Suggested starting tempos, not genre rules.',[
+styles_page(9,'ELECTRO & ELECTROPOP','B Phrygian dominant loops | Suggested starting tempos, not genre rules.',[
  ('Electro | 110-135 BPM',[
   ('23  Machine steps',['B','C','Em','B'],'Use a syncopated drum-machine beat, short chord stabs and a dry octave bass.'),
   ('24  Metallic circuit',['B5','E5','C5','B5'],'Sequence sixteenth-note bass bursts; leave rests around snare hits.'),
@@ -361,7 +361,7 @@ styles_page(9,'ELECTRO & ELECTROPOP','B Phrygian dominant sketches | Suggested s
   ('27  Glass chorus',['B7','Emadd9','Am7','Cmaj7'],'Build a repeating synth hook; use C natural before the return to B7.'),
   ('28  Night drive',['B','Em','D#dim','C'],'Try octave bass pulses and a wide pad; keep the lead melody simple.')])])
 
-styles_page(10,'HYPERPOP & BLACK METAL','B Phrygian dominant sketches | Let texture and articulation define the contrast.',[
+styles_page(10,'HYPERPOP & BLACK METAL','B Phrygian dominant loops | Let texture and articulation define the contrast.',[
  ('Hyperpop | 140-180 BPM, or half-time feel',[
   ('29  Sugar and static',['B7','F#m7b5','Emadd9','Cmaj7'],'Use bright supersaws and abrupt stops; double a simple hook an octave higher.'),
   ('30  Pixel jump',['B','C','D#dim','Am','C','B'],'Chop the chords into short bursts; jump registers between phrases.'),
@@ -371,7 +371,7 @@ styles_page(10,'HYPERPOP & BLACK METAL','B Phrygian dominant sketches | Let text
   ('34  Distant ruin',['B','F#dim','Em','C','B','B7'],'Let the diminished chord add friction; contrast fast repetition with a long B.')])],
     variation_guide='Hyperpop and black metal variations: 31 and 33 on p8.')
 
-styles_page(11,'DUB & DUBSTEP','B Phrygian dominant sketches | Leave space for bass, rhythm and effects.',[
+styles_page(11,'DUB & DUBSTEP','B Phrygian dominant loops | Leave space for bass, rhythm and effects.',[
  ('Dub | 65-85 BPM',[
   ('36  Half-step skank',['B','C','B','Am'],'Keep the chord hits brief; answer them with bass phrases rather than held roots.'),
   ('37  Empty space',['B7','Am7','Emadd9','Cmaj7'],'Drop the chords out for a bar on later repeats; let bass and echoes carry it.')]),
@@ -380,7 +380,7 @@ styles_page(11,'DUB & DUBSTEP','B Phrygian dominant sketches | Leave space for b
   ('40  Weightless drop',['B7','F#m7b5','Emadd9','Cmaj7'],'Start with airy pads, then shorten the chords and open space for the bass drop.')])],
     variation_guide='Dub and dubstep variations: 35 on p6 and 39 on p5.')
 
-header('BLUES | SCALE EXCEPTIONS','B-centred examples | Blues harmony can deliberately leave B Phrygian dominant.',12)
+header('BLUES | SCALE EXCEPTIONS','B Phrygian dominant blues | Blues harmony can deliberately leave the scale.',12)
 lines(H-111,['Only example 41 stays entirely inside B Phrygian dominant. Examples 42-43 borrow notes.',
               'B blues melody: B D E F F# A. D and F are outside the scale; D# is its major third.'],9,16)
 txt(M,H-169,'41  Phrygian dominant blues-inspired loop | 65-95 BPM',12,'Bold')
@@ -410,7 +410,7 @@ table(190,['Chord','Notes','Notes outside B Phrygian dominant'],[80,180,W-2*M-26
 lines(58,['Choose the scale by the current harmony here; the scale-only rule is relaxed.'],9,16)
 c.showPage()
 
-styles_page(13,'MORE ELECTRONIC DIRECTIONS','B Phrygian dominant sketches | Techno, house, industrial and breakbeat arrangements.',[
+styles_page(13,'MORE ELECTRONIC DIRECTIONS','B Phrygian dominant loops | Techno, house, industrial and breakbeat arrangements.',[
  ('Techno / house / industrial',[
   ('45  House | 118-128 BPM',['B7','Emadd9','Am7','Cmaj7'],'Delay offbeat stabs; move bass each beat. Glossary: swung offbeats. Bass: tip 1, p14.'),
   ('46  Industrial | 100-135 BPM',['B5','C5','E5','B5'],'Play B+F# as short stabs; add metallic percussion and repeating bass. Tip 2, p14.')]),
