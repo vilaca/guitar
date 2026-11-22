@@ -203,7 +203,7 @@ assert all(notes <= allowed for notes in catalog.values())
 def styles_page(page,title,subtitle,groups):
     header(title,subtitle,page)
     lines(H-108,['Each box = one bar in 4/4. Repeat the loop; end the piece on Bm or Bm7.',
-                 'Piano keys: p7. Plain-language tips: pp13-14. Bass follows the chord roots.'],9,15)
+                 'Piano keys: triads p2, extended chords p7. Tips: pp13-14. Bass follows chord roots.'],9,15)
     y=H-163
     for group,loops in groups:
         txt(M,y,group,14,'Helvetica-Bold');y-=29

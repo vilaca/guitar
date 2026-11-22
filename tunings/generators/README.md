@@ -1,6 +1,6 @@
 # Guitar tunings reference generator
 
-Creates the six-page tuning reference as an editable Word document and a printable PDF. It includes the standard, all-fourths, drop, Josh Homme and Stephen Carpenter tunings from the discussion, interval tables, scale relationships and linked artist sources.
+Creates the six-page tuning reference as an editable Word document and a printable PDF. It includes the standard, all-fourths, drop, Josh Homme and Stephen Carpenter tunings, interval tables, scale relationships and linked artist sources.
 
 ## Run
 
@@ -13,7 +13,7 @@ python generate_tunings_reference.py --output-dir generated
 
 Use `python3` instead of `python` if that is the command on your system.
 
-The generator writes `guitar_tunings_discussed.docx` and `guitar_tunings_discussed.pdf`. To create only one format, add `--format pdf` or `--format docx`. Existing output files with the same names are overwritten.
+The generator writes `guitar_tunings_reference.docx` and `guitar_tunings_reference.pdf`. To create only one format, add `--format pdf` or `--format docx`. Existing output files with the same names are overwritten.
 
 ## Edit
 
