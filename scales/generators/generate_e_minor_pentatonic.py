@@ -107,7 +107,7 @@ for row,(op,label) in enumerate(zip(opens,labels)):
 y=top-7*rh-28
 y=paragraph(y,'Thinnest string at the top. The map repeats 12 frets higher.',9)-14
 y=section(y,'Root rule',['E is the root on open strings 6 and 1, and on string 7 at fret 5. All seven open strings fit E minor pentatonic.'])
-y=section(y,'How to read the progression labels',['[P] = every chord note belongs to the five-note pentatonic collection.','[H] = wider harmony. Chords marked * add outside notes, listed on page 5 or 12.','Example: Em-C*-G-D* is common E minor harmony. C adds C natural; D adds F#.'])
+y=section(y,'Using the notes',['E is home. G is the minor third that gives the scale its minor sound; A, B and D are the fourth, fifth and minor seventh.','You do not need every scale note in every chord.'])
 assert y>45
 c.showPage()
 
@@ -276,7 +276,7 @@ txt(M,398,'WIDER-HARMONY REFERENCE',11,'Bold')
 extra=['C','D','Am','Am7','Bm7','B7','Cmaj7','Em9','Gmaj7','F','C5','B5']
 table(378,['Chord','Complete notes','Outside E minor pentatonic'],[87,170,INNER-257],
       [(ch+'*',CH[ch],', '.join(n for n in CH[ch].split() if midi(n+'3')%12 not in ALLOWED)) for ch in extra],height=20,size=8.5)
-paragraph(82,'An asterisk marks added notes, not an augmented chord. These harmonies expand the accompaniment; the pentatonic scale remains a useful starting palette for the melody. Match the current chord when a clash sounds unwanted.',8.5,12)
+paragraph(86,'[P] = every chord note belongs to the five-note scale. [H] = wider harmony; an asterisk marks added notes, not an augmented chord. The pentatonic scale remains a useful starting palette for the melody. Match the current chord when a clash sounds unwanted.',8.5,12)
 c.showPage()
 
 def style_page(page,title,subtitle,groups,variation_guide=None):
