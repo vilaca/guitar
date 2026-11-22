@@ -114,7 +114,7 @@ c.showPage()
 header(2,'GUITAR PATTERNS','E minor pentatonic | Standard B E A D G B E')
 standard = [[5, 8, 10], [7, 10, 12], [10, 12, 14], [12, 14, 17], [14, 16, 19], [17, 20, 22], [19, 22, 24]]
 assert len(standard) == 7 and all(len(row) == 3 for row in standard)
-open_e_diagonal = [[], [0, 3, 5], [2, 5, 7], [5, 7, 9], [7, 9, 12], [10, 12, 15], [12]]
+open_b_diagonal = [[0, 3, 5], [3, 5, 7], [5, 7, 10], [7, 9, 12], [9, 12, 14], [12, 15, 17], [15, 17, 19]]
 
 def tab(top,title,frets):
     txt(M, top, title, 13, 'Bold')
@@ -154,17 +154,17 @@ def tab(top,title,frets):
     assert all(a<b for a,b in zip(seq,seq[1:]))
     return seq
 
-open_run = tab(H-120,'DIAGONAL | start on open E, string 6',open_e_diagonal)
+open_run = tab(H-120,'DIAGONAL | start on open B, string 7',open_b_diagonal)
 diagonal_run = tab(H-366,'DIAGONAL | start on E at string 7, fret 5',standard)
-assert open_run == [n for n in range(midi('E2'), midi('E5') + 1) if n % 12 in ALLOWED]
+assert open_run == [n for n in range(midi('B1'), midi('B5') + 1) if n % 12 in ALLOWED]
 assert diagonal_run == [n for n in range(midi('E2'), midi('E6') + 1) if n % 12 in ALLOWED]
-for pattern in (open_e_diagonal, standard):
+for pattern in (open_b_diagonal, standard):
     starting_frets = [row[0] for row in pattern if row]
     assert all(a < b for a, b in zip(starting_frets, starting_frets[1:]))
 y=H-594
 for p in ['Play the plain fret numbers from left to right (0 = open). Parentheses mark the nearest scale fret on either side of a three-note group on that string, wherever it falls within frets 0-24. Skip these markers when playing the run.',
-          'Open-E run: start on open E2 (string 6). Play three notes per string from string 6 through string 2, shifting up the neck at each crossing. Finish three octaves higher on E5 (string 1, fret 12).',
-          'Seventh-string run: start on the same E2 at string 7, fret 5. Play three notes on each of the seven strings. The full four-octave run ends on E6 at fret 24.']:
+          'Open-B run: start on the open seventh string, B1. Play three notes on each of the seven strings, shifting up the neck at each crossing. Finish on B5 (string 1, fret 19).',
+          'Seventh-string run: start on E2 at string 7, fret 5. Play three notes on each of the seven strings. The full four-octave run ends on E6 at fret 24.']:
     y=paragraph(y,p,9.3)-10
 assert y>45
 c.showPage()

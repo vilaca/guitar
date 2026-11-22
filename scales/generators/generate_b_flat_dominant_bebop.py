@@ -116,6 +116,15 @@ assert y>50
 c.showPage()
 
 header(2, 'GUITAR PATTERNS', 'Bb dominant bebop | Standard B E A D G B E')
+def route(per_string):
+    opens = [35, 40, 45, 50, 55, 59, 64]
+    notes = [n for n in range(35, 100) if n % 12 in ALLOWED]
+    rows, i = [], 0
+    for open_pitch, count in zip(opens, per_string):
+        rows.append([n - open_pitch for n in notes[i:i + count]])
+        i += count
+    return rows
+
 compact = [[8, 9, 10], [6, 8, 10], [6, 8, 10], [6, 7, 8], [5, 7, 8], [6, 8, 9], [5, 6, 8]]
 assert all(len(row) == 3 for row in compact)
 
@@ -157,10 +166,15 @@ def pattern(top, title, frets):
 
 played = pattern(H-120, 'THREE NOTES PER STRING | G2 to C5', compact)
 assert played == [n for n in range(43, 73) if n % 12 in ALLOWED]
-y = H-396
+diagonal = route([4] * 7)
+played = pattern(H-345, 'DIAGONAL | start on string 7, fret 1 (C)', diagonal)
+assert played == [n for n in range(36, 78) if n % 12 in ALLOWED]
+assert all(a <= b for a, b in zip([r[0] for r in diagonal], [r[0] for r in diagonal][1:]))
+y = H-575
 for instruction in [
     'Read left to right. Bold numbers mark G. Parentheses show the neighboring scale frets on the same string. Skip them when playing the run.',
     'Three notes per string: stay around frets 5-10 in standard tuning. Hear the opening G-Ab-A and continue to Bb on string 6.',
+    'Diagonal: the open seventh string is B, which is outside the scale, so start on the first scale note above it, C at fret 1. Play four notes per string and shift up the neck. Finish on F5 (string 1, fret 13).',
 ]:
     y = paragraph(y, instruction, 9.3) - 10
 assert y > 45
