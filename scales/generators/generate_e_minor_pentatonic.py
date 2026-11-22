@@ -211,9 +211,12 @@ basic=[('Em','E2','G3 B3 E4'),('G','G2','G3 B3 D4'),('Esus4','E2','A3 B3 E4'),
        ('C','C3','G3 C4 E4'),('D','D3','A3 D4 F#4')]
 header(3,'PIANO KEYS | BASIC CHORDS','L = left-hand bass | R = right-hand chord | C4 = middle C')
 txt(M,H-105,'Play each L and all three R keys together. Shading also marks the selected white keys.',9)
-for i,(ch,lh,rh) in enumerate(basic):
-    verify(ch,lh,rh);top=H-128-i*80;star='*' if OUTSIDE[ch] else ''
-    txt(M,top,ch+star,11,'Bold');txt(M+96,top,'LH: '+lh+'     RH: '+rh,10)
+degrees=['i','bIII','i sus4','IV sus2','bVII sus4','IV sus4','bVI','bVII']
+labels3=[ch+('*' if OUTSIDE[ch] else '')+' ('+d+')' for (ch,_,_),d in zip(basic,degrees)]
+lh_x=max(pdfmetrics.stringWidth(l,'Bold',11) for l in labels3)+14
+for i,((ch,lh,rh),label) in enumerate(zip(basic,labels3)):
+    verify(ch,lh,rh);top=H-128-i*80
+    txt(M,top,label,11,'Bold');txt(M+lh_x,top,'LH: '+lh+'     RH: '+rh,10)
     piano(top-48,lh,rh)
 txt(M,49,'The first six chords are [P]. C* adds C natural; D* adds F#. Suspended chords replace the third.',9)
 c.showPage()

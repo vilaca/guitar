@@ -215,9 +215,12 @@ triads=[('Gm','G2','Bb3 D4 G4'),('Ab','Ab2','C4 Eb4 Ab4'),('Bb','Bb2','Bb3 D4 F4
         ('Fm','F2','Ab3 C4 F4'),('F','F2','A3 C4 F4')]
 header(3,'PIANO KEYS | BASIC CHORDS','L = left-hand bass | R = right-hand chord | C4 = middle C')
 txt(M,H-105,'Play each L and all three R keys together. Shading also marks the selected white keys.',9)
-for i,(ch,lh,rh) in enumerate(triads):
+degrees=['i','bII','bIII','iv','v','bVI','bvii','bVII']
+labels3=[ch+' ('+d+')' for (ch,_,_),d in zip(triads,degrees)]
+lh_x=max(pdfmetrics.stringWidth(l,'Bold',11) for l in labels3)+14
+for i,((ch,lh,rh),label) in enumerate(zip(triads,labels3)):
     verify_voicing(ch,lh,rh);top=H-128-i*80
-    txt(M,top,ch,11,'Bold');txt(M+92,top,'LH: '+lh+'     RH: '+rh,10)
+    txt(M,top,label,11,'Bold');txt(M+lh_x,top,'LH: '+lh+'     RH: '+rh,10)
     piano(top-48,lh,rh)
 txt(M,49,'All notes fit Bb dominant bebop. Fm uses Ab; F uses A natural.',9)
 c.showPage()
