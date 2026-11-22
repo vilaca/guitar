@@ -40,9 +40,7 @@ note_names = {11: 'B', 0: 'C', 2: 'D', 4: 'E', 6: 'F#', 7: 'G', 9: 'A'}
 allowed = set(note_names)
 opens = [35, 40, 45, 50, 55, 59, 64]
 labels = ['7 B', '6 E', '5 A', '4 D', '3 G', '2 B', '1 e']
-compact = [[0, 1, 3], [0, 2, 3], [0, 2, 3], [0, 2, 4], [0, 2, 4], [1, 3, 5], [2, 3, 5]]
 diagonal = [[0, 1, 3, 5], [2, 3, 5, 7], [3, 5, 7, 9], [5, 7, 9, 10], [7, 9, 11, 12], [10, 12, 13, 15], [12, 14, 15, 17]]
-assert all(len(row) == 3 for row in compact)
 
 def pattern(top, title, frets, gap=26):
     txt(M, top, title, 13, 'Bold')
@@ -147,15 +145,12 @@ c.showPage()
 
 # Page 2: guitar patterns.
 header('GUITAR PATTERNS','B Phrygian | Standard B E A D G B E',2)
-played = pattern(H-120, 'THREE NOTES PER STRING | B1 to A4', compact)
-assert played == [n for n in range(35, 70) if n % 12 in allowed]
-played = pattern(H-345, 'DIAGONAL | start on open B, string 7', diagonal)
+played = pattern(H-120, 'DIAGONAL | start on open B, string 7', diagonal)
 assert played == [n for n in range(35, 82) if n % 12 in allowed]
 assert all(a < b for a, b in zip([r[0] for r in diagonal], [r[0] for r in diagonal][1:]))
-y = H-575
+y = H-350
 for instruction in [
     'Read left to right. Bold numbers mark B. Parentheses show the neighboring scale frets on the same string. Skip them when playing the run.',
-    'Three notes per string: stay around frets 0-5 in standard tuning. Hear the opening B-C and the half-step pull back to B.',
     'Diagonal: start on open B1 (string 7), play four notes per string and shift up the neck. Finish on A5 (string 1, fret 17).',
 ]:
     for line in simpleSplit(instruction, 'Body', 9.3, W - 2 * M):

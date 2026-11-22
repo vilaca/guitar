@@ -5,7 +5,7 @@
 | Review item | Status | Reason |
 | --- | --- | --- |
 | 1. Phrygian piano-page references | Applied | The loop-page caption now sends players to pages 3-4, where the basic and fuller piano chords sit together. |
-| 2. Bebop six-note slide | Superseded | The six-note slide was removed with the longer fingering. Page 2 now teaches three notes per string. |
+| 2. Bebop six-note slide | Superseded | The six-note slide was removed with the longer fingering. Page 2 now shows a diagonal route. |
 | 3. Change the Gm9 voicing | Not applied | With G2 in the bass, A3 already sounds a ninth above the root. The adjacent A3 and Bb3 are a valid voicing. Moving A to the top would change its sound. |
 | 4. E minor ending on a 22-fret guitar | Removed | The 22-fret note was dropped from the pentatonic guide's page 2 at the author's request. |
 
@@ -22,7 +22,7 @@
 | B. Share one layout module | Not applied | Each generator is documented as independently runnable. The Phrygian loop pages already use one shared caption. |
 | C. Move playing tips to a separate PDF | Partially applied | Five general rhythm and production topics moved to the [shared playing glossary](pdfs/playing_glossary.pdf). Each guide retains five examples with its own pitches and chords. |
 | D. Add drop-A rows | Not applied | The scale guides use B standard throughout, as requested. |
-| E. Add multiple fixed-position boxes | Not applied as proposed | Phrygian and bebop already have a compact three-note-per-string pattern. The pentatonic guide uses the two requested diagonals. Further positions would be additional exercises. |
+| E. Add multiple fixed-position boxes | Not applied as proposed | Every guide's page 2 now shows diagonal routes only; the compact three-note-per-string boxes were removed. Further positions would be additional exercises. |
 | F. Clarify the bebop title | Already applied | The title names the B♭ dominant bebop collection and the G-centred riff. The collection contains both A♭ and A, and loop 03 centres on B♭7. |
 | G. Add Roman numerals to all loops | Not applied | This would require analysing each loop in its own tonal context. The proposed equivalence was incorrect. Gm to A♭ is i to ♭II in G, while Em to Dsus4 is i to ♭VIIsus4 in E. |
 | H. Mark the optional blue note on the pentatonic grid | Not applied | Page 1 maps the five pentatonic notes. The blues page introduces B♭ separately as an optional addition. |
