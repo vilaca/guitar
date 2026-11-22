@@ -233,7 +233,7 @@ lines(H-103,['Use these richer chords in loops 05-10 and wherever their symbols 
 txt(M,60,'All notes belong to the scale. Gm9 makes A natural audible as an added colour above G minor.',9)
 for i,(ch,lh,rh) in enumerate(full):
     verify_voicing(ch,lh,rh);top=H-137-i*95
-    txt(M,top,ch,11,'Bold');txt(M+93,top,'LH: '+lh+'     RH: '+rh,10)
+    txt(M,top,ch,11,'Bold');txt(M+105,top,'LH: '+lh+'     RH: '+rh,10)
     piano(top-49,lh,rh)
 paragraph(77,'For more weight, replace a left-hand fifth with a bass octave, such as G2-G3. If the low register becomes crowded, move the right-hand chord up an octave.',9)
 c.showPage()

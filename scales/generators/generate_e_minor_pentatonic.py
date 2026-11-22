@@ -230,7 +230,7 @@ txt(M,60,'[P] Every played note belongs to E minor pentatonic. Em7(add11) uses a
 for i,(ch,lh,rh) in enumerate(full):
     verify(ch,lh,rh);assert ch in STRICT
     top=H-137-i*95;txt(M,top,ch,11,'Bold')
-    txt(M+115,top,'LH: '+lh+'     RH: '+rh,10);piano(top-49,lh,rh)
+    txt(M+105,top,'LH: '+lh+'     RH: '+rh,10);piano(top-49,lh,rh)
 paragraph(77,'For more weight, use a left-hand octave such as E2-E3. Keep dense chords above the low bass. C4 is middle C; octave names can vary between synth manufacturers.',9)
 c.showPage()
 
