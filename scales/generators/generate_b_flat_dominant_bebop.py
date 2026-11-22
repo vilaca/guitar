@@ -108,7 +108,7 @@ y=paragraph(y,'Ab and A are different colours: Ab is G\'s dark b2; A is its natu
 assert y>50
 c.showPage()
 
-header(2, 'GUITAR PATTERN', 'G-centred riff | Standard B E A D G B E')
+header(2, 'GUITAR PATTERNS', 'G-centred riff | Standard B E A D G B E')
 compact = [[8, 9, 10], [6, 8, 10], [6, 8, 10], [6, 7, 8], [5, 7, 8], [6, 8, 9], [5, 6, 8]]
 assert all(len(row) == 3 for row in compact)
 
@@ -143,7 +143,7 @@ def pattern(top, title, frets):
             c.drawCentredString(x, y - 3, label)
 
     for string, row in enumerate(frets):
-        y = top - 42 - (6 - string) * 32
+        y = top - 42 - (6 - string) * 26
         draw_row(y, labels[string], opens[string], row, len(played))
         played.extend(opens[string] + f for f in row)
     return played

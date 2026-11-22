@@ -7,7 +7,7 @@
 | 1. Phrygian piano-page references | Applied | The loop-page caption now sends players to page 2 for triads and page 7 for extended chords. A reference to page 7 alone missed the triads. |
 | 2. Bebop six-note slide | Superseded | The six-note slide was removed with the longer fingering. Page 2 now teaches three notes per string. |
 | 3. Change the Gm9 voicing | Not applied | With G2 in the bass, A3 already sounds a ninth above the root. The adjacent A3 and Bb3 are a valid voicing. Moving A to the top would change its sound. |
-| 4. E minor ending on a 22-fret guitar | Already applied | On page 2, string 1 carries B5 at fret 19 and D6 at fret 22. Players can stop there before the final E6 at fret 24. |
+| 4. E minor ending on a 22-fret guitar | Removed | The 22-fret note was dropped from the pentatonic guide's page 2 at the author's request. |
 
 [Phrygian guide](pdfs/phrygian_7_string_standard.pdf) · [B♭ dominant bebop guide](pdfs/b_flat_dominant_bebop_7_string_and_piano.pdf) · [E minor pentatonic guide](pdfs/e_minor_pentatonic_7_string_and_piano.pdf)
 

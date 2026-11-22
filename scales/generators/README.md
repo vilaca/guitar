@@ -4,7 +4,7 @@ Standalone generators for the three scale guides and their shared playing glossa
 
 | Script | Guide | Pages |
 | --- | --- | --- |
-| `generate_phrygian.py` | 7-string B Phrygian, B standard, piano/synth, 43 progressions | 13 |
+| `generate_phrygian.py` | 7-string B Phrygian, B standard, piano/synth, 43 progressions | 14 |
 | `generate_b_flat_dominant_bebop.py` | Bb dominant bebop, G-centred riff, guitar/piano, 45 progressions | 14 |
 | `generate_e_minor_pentatonic.py` | E minor pentatonic, guitar/piano, 46 progressions | 14 |
 | `generate_playing_glossary.py` | Shared rhythm and production terms | 1 |

@@ -9,6 +9,9 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.colors import black, HexColor, white
 from reportlab.lib.utils import simpleSplit
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+import reportlab
 from pathlib import Path
 
 import argparse
@@ -21,18 +24,17 @@ OUT = Path(args.output).expanduser().resolve()
 OUT.parent.mkdir(parents=True, exist_ok=True)
 
 c = canvas.Canvas(str(OUT), pagesize=A4)
-c.setTitle('7-string Phrygian - B Standard')
+c.setTitle('B Phrygian - 7-string guitar, piano and 43 progressions')
 c.setAuthor('')
 W,H = A4
-M=40
+M=38
+TOTAL=14
+font_dir = Path(reportlab.__file__).resolve().parent / 'fonts'
+for family, filename in [('Body', 'Vera.ttf'), ('Bold', 'VeraBd.ttf')]:
+    pdfmetrics.registerFont(TTFont(family, str(font_dir / filename)))
 
-def txt(x,y,s,size=10,font='Helvetica'):
+def txt(x,y,s,size=10,font='Body'):
     c.setFillColor(black); c.setFont(font,size); c.drawString(x,y,s)
-
-txt(M, H-48, '7-STRING PHRYGIAN', 23, 'Helvetica-Bold')
-txt(M, H-69, 'Standard seven-string tuning | B E A D G B E', 11)
-txt(M, H-95, 'Formula: 1  b2  b3  4  5  b6  b7', 11, 'Helvetica-Bold')
-txt(M, H-113, 'B Phrygian: B  C  D  E  F#  G  A', 10)
 
 note_names = {11: 'B', 0: 'C', 2: 'D', 4: 'E', 6: 'F#', 7: 'G', 9: 'A'}
 allowed = set(note_names)
@@ -42,14 +44,14 @@ compact = [[0, 1, 3], [0, 2, 3], [0, 2, 3], [0, 2, 4], [0, 2, 4], [1, 3, 5], [2,
 diagonal = [[0, 1, 3, 5], [2, 3, 5, 7], [3, 5, 7, 9], [5, 7, 9, 10], [7, 9, 11, 12], [10, 12, 13, 15], [12, 14, 15, 17]]
 assert all(len(row) == 3 for row in compact)
 
-def pattern(top, title, frets, gap=22):
-    txt(M, top, title, 13, 'Helvetica-Bold')
+def pattern(top, title, frets, gap=26):
+    txt(M, top, title, 13, 'Bold')
     left = M + 38
     step = (W - M - 12 - left) / (sum(map(len, frets)) + 1)
     played = []
 
     def draw_row(y, label, open_pitch, row, start):
-        txt(M, y - 3, label, 8, 'Helvetica-Bold')
+        txt(M, y - 3, label, 8, 'Bold')
         c.setStrokeColor(HexColor('#888888'))
         c.setLineWidth(.5)
         c.line(left - 10, y, W - M, y)
@@ -61,7 +63,7 @@ def pattern(top, title, frets, gap=22):
             neighbor = i < first or i >= first + len(row)
             label = f'({fret})' if neighbor else str(fret)
             size = 9 if neighbor else 11
-            font = 'Helvetica-Bold' if (open_pitch + fret) % 12 == 11 else 'Helvetica'
+            font = 'Bold' if (open_pitch + fret) % 12 == 11 else 'Body'
             x = left + (start + 1 + i - first) * step
             width = c.stringWidth(label, font, size) + 1
             c.setFillColor(white)
@@ -71,56 +73,20 @@ def pattern(top, title, frets, gap=22):
             c.drawCentredString(x, y - 3, label)
 
     for string, row in enumerate(frets):
-        y = top - 34 - (6 - string) * gap
+        y = top - 42 - (6 - string) * gap
         draw_row(y, labels[string], opens[string], row, len(played))
         played.extend(opens[string] + f for f in row)
     return played
 
-played = pattern(H-142, 'THREE NOTES PER STRING | B1 to A4', compact)
-assert played == [n for n in range(35, 70) if n % 12 in allowed]
-played = pattern(H-338, 'DIAGONAL | start on open B, string 7', diagonal)
-assert played == [n for n in range(35, 82) if n % 12 in allowed]
-assert all(a < b for a, b in zip([r[0] for r in diagonal], [r[0] for r in diagonal][1:]))
-txt(M, H-520, 'Play left to right. Bold frets mark B. Parentheses show neighboring scale frets to skip during the run.', 9)
-txt(M, H-533, 'Diagonal: start on open B1 (string 7), play four notes per string and shift up the neck. Finish on A5 (string 1, fret 17).', 9)
-
-txt(M, H-558, 'STANDARD 7-STRING | FRETS 0-12', 12, 'Helvetica-Bold')
-txt(M, H-575, 'Dark cells mark B roots. A dash marks a note outside B Phrygian.', 9)
-left = M + 38
-cell_width = (W - M - left) / 13
-row_height = 21
-grid_top = H - 596
-c.setFont('Helvetica-Bold', 8)
-for fret in range(13):
-    c.drawCentredString(left + (fret + 0.5) * cell_width, grid_top + 7, str(fret))
-for row, (label, pitch) in enumerate(zip(reversed(labels), reversed(opens))):
-    y = grid_top - (row + 1) * row_height
-    txt(M, y + 8, label, 9, 'Helvetica-Bold')
-    for fret in range(13):
-        note = note_names.get((pitch + fret) % 12, '-')
-        x = left + fret * cell_width
-        root = note == 'B'
-        c.setFillColor(HexColor('#333333') if root else white)
-        c.setStrokeColor(HexColor('#cccccc'))
-        c.rect(x, y, cell_width, row_height, fill=1, stroke=1)
-        c.setFillColor(white if root else black)
-        c.setFont('Helvetica-Bold' if root else 'Helvetica', 9)
-        c.drawCentredString(x + cell_width / 2, y + 8, note)
-
-txt(M, H-762, 'Root rule', 11, 'Helvetica-Bold')
-txt(M, H-778, 'The open seventh string is the root. All seven open strings fit B Phrygian.', 9)
-txt(M, H-793, 'For a lower standard tuning, keep the fret numbers and use the new seventh-string root.', 9)
-txt(W-65,27,'1/13',8); c.showPage()
-
-
-
-
 def header(title, subtitle, page):
-    txt(M,H-48,title,21,'Helvetica-Bold')
-    txt(M,H-70,subtitle,10)
-    c.setStrokeColor(HexColor('#aaaaaa')); c.line(M,H-85,W-M,H-85)
-    txt(M,27,'7-STRING PHRYGIAN | B standard',8)
-    txt(W-65,27,str(page)+'/13',8)
+    size = 20
+    while pdfmetrics.stringWidth(title, 'Bold', size) > W - 2 * M:
+        size -= .5
+    txt(M,H-44,title,size,'Bold')
+    txt(M,H-66,subtitle,9)
+    c.setStrokeColor(HexColor('#aaaaaa')); c.setLineWidth(.6); c.line(M,H-80,W-M,H-80)
+    txt(M,25,'7-STRING PHRYGIAN | guitar + piano / synth',7)
+    txt(W-M-30,25,f'{page}/{TOTAL}',7)
 
 def lines(y, rows, size=10, leading=16):
     for row in rows:
@@ -135,12 +101,70 @@ def table(y, columns, widths, rows, row_h=27, font_size=10):
         if i==0:
             c.setFillColor(HexColor('#eeeeee'));c.rect(M,yy-row_h+5,sum(widths),row_h,fill=1,stroke=0)
         for j,cell in enumerate(row):
-            txt(xs[j]+6,yy-13,str(cell),font_size,'Helvetica-Bold' if i==0 else 'Helvetica')
+            txt(xs[j]+6,yy-13,str(cell),font_size,'Bold' if i==0 else 'Body')
         c.setStrokeColor(HexColor('#cccccc'));c.setLineWidth(.4)
         c.line(M,yy-row_h+5,xs[-1],yy-row_h+5)
     return y-(len(rows)+1)*row_h
 
-header('PIANO KEYS | B PHRYGIAN','L = left-hand bass | R = right-hand chord | C4 = middle C',2)
+
+# Page 1: scale, formula and fretboard map.
+header('7-STRING PHRYGIAN','Standard seven-string tuning | B E A D G B E',1)
+lines(H-110,['B Phrygian: B  C  D  E  F#  G  A',
+             'Formula from B: 1  b2  b3  4  5  b6  b7'],11,18)
+lines(H-150,['Phrygian is a minor sound with a lowered second: C sits a half-step above B.',
+             'That half-step pull from C back to B is the scale\'s signature. B is home.'],9.5,15)
+txt(M, H-210, 'STANDARD 7-STRING | FRETS 0-12', 12, 'Bold')
+txt(M, H-228, 'Dark cells mark B roots. A dash marks a note outside B Phrygian.', 9)
+left = M + 38
+cell_width = (W - M - left) / 13
+row_height = 29
+grid_top = H - 262
+c.setFont('Bold', 8)
+for fret in range(13):
+    c.drawCentredString(left + (fret + 0.5) * cell_width, grid_top + 9, str(fret))
+for row, (label, pitch) in enumerate(zip(reversed(labels), reversed(opens))):
+    y = grid_top - (row + 1) * row_height
+    txt(M, y + 10, label, 9, 'Bold')
+    for fret in range(13):
+        note = note_names.get((pitch + fret) % 12, '-')
+        x = left + fret * cell_width
+        root = note == 'B'
+        c.setFillColor(HexColor('#333333') if root else white)
+        c.setStrokeColor(HexColor('#cccccc'))
+        c.rect(x, y, cell_width, row_height, fill=1, stroke=1)
+        c.setFillColor(white if root else black)
+        c.setFont('Bold' if root else 'Body', 9)
+        c.drawCentredString(x + cell_width / 2, y + 10, note)
+y = grid_top - 7 * row_height - 28
+lines(y,['Thinnest string at the top. The map repeats 12 frets higher.'],9)
+txt(M, y - 34, 'Root rule', 11, 'Bold')
+lines(y - 54,['The open seventh string is the root. All seven open strings fit B Phrygian.',
+              'For a lower standard tuning, keep the fret numbers and use the new seventh-string root.'],9.5,15)
+txt(M, y - 108, 'Using the half-step', 11, 'Bold')
+lines(y - 128,['Land on B to rest. Move to C for tension, then fall back to B.',
+               'You do not need every scale note in every chord.'],9.5,15)
+c.showPage()
+
+# Page 2: guitar patterns.
+header('GUITAR PATTERNS','B Phrygian | Standard B E A D G B E',2)
+played = pattern(H-120, 'THREE NOTES PER STRING | B1 to A4', compact)
+assert played == [n for n in range(35, 70) if n % 12 in allowed]
+played = pattern(H-345, 'DIAGONAL | start on open B, string 7', diagonal)
+assert played == [n for n in range(35, 82) if n % 12 in allowed]
+assert all(a < b for a, b in zip([r[0] for r in diagonal], [r[0] for r in diagonal][1:]))
+y = H-575
+for instruction in [
+    'Read left to right. Bold numbers mark B. Parentheses show the neighboring scale frets on the same string. Skip them when playing the run.',
+    'Three notes per string: stay around frets 0-5 in standard tuning. Hear the opening B-C and the half-step pull back to B.',
+    'Diagonal: start on open B1 (string 7), play four notes per string and shift up the neck. Finish on A5 (string 1, fret 17).',
+]:
+    for line in simpleSplit(instruction, 'Body', 9.3, W - 2 * M):
+        txt(M, y, line, 9.3); y -= 14
+    y -= 10
+assert y > 45
+c.showPage()
+
+header('PIANO KEYS | BASIC CHORDS','L = left-hand bass | R = right-hand chord | C4 = middle C',3)
 chords=[('i','Bm','B D F#'),('bII','C','C E G'),('bIII','D','D F# A'),('iv','Em','E G B'),('v diminished','F#dim','F# A C'),('bVI','G','G B D'),('bvii','Am','A C E')]
 voicings=[('Bm','B2','B3 D4 F#4'),('C','C3','C4 E4 G4'),
           ('D','D3','A3 D4 F#4'),('Em','E3','B3 E4 G4'),
@@ -165,11 +189,11 @@ def piano(y,lh,rh):
         x=x0+j*kw
         c.setFillColor(HexColor('#d9d9d9') if n in targets else white)
         c.setStrokeColor(black);c.setLineWidth(.5);c.rect(x,y,kw,kh,fill=1,stroke=1)
-        c.setFillColor(black);c.setFont('Helvetica',7)
+        c.setFillColor(black);c.setFont('Body',7)
         c.drawCentredString(x+kw/2,y-9,names[n%12]+str(n//12-1))
         if n in targets:
             c.setFillColor(white);c.circle(x+kw/2,y+11,6.5,fill=1,stroke=1)
-            c.setFillColor(black);c.setFont('Helvetica-Bold',8)
+            c.setFillColor(black);c.setFont('Bold',8)
             c.drawCentredString(x+kw/2,y+8,targets[n])
     for j,n in enumerate(white_notes[:-1]):
         if n%12 not in {0,2,5,7,9}: continue
@@ -177,7 +201,7 @@ def piano(y,lh,rh):
         c.setFillColor(black);c.rect(x,y+kh-bh,bw,bh,fill=1,stroke=1)
         if sharp in targets:
             c.setFillColor(white);c.circle(x+bw/2,y+kh-bh+9,6,fill=1,stroke=0)
-            c.setFillColor(black);c.setFont('Helvetica-Bold',8)
+            c.setFillColor(black);c.setFont('Bold',8)
             c.drawCentredString(x+bw/2,y+kh-bh+6,targets[sharp])
     # All selected notes must be represented by a key within this range.
     assert all(41<=n<=71 for n in targets)
@@ -185,13 +209,38 @@ def piano(y,lh,rh):
 txt(M,H-105,'Play each L and all three R keys together. Shading also marks the selected white keys.',9)
 for i,((degree,_,notes),(name,lh,rh)) in enumerate(zip(chords,voicings)):
     top=H-133-i*94
-    txt(M,top,name+' ('+degree+')',11,'Helvetica-Bold')
+    txt(M,top,name+' ('+degree+')',11,'Bold')
     txt(M+155,top,'LH: '+lh+'     RH: '+rh,10)
     piano(top-54,lh,rh)
 txt(M,49,'All notes fit B Phrygian. Play these voicings over the B-standard guitar patterns.',9)
 c.showPage()
 
-header('PROGRESSIONS & SYNTH IDEAS','Original practice loops | Suggested tempo: 70-100 BPM, in 4/4.',3)
+# New progressions and their complete pitch collections.
+extensions={'Bm7':{11,2,6,9},'Cmaj7':{0,4,7,11},'Em7':{4,7,11,2},
+            'Gmaj7':{7,11,2,6},'Am7':{9,0,4,7},'Dadd9':{2,6,9,4}}
+catalog={**expected,**extensions}
+for name,root in [('B5',11),('C5',0),('D5',2),('G5',7),('A5',9)]:
+    catalog[name]={root,(root+7)%12}
+assert all(notes <= allowed for notes in catalog.values())
+
+header('PIANO KEYS | FULLER CHORDS','L = left-hand root + fifth | R = right-hand chord | C4 = middle C',4)
+lines(H-106,['Use these richer chords in loops 05-10 and wherever their symbols appear.',
+              'The keyboard shows every played key. Move a voicing up an octave if the bass gets muddy.'],9,15)
+full=[('Bm7','B2 F#3','A3 B3 D4 F#4'),('Cmaj7','C3 G3','B3 C4 E4 G4'),
+      ('Em7','E3 B3','D4 E4 G4 B4'),('Gmaj7','G2 D3','F#3 B3 D4 G4'),
+      ('Am7','A2 E3','G3 C4 E4 A4'),('Dadd9','D3 A3','D4 E4 F#4 A4')]
+for i,(name,lh,rh) in enumerate(full):
+    assert {pc(n) for n in (lh+' '+rh).split()} == catalog[name]
+    top=H-155-i*94
+    txt(M,top,name,11,'Bold')
+    txt(M+105,top,'LH: '+lh+'     RH: '+rh,10)
+    piano(top-54,lh,rh)
+lines(75,['Power-chord spellings: B5 = B F#; C5 = C G; D5 = D A; G5 = G D; A5 = A E.',
+          'Optional bass octaves: replace a left-hand fifth with root + root an octave higher.',
+          'Pages 1-11 and 13 stay in B Phrygian. Page 12 marks the blues exceptions.'],9,16)
+c.showPage()
+
+header('START HERE | FOUR LOOPS','Each box is one bar in 4/4. Try 70-100 BPM and repeat each loop.',5)
 txt(M, H-110,'One chord per bar in 4/4. Follow the roots in the bass and resolve to Bm or Bm7.',10)
 variations = {
     '22': ('Variation 31 - Digital bloom / Hyperpop | 140-180 BPM, or half-time feel',
@@ -212,9 +261,9 @@ def draw_variation(y, title):
     variation = variations.get(title[:2])
     if variation:
         name, direction = variation
-        txt(M + 10, y, name, 8.5, 'Helvetica-Bold')
+        txt(M + 10, y, name, 8.5, 'Bold')
         y -= 12
-        for line in simpleSplit(direction, 'Helvetica', 8.5, W - 2 * M - 10):
+        for line in simpleSplit(direction, 'Body', 8.5, W - 2 * M - 10):
             txt(M + 10, y, line, 8.5)
             y -= 12
     return y
@@ -226,12 +275,12 @@ progressions=[
  ('04  Minor lift, close return','| Bm | D | C | Bm |','i - bIII - bII - i: return from C to Bm to reinforce B as home.')]
 yy=H-143
 for title,prog,caption in progressions:
-    txt(M,yy,title,11,'Helvetica-Bold')
-    txt(M,yy-23,prog,13,'Courier-Bold')
+    txt(M,yy,title,11,'Bold')
+    txt(M,yy-23,prog,10,'Courier')
     txt(M,yy-43,caption,9)
     draw_variation(yy-56, title)
     yy-=77
-txt(M,367,'Moving-bass loop: B - C - A - B',13,'Helvetica-Bold')
+txt(M,367,'Moving-bass loop: B - C - A - B',13,'Bold')
 lines(346,['Both hands change each bar. The right-hand notes match the piano diagrams.',
            'Hear the bass climb a half-step from B to C, drop to A, then return to B.'],9,15)
 moving=[('1','Bm','B2','B3 D4 F#4'),('2','C','C3','C4 E4 G4'),
@@ -246,24 +295,16 @@ lines(145,['Start simply: play both hands on beat 1 and hold for the bar.',
            'If the scale root changes with a lower tuning, transpose every chord equally.'],9,18)
 c.showPage()
 
-# New progressions and their complete pitch collections.
-extensions={'Bm7':{11,2,6,9},'Cmaj7':{0,4,7,11},'Em7':{4,7,11,2},
-            'Gmaj7':{7,11,2,6},'Am7':{9,0,4,7},'Dadd9':{2,6,9,4}}
-catalog={**expected,**extensions}
-for name,root in [('B5',11),('C5',0),('D5',2),('G5',7),('A5',9)]:
-    catalog[name]={root,(root+7)%12}
-assert all(notes <= allowed for notes in catalog.values())
-
 def styles_page(page,title,subtitle,groups,variation_guide=None):
     header(title,subtitle,page)
-    txt(M,H-108,'One bar per chord | Piano: triads p2, extended chords p7 | Tips p13',9)
+    txt(M,H-108,'1 bar per chord | Keys pp3-4 | Tips p14',9)
     y=H-140
     for group,loops in groups:
-        txt(M,y,group,14,'Helvetica-Bold');y-=29
+        txt(M,y,group,14,'Bold');y-=29
         for label,seq,feel in loops:
             assert all(chord in catalog for chord in seq)
-            txt(M,y,label,10,'Helvetica-Bold')
-            txt(M,y-23,'| '+' | '.join(seq)+' |',11,'Courier-Bold')
+            txt(M,y,label,10,'Bold')
+            txt(M,y-23,'| '+' | '.join(seq)+' |',10,'Courier')
             txt(M,y-43,feel,9)
             y = draw_variation(y-58, label) - 18
         y-=24
@@ -272,7 +313,7 @@ def styles_page(page,title,subtitle,groups,variation_guide=None):
     assert y>60
     c.showPage()
 
-styles_page(4,'AMBIENT & ETHEREAL','Original B Phrygian loops | Let the harmony breathe.',[
+styles_page(6,'AMBIENT & ETHEREAL','Original B Phrygian loops | Let the harmony breathe.',[
  ('Ambient | 50-75 BPM',[
   ('05  Slow drift',['Bm7','Cmaj7','Em7','Bm7'],'Sustain pads; give each chord two bars if you want a slower harmonic rhythm.'),
   ('06  Quiet return',['Bm7','Em7','Cmaj7','Bm7'],'Use soft attacks and sparse notes; let Cmaj7 settle back into Bm7.'),
@@ -282,17 +323,17 @@ styles_page(4,'AMBIENT & ETHEREAL','Original B Phrygian loops | Let the harmony 
   ('09  Falling through',['Bm7','Am7','Em7','Cmaj7','Bm7','Bm7'],'Use a high, sparse melody; hold the final Bm7 for the last two bars.'),
   ('10  Glass motion',['Bm7','Gmaj7','Em7','Cmaj7','Bm7','Bm7'],'Keep common tones ringing with a synth release; change bass notes cleanly.')])])
 
-styles_page(5,'METAL & ROCK','Original B Phrygian loops | Make the rhythm carry the weight.',[
+styles_page(7,'METAL & ROCK','Original B Phrygian loops | Make the rhythm carry the weight.',[
  ('Metal | 85-140 BPM',[
-  ('11  Half-step pressure',['B5','C5','B5','A5'],'Play B+F# briefly and release; leave silence after each hit. Tip 2, p13.'),
+  ('11  Half-step pressure',['B5','C5','B5','A5'],'Play B+F# briefly and release; leave silence after each hit. Tip 2, p14.'),
   ('12  Climb and collapse',['B5','C5','D5','C5','B5','B5'],'Strike twice per beat; stop early before the return to B5. Glossary: eighth-note hits.'),
   ('13  Heavy descent',['B5','G5','A5','C5','B5','B5'],'Use a strong snare on beat 3; sustain bass octaves below. Glossary: half-time feel.')]),
  ('Rock | 95-140 BPM',[
-  ('14  Open drive',['Bm','G','D','C','Bm','Bm'],'Play all 3 chord notes (Bm = B D F#), twice per beat. Tip 3, p13.'),
-  ('15  Angular lift',['Bm','D','Am','C','Bm','Bm'],'Repeat a melody ending C-B as C changes to Bm. Tip 4, p13.'),
-  ('16  Dark release',['Bm','Em','G','C','Bm','Bm'],'Start with B3-D4; later spread Bm as B2-F#3-D4-B4. Tip 5, p13.')])])
+  ('14  Open drive',['Bm','G','D','C','Bm','Bm'],'Play all 3 chord notes (Bm = B D F#), twice per beat. Tip 3, p14.'),
+  ('15  Angular lift',['Bm','D','Am','C','Bm','Bm'],'Repeat a melody ending C-B as C changes to Bm. Tip 4, p14.'),
+  ('16  Dark release',['Bm','Em','G','C','Bm','Bm'],'Start with B3-D4; later spread Bm as B2-F#3-D4-B4. Tip 5, p14.')])])
 
-styles_page(6,'POP & CINEMATIC','Original B Phrygian loops | Familiar motion with a darker half-step.',[
+styles_page(8,'POP & CINEMATIC','Original B Phrygian loops | Familiar motion with a darker half-step.',[
  ('Pop / dark pop | 85-120 BPM',[
   ('17  Dark chorus',['Bm','G','D','Am','C','Bm'],'Use a regular drum groove and a repeating melody; save C for the final turn.'),
   ('18  Bright surface',['Bm','D','G','C'],'Keep a simple hook around B and D; the loop returns from C to Bm.'),
@@ -302,24 +343,7 @@ styles_page(6,'POP & CINEMATIC','Original B Phrygian loops | Familiar motion wit
   ('21  Long scene',['Bm','Bm','Em','C','G','Am','C','Bm'],'Build over eight bars: start sparse, add layers, then return to a clear B bass.'),
   ('22  Suspended scene',['Bm7','Am7','Cmaj7','Em7','Cmaj7','Bm7'],'Use slow broken chords; let the final Bm7 ring before repeating.')])])
 
-header('FULLER PIANO VOICINGS','L = left-hand root + fifth | R = right-hand chord | C4 = middle C',7)
-lines(H-106,['Use these richer chords in loops 05-10 and wherever their symbols appear.',
-              'The keyboard shows every played key. Move a voicing up an octave if the bass gets muddy.'],9,15)
-full=[('Bm7','B2 F#3','A3 B3 D4 F#4'),('Cmaj7','C3 G3','B3 C4 E4 G4'),
-      ('Em7','E3 B3','D4 E4 G4 B4'),('Gmaj7','G2 D3','F#3 B3 D4 G4'),
-      ('Am7','A2 E3','G3 C4 E4 A4'),('Dadd9','D3 A3','D4 E4 F#4 A4')]
-for i,(name,lh,rh) in enumerate(full):
-    assert {pc(n) for n in (lh+' '+rh).split()} == catalog[name]
-    top=H-155-i*94
-    txt(M,top,name,11,'Helvetica-Bold')
-    txt(M+105,top,'LH: '+lh+'     RH: '+rh,10)
-    piano(top-54,lh,rh)
-lines(75,['Power-chord spellings: B5 = B F#; C5 = C G; D5 = D A; G5 = G D; A5 = A E.',
-          'Optional bass octaves: replace a left-hand fifth with root + root an octave higher.',
-          'Pages 1-10 and 12 stay in B Phrygian. Page 11 marks the blues exceptions.'],9,16)
-c.showPage()
-
-styles_page(8,'ELECTRO & ELECTROPOP','B Phrygian sketches | Suggested starting tempos, not genre rules.',[
+styles_page(9,'ELECTRO & ELECTROPOP','B Phrygian sketches | Suggested starting tempos, not genre rules.',[
  ('Electro | 110-135 BPM',[
   ('23  Machine steps',['Bm','C','Em','Bm'],'Use a syncopated drum-machine beat, short chord stabs and a dry octave bass.'),
   ('24  Metallic circuit',['B5','D5','C5','B5'],'Sequence sixteenth-note bass bursts; leave rests around snare hits.'),
@@ -329,7 +353,7 @@ styles_page(8,'ELECTRO & ELECTROPOP','B Phrygian sketches | Suggested starting t
   ('27  Glass chorus',['Bm7','Dadd9','Am7','Cmaj7'],'Build a repeating synth hook; use C natural before the return to Bm7.'),
   ('28  Night drive',['Bm','Em','D','C'],'Try octave bass pulses and a wide pad; keep the lead melody simple.')])])
 
-styles_page(9,'HYPERPOP & BLACK METAL','B Phrygian sketches | Let texture and articulation define the contrast.',[
+styles_page(10,'HYPERPOP & BLACK METAL','B Phrygian sketches | Let texture and articulation define the contrast.',[
  ('Hyperpop | 140-180 BPM, or half-time feel',[
   ('29  Sugar and static',['Bm7','Gmaj7','Dadd9','Cmaj7'],'Use bright supersaws and abrupt stops; double a simple hook an octave higher.'),
   ('30  Pixel jump',['Bm','C','D','Am','C','Bm'],'Chop the chords into short bursts; jump registers between phrases.'),
@@ -337,22 +361,22 @@ styles_page(9,'HYPERPOP & BLACK METAL','B Phrygian sketches | Let texture and ar
  ('Black metal | 140-200 BPM, or slower atmospheric feel',[
   ('32  Frost line',['Bm','C','Bm','Em'],'Rapidly repeat upper chord tones; use a thin pad under a relentless drum pulse.'),
   ('34  Distant ruin',['Bm','F#dim','Em','C','Bm','Bm'],'Let the diminished chord add friction; contrast fast repetition with a long Bm.')])],
-    variation_guide='Hyperpop and black metal variations: 31 and 33 on p6.')
+    variation_guide='Hyperpop and black metal variations: 31 and 33 on p8.')
 
-styles_page(10,'DUB & DUBSTEP','B Phrygian sketches | Leave space for bass, rhythm and effects.',[
+styles_page(11,'DUB & DUBSTEP','B Phrygian sketches | Leave space for bass, rhythm and effects.',[
  ('Dub | 65-85 BPM',[
   ('36  Half-step skank',['Bm','C','Bm','Am'],'Keep the chord hits brief; answer them with bass phrases rather than held roots.'),
   ('37  Empty space',['Bm7','Am7','Em7','Cmaj7'],'Drop the chords out for a bar on later repeats; let bass and echoes carry it.')]),
  ('Dubstep | around 140 BPM, half-time feel',[
   ('38  Sub pressure',['B5','C5','B5','G5'],'Keep deep sub notes simple; put rhythmic filter movement on a separate mid bass.'),
   ('40  Weightless drop',['Bm7','Gmaj7','Em7','Cmaj7'],'Start with airy pads, then shorten the chords and open space for the bass drop.')])],
-    variation_guide='Dub and dubstep variations: 35 on p4 and 39 on p3.')
+    variation_guide='Dub and dubstep variations: 35 on p6 and 39 on p5.')
 
-header('BLUES | SCALE EXCEPTIONS','B-centred examples | Blues harmony can deliberately leave B Phrygian.',11)
+header('BLUES | SCALE EXCEPTIONS','B-centred examples | Blues harmony can deliberately leave B Phrygian.',12)
 lines(H-111,['Only example 41 stays entirely inside B Phrygian. Examples 42-43 borrow notes.',
               'B minor blues melody: B D E F F# A. F natural is also outside B Phrygian.'],9,16)
-txt(M,H-169,'41  Phrygian blues-inspired loop | 65-95 BPM',12,'Helvetica-Bold')
-txt(M,H-194,'| Bm7 | Em7 | Bm7 | C | Bm7 | Bm7 |',11,'Courier-Bold')
+txt(M,H-169,'41  Phrygian blues-inspired loop | 65-95 BPM',12,'Bold')
+txt(M,H-194,'| Bm7 | Em7 | Bm7 | C | Bm7 | Bm7 |',10,'Courier')
 lines(H-217,['This is a six-bar modal loop, not a traditional 12-bar blues.',
              'Try a shuffle feel and short answering phrases. Keep the melody in B Phrygian.'],9,16)
 
@@ -368,28 +392,28 @@ for yy,title,seq,description in [
  (H-470,'43  Dominant 12-bar blues | outside Phrygian',dominant_blues,
   'B7 adds D#; E7 adds G#; F#7 adds A# and C#. This uses a different palette.')]:
     assert len(seq)==12 and all(ch in catalog or ch in borrowed for ch in seq)
-    txt(M,yy,title,12,'Helvetica-Bold')
+    txt(M,yy,title,12,'Bold')
     for row in range(3):
-        txt(M,yy-26-row*22,'| '+' | '.join(seq[row*4:row*4+4])+' |',12,'Courier-Bold')
+        txt(M,yy-26-row*22,'| '+' | '.join(seq[row*4:row*4+4])+' |',10,'Courier')
     txt(M,yy-100,description,9)
 
-txt(M,210,'Chord notes for the borrowed harmony',12,'Helvetica-Bold')
+txt(M,210,'Chord notes for the borrowed harmony',12,'Bold')
 table(190,['Chord','Notes','Notes outside B Phrygian'],[80,180,W-2*M-260],
       [('B7','B D# F# A','D#'),('E7','E G# B D','G#'),('F#7','F# A# C# E','A#, C#')],row_h=26)
 lines(58,['Choose the scale by the current harmony here; the Phrygian-only rule is relaxed.'],9,16)
 c.showPage()
 
-styles_page(12,'MORE ELECTRONIC DIRECTIONS','B Phrygian sketches | Techno, house, industrial and breakbeat arrangements.',[
+styles_page(13,'MORE ELECTRONIC DIRECTIONS','B Phrygian sketches | Techno, house, industrial and breakbeat arrangements.',[
  ('Techno / house / industrial',[
-  ('45  House | 118-128 BPM',['Bm7','Em7','Am7','Cmaj7'],'Delay offbeat stabs; move bass each beat. Glossary: swung offbeats. Bass: tip 1, p13.'),
-  ('46  Industrial | 100-135 BPM',['B5','C5','G5','B5'],'Play B+F# as short stabs; add metallic percussion and repeating bass. Tip 2, p13.')]),
+  ('45  House | 118-128 BPM',['Bm7','Em7','Am7','Cmaj7'],'Delay offbeat stabs; move bass each beat. Glossary: swung offbeats. Bass: tip 1, p14.'),
+  ('46  Industrial | 100-135 BPM',['B5','C5','G5','B5'],'Play B+F# as short stabs; add metallic percussion and repeating bass. Tip 2, p14.')]),
  ('Drum & bass / UK garage / trip-hop',[
   ('47  Drum & bass | 165-175 BPM',['Bm7','Dadd9','Em7','Cmaj7'],'Let chords last a bar or two over fast breaks; leave room for a clean sub bass.'),
   ('49  Trip-hop | 65-95 BPM',['Bm7','Cmaj7','Am7','Bm7'],'Loosen the drums; vary mellow keys over sparse bass. Glossary: loose drums and warm keys.')])],
-    variation_guide='Techno and UK garage variations: 44 on p9 and 48 on p10.')
+    variation_guide='Techno and UK garage variations: 44 on p10 and 48 on p11.')
 
 
-header('PLAYING EXAMPLES','Bass, chords and melodic phrasing for B Phrygian',13)
+header('PLAYING EXAMPLES','Bass, chords and melodic phrasing for B Phrygian',14)
 tips = [
 
     ('1  Walking bass', 'Play one note per beat: B-C-D-F# over Bm7, landing on E for Em7.'),
@@ -402,13 +426,13 @@ tips = [
 ]
 y = H - 111
 for title, direction in tips:
-    txt(M, y, title, 11, 'Helvetica-Bold')
+    txt(M, y, title, 11, 'Bold')
     y -= 17
-    for line in simpleSplit(direction, 'Helvetica', 9.3, W - 2 * M):
+    for line in simpleSplit(direction, 'Body', 9.3, W - 2 * M):
         txt(M, y, line, 9.3)
         y -= 13
     y -= 22
-txt(M, y - 12, 'Shared rhythm and production terms', 11, 'Helvetica-Bold')
+txt(M, y - 12, 'Shared rhythm and production terms', 11, 'Bold')
 txt(M, y - 32, 'See Playing glossary (playing_glossary.pdf), supplied with the scale guides.', 9)
 c.linkURL('playing_glossary.pdf', (M, y - 36, M + 320, y - 20), relative=0, kind='GoToR')
 assert y > 85

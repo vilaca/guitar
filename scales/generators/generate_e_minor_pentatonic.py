@@ -106,7 +106,7 @@ for t in ['[P] = every chord note belongs to the five-note pentatonic collection
 assert y>45
 c.showPage()
 
-header(2,'E MINOR PENTATONIC PATTERNS','Standard tuning, low to high: B E A D G B E | Bold fret numbers mark E.')
+header(2,'GUITAR PATTERNS','Standard tuning, low to high: B E A D G B E | Bold fret numbers mark E.')
 standard = [[5, 8, 10], [7, 10, 12], [10, 12, 14], [12, 14, 17], [14, 16, 19], [17, 20, 22], [19, 22, 24]]
 assert len(standard) == 7 and all(len(row) == 3 for row in standard)
 open_e_diagonal = [[], [0, 3, 5], [2, 5, 7], [5, 7, 9], [7, 9, 12], [10, 12, 15], [12]]
@@ -117,7 +117,7 @@ def tab(top,title,frets):
     step = (W - M - 12 - left) / (sum(map(len, frets)) + 1)
     seq = []
     for s, row in enumerate(frets):
-        yy = top - 42 - (6 - s) * 20
+        yy = top - 42 - (6 - s) * 26
         txt(M, yy - 3, labels[6 - s], 8, 'Bold')
         c.setLineWidth(.5)
         c.setStrokeColor(HexColor('#888888'))
@@ -139,8 +139,8 @@ def tab(top,title,frets):
             x = start_x + offset * step
             label = f'({fret})' if neighbor else str(fret)
             font = 'Bold' if (open_pitch + fret) % 12 == 4 else 'Body'
-            size = 8 if neighbor else 9
-            width = pdfmetrics.stringWidth(label, font, size) + 4
+            size = 9 if neighbor else 11
+            width = pdfmetrics.stringWidth(label, font, size) + 1
             c.setFillColor(white)
             c.rect(x - width / 2, yy - 6, width, 12, fill=1, stroke=0)
             center(x, yy - 3.2, label, size, font)
@@ -159,8 +159,7 @@ for pattern in (open_e_diagonal, standard):
 y=H-594
 for p in ['Play the plain fret numbers from left to right (0 = open). Parentheses mark the nearest scale fret on either side of a three-note group on that string, wherever it falls within frets 0-24. Skip these markers when playing the run.',
           'Open-E run: start on open E2 (string 6). Play three notes per string from string 6 through string 2, shifting up the neck at each crossing. Finish three octaves higher on E5 (string 1, fret 12).',
-          'Seventh-string run: start on the same E2 at string 7, fret 5. Play three notes on each of the seven strings. The full four-octave run ends on E6 at fret 24.',
-          'On a 22-fret guitar, play B5 on string 1 at fret 19, then finish with D6 at fret 22 on the same string. For a three-octave run, finish on E5 (string 2, fret 17).']:
+          'Seventh-string run: start on the same E2 at string 7, fret 5. Play three notes on each of the seven strings. The full four-octave run ends on E6 at fret 24.']:
     y=paragraph(y,p,9.3)-10
 assert y>45
 c.showPage()
