@@ -1,6 +1,6 @@
 # Tuning reference review decisions
 
-The [six-page tuning reference](pdfs/guitar_tunings_reference.pdf) and the editable Word version are built from the [same source](generators/generate_tunings_reference.py).
+The [six-page tuning reference](pdfs/guitar_tunings_reference.pdf) is built by the [PDF generator](generators/generate_tunings_reference.py).
 
 | Review item | Status | Reason |
 | --- | --- | --- |
@@ -8,7 +8,7 @@ The [six-page tuning reference](pdfs/guitar_tunings_reference.pdf) and the edita
 | 2. Starting tuning for custom drop E | Applied | Page 2 lists F# B E A D G C. Lowering only the seventh string from F# to E gives E B E A D G C. |
 | 3. Carpenter attribution | Applied | Page 5 cites the 2013 rig rundown for the pitches and the 2016 interview for Carpenter's description of standard eight-string tuning, drop E and the high-E drone. |
 | 4. Homme string order and octaves | Applied | Page 4 identifies GGDGDD as a viewer transcription. Reading it from thickest to thinnest and assigning specific octaves are choices made for the worked example. |
-| 5. Printable artist sources | Applied | Page 6 prints each full URL under its source label. The links also work in the PDF and Word outputs. |
+| 5. Printable artist sources | Applied | Page 6 prints each full URL under its source label. Readers can also follow the links in the PDF. |
 | 6. Consistent wording and hyphenation | Applied | The eight-string example has a descriptive heading, and compound modifiers such as “seven-string” and “all-fourths” are hyphenated. |
 | 6. Compress the guide to four pages | Not applied | The six-page arrangement keeps each artist example on one page and the expanded tuning and scale tables together on page 3. |
 | 7. Instrument labels and tuning provenance | Applied | Pages 1 and 3 identify the Solar in B standard and the Xiphos in factory A standard and owner-reported G standard. The instrument sheets document the source of each tuning. |

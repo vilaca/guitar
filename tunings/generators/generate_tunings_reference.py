@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Generate a DOCX and PDF reference to guitar tunings.
+"""Generate a PDF reference to guitar tunings.
 
-Install: python -m pip install python-docx reportlab
+Install: python -m pip install reportlab
 Run: python generate_tunings_reference.py --output-dir generated
 """
 from pathlib import Path
@@ -158,69 +158,6 @@ link(p,'3  Premier Guitar Deftones rig rundown from November 2013','https://www.
 link(p,'4  Premier Guitar A Little Darkness interview from March 2016','https://www.premierguitar.com/artists/deftones-a-little-darkness')
 para(p,'The interval patterns and scale-membership statements in this reference are calculated from the listed notes. Artist associations follow the sources above; the Homme octave realization is explicitly identified as a worked example.')
 
-def make_docx(path):
-    from docx import Document
-    from docx.shared import Inches,Pt,RGBColor
-    from docx.enum.table import WD_TABLE_ALIGNMENT,WD_CELL_VERTICAL_ALIGNMENT
-    from docx.oxml import OxmlElement
-    from docx.oxml.ns import qn
-    from docx.opc.constants import RELATIONSHIP_TYPE as RT
-    doc=Document();sec=doc.sections[0]
-    sec.page_width=Inches(8.5);sec.page_height=Inches(11)
-    sec.top_margin=sec.bottom_margin=Inches(.65)
-    sec.left_margin=sec.right_margin=Inches(.7)
-    normal=doc.styles['Normal'];normal.font.name='Calibri';normal.font.size=Pt(10.5)
-    normal.paragraph_format.space_after=Pt(7);normal.paragraph_format.line_spacing=1.08
-    for name,size in [('Title',23),('Heading 1',16),('Heading 2',12)]:
-        st=doc.styles[name];st.font.name='Calibri';st.font.size=Pt(size);st.font.color.rgb=RGBColor(0,0,0)
-        st.paragraph_format.space_after=Pt(8)
-        st.paragraph_format.space_before=Pt(10 if name=='Heading 2' else 0)
-    for idx,page in enumerate(PAGES):
-        if idx:doc.add_page_break()
-        doc.add_paragraph(page['title'],'Title' if idx==0 else 'Heading 1')
-        for block in page['blocks']:
-            if block[0]=='p':doc.add_paragraph(block[1])
-            elif block[0]=='h':doc.add_paragraph(block[1],'Heading 2')
-            elif block[0]=='link':
-                p=doc.add_paragraph();p.paragraph_format.space_after=Pt(6)
-                h=OxmlElement('w:hyperlink');h.set(qn('r:id'),p.part.relate_to(block[2],RT.HYPERLINK,is_external=True))
-                r=OxmlElement('w:r');props=OxmlElement('w:rPr');color=OxmlElement('w:color');color.set(qn('w:val'),'000000');props.append(color);r.append(props)
-                t=OxmlElement('w:t');p.add_run(block[1]).add_break();t.text=block[2];r.append(t);h.append(r);p._p.append(h)
-            else:
-                _,heads,rows,weights=block
-                table=doc.add_table(rows=1,cols=len(heads));table.alignment=WD_TABLE_ALIGNMENT.CENTER;table.autofit=False
-                widths=[7.1*w/sum(weights) for w in weights]
-                for col,width in zip(table.columns,widths):col.width=Inches(width)
-                for i,row in enumerate([heads]+rows):
-                    cells=table.rows[0].cells if i==0 else table.add_row().cells
-                    for j,(cell,s) in enumerate(zip(cells,row)):
-                        cell.width=Inches(widths[j]);cell.vertical_alignment=WD_CELL_VERTICAL_ALIGNMENT.CENTER
-                        cell.text=str(s);pr=cell._tc.get_or_add_tcPr()
-                        shade=OxmlElement('w:shd');shade.set(qn('w:fill'),'404040' if i==0 else ('F4F4F4' if i%2==0 else 'FFFFFF'));pr.append(shade)
-                        borders=OxmlElement('w:tcBorders')
-                        for edge in ['top','left','bottom','right']:
-                            e=OxmlElement('w:'+edge);e.set(qn('w:val'),'single');e.set(qn('w:sz'),'4');e.set(qn('w:color'),'D9D9D9');borders.append(e)
-                        pr.append(borders)
-                        margins=OxmlElement('w:tcMar')
-                        for edge in ['top','left','bottom','right']:
-                            e=OxmlElement('w:'+edge);e.set(qn('w:w'),'65');e.set(qn('w:type'),'dxa');margins.append(e)
-                        pr.append(margins)
-                        for pp in cell.paragraphs:
-                            pp.paragraph_format.space_after=Pt(0);pp.paragraph_format.line_spacing=1.03
-                            for rr in pp.runs:rr.font.size=Pt(9.4);rr.bold=i==0;rr.font.color.rgb=RGBColor(255,255,255) if i==0 else RGBColor(0,0,0)
-                    if i==0:
-                        repeat=OxmlElement('w:tblHeader');table.rows[0]._tr.get_or_add_trPr().append(repeat)
-                    no_split=OxmlElement('w:cantSplit');table.rows[i]._tr.get_or_add_trPr().append(no_split)
-                doc.add_paragraph().paragraph_format.space_after=Pt(0)
-    foot=sec.footer.paragraphs[0];foot.alignment=2
-    field=OxmlElement('w:fldSimple');field.set(qn('w:instr'),'PAGE');foot._p.append(field)
-    # Some Word templates carry a coloured rule in the Title style.
-    for root in [doc.styles.element,doc._element]:
-        for border in root.xpath('.//w:pBdr'):
-            border.getparent().remove(border)
-    doc.core_properties.title='Guitar tunings reference';doc.core_properties.author=''
-    doc.save(path)
-
 def make_pdf(path):
     import reportlab
     from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Table,TableStyle,PageBreak,KeepTogether
@@ -244,7 +181,11 @@ def make_pdf(path):
         for b in page['blocks']:
             if b[0]=='p':story.append(Paragraph(escape(b[1]),styles['RefP']))
             elif b[0]=='h':story.append(Paragraph(escape(b[1]),styles['RefH']))
-            elif b[0]=='link':story.append(Paragraph('<link href="'+escape(b[2],{'"':'&quot;'})+'">'+escape(b[1])+'</link><br/>'+escape(b[2]),styles['RefLink']))
+            elif b[0] == 'link':
+                url = escape(b[2], {'"': '&quot;'})
+                label = f'<link href="{url}">{escape(b[1])}</link>'
+                address = f'<link href="{url}">{escape(b[2])}</link>'
+                story.append(Paragraph(f'{label}<br/>{address}', styles['RefLink']))
             else:
                 _,heads,rows,weights=b
                 data=[[Paragraph(escape(str(s)),styles['RefTH'] if i==0 else styles['RefCell']) for s in row] for i,row in enumerate([heads]+rows)]
@@ -258,8 +199,10 @@ def make_pdf(path):
 if __name__=='__main__':
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--output-dir',default='generated_tunings')
-    ap.add_argument('--format',choices=['docx','pdf','both'],default='both')
-    args=ap.parse_args();dest=Path(args.output_dir).expanduser().resolve();dest.mkdir(parents=True,exist_ok=True)
-    for fmt,writer in [('docx',make_docx),('pdf',make_pdf)]:
-        if args.format in [fmt,'both']:
-            out=dest/('guitar_tunings_reference.'+fmt);writer(out);print(out)
+    ap.add_argument('--format', choices=['pdf'], help=argparse.SUPPRESS)
+    args = ap.parse_args()
+    dest = Path(args.output_dir).expanduser().resolve()
+    dest.mkdir(parents=True, exist_ok=True)
+    out = dest / 'guitar_tunings_reference.pdf'
+    make_pdf(out)
+    print(out)
