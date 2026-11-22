@@ -1,10 +1,11 @@
 # Music PDF generators
 
-Standalone generators for the three scale guides and their shared playing glossary.
+Standalone generators for the four scale guides and their shared playing glossary.
 
 | Script | Guide | Pages |
 | --- | --- | --- |
 | `generate_phrygian.py` | 7-string B Phrygian, B standard, piano/synth, 43 progressions | 14 |
+| `generate_phrygian_dominant.py` | 7-string B Phrygian dominant, B standard, piano/synth, 43 progressions | 14 |
 | `generate_b_flat_dominant_bebop.py` | Bb dominant bebop, G-centred riff, guitar/piano, 45 progressions | 14 |
 | `generate_e_minor_pentatonic.py` | E minor pentatonic, guitar/piano, 46 progressions | 14 |
 | `generate_playing_glossary.py` | Shared rhythm and production terms | 1 |
@@ -29,6 +30,7 @@ On systems where Python is named `python3`, use `python3` in both commands. The 
 ```sh
 python generate_playing_glossary.py --output playing_glossary.pdf
 python generate_phrygian.py --output phrygian.pdf
+python generate_phrygian_dominant.py --output phrygian_dominant.pdf
 python generate_b_flat_dominant_bebop.py --output bebop.pdf
 python generate_e_minor_pentatonic.py --output pentatonic.pdf
 ```
@@ -39,4 +41,4 @@ Each script works independently; it does not need another generator or any origi
 
 The scale patterns, chord spellings, piano voicings, progressions and explanatory text are ordinary Python lists and dictionaries in each script. Edit them and rerun the script. Assertions check note membership, guitar pitch sequences and chord voicings; if you change a scale, update its related data consistently.
 
-The Phrygian guide uses standard PDF fonts. The other guides use fonts bundled with ReportLab, so they do not depend on system font paths. Minor font/layout differences from earlier PDF copies are possible.
+All guides use the Vera fonts bundled with ReportLab, so they do not depend on system font paths. Minor font/layout differences from earlier PDF copies are possible.

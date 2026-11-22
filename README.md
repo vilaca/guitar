@@ -2,9 +2,10 @@
 
 ## Practice PDFs
 
-The three scale guides use seven-string B standard (B E A D G B E). Each includes fretboard patterns, piano voicings and 49 practice arrangements.
+The four scale guides use seven-string B standard (B E A D G B E). Each has the same 14-page layout: scale map, guitar patterns, piano voicings and practice loops by genre.
 
 - [B Phrygian](scales/pdfs/phrygian_7_string_standard.pdf)
+- [B Phrygian dominant](scales/pdfs/phrygian_dominant_7_string_standard.pdf)
 - [B♭ dominant bebop with a G-centred riff](scales/pdfs/b_flat_dominant_bebop_7_string_and_piano.pdf)
 - [E minor pentatonic](scales/pdfs/e_minor_pentatonic_7_string_and_piano.pdf)
 - [Playing glossary](scales/pdfs/playing_glossary.pdf) — rhythm and production terms used in the guides.
