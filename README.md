@@ -1,48 +1,27 @@
 # Guitar
 
-Guitar reference material, grouped by topic. Each topic has its finished PDFs in `pdfs/` and the Python scripts that build them in `generators/`.
+## Practice PDFs
 
-| Topic | What it covers |
+The three scale guides use seven-string B standard (B E A D G B E). Each includes fretboard patterns, piano voicings and 49 practice arrangements.
+
+- [B Phrygian](scales/pdfs/phrygian_7_string_standard.pdf)
+- [B♭ dominant bebop with a G-centred riff](scales/pdfs/b_flat_dominant_bebop_7_string_and_piano.pdf)
+- [E minor pentatonic](scales/pdfs/e_minor_pentatonic_7_string_and_piano.pdf)
+- [Playing glossary](scales/pdfs/playing_glossary.pdf) — rhythm and production terms used in the guides.
+- [Guitar tunings reference](tunings/pdfs/guitar_tunings_reference.pdf) — standard, all-fourths and drop tunings, with Josh Homme and Stephen Carpenter examples.
+
+## Instruments and manuals
+
+| Instrument | Setup notes and manuals |
 | --- | --- |
-| [`scales/`](scales/) | 7-string scale guides (standard B E A D G B E) with piano / synth voicings and 49 practice arrangements per guide, with variations grouped by chord progression: B Phrygian, Bb dominant bebop (G-centred) and E minor pentatonic. The [shared playing glossary](scales/pdfs/playing_glossary.pdf) covers rhythm and production terms. Review notes are in `scales/fixes.md`. |
-| [`tunings/`](tunings/) | Six-page tunings reference: standard, all-fourths, drop, Josh Homme and Stephen Carpenter tunings, interval tables, scale relationships and linked artist sources. Review notes are in `tunings/fixes.md`. |
-| [`guitars/`](guitars/) | Reference sheets for the instruments: two 7-strings, Ibanez XPTB720 (25.5", A standard) and Solar A1.7ROP-29+ (29", B standard), and the Ibanez SRMS625EX 5-string multi-scale bass, with a three-way comparison. |
+| [Ibanez XPTB720](guitars/ibanez-xptb720.md) | [Tremolo setup notes](guitars/ibanez-edge-zero-ii-setup.md) · [Edge-Zero II tremolo manual (PDF)](guitars/manuals/ibanez-edge-zero-ii-tremolo.pdf) |
+| [Solar A1.7ROP-29+](guitars/solar-a1.7rop-29.md) | — |
+| [Ibanez SRMS625EX bass](guitars/ibanez-srms625ex.md) | [SRMS series bass manual (PDF)](guitars/manuals/ibanez-srms-series-bass.pdf) |
 
-## Layout
+[Compare all three instruments](guitars/comparison.md)
 
-```
-guitar/
-├── scales/
-│   ├── pdfs/
-│   ├── generators/
-│   └── fixes.md
-├── tunings/
-│   ├── pdfs/
-│   ├── generators/
-│   └── fixes.md
-└── guitars/
-    ├── ibanez-xptb720.md
-    ├── solar-a1.7rop-29.md
-    ├── comparison.md
-    ├── ibanez-srms625ex.md
-    ├── ibanez-edge-zero-ii-setup.md
-    └── manuals/
-```
+## Rebuild the PDFs
 
-## Regenerate
+Follow the [scale and glossary instructions](scales/generators/README.md) or the [tuning reference instructions](tunings/generators/README.md). Copy the generated PDFs into the corresponding `pdfs/` folder to publish an update.
 
-Each `generators/` folder has its own `README.md` and `requirements.txt`.
-
-```sh
-# scales
-cd scales/generators
-python3 -m pip install -r requirements.txt
-python3 generate_all.py --output-dir generated_pdfs
-
-# tunings
-cd tunings/generators
-python3 -m pip install -r requirements.txt
-python3 generate_tunings_reference.py --output-dir generated
-```
-
-Output goes to git-ignored folders. To publish a new version, copy the PDFs you want into the matching `pdfs/` folder.
+Review decisions for the [scales](scales/fixes.md) and [tunings](tunings/fixes.md).
