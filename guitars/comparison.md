@@ -11,8 +11,8 @@ The first two are 7-string guitars. The SRMS625EX is a 5-string multi-scale bass
 | Instrument | 7-string guitar | 7-string guitar | 5-string bass |
 | Scale | 648 mm (25.5") | 29" (736.6 mm) | 901.7 mm (35.5") to 864.0 mm (34.0") |
 | Factory tuning | A standard: A D G C F A D | B standard: B E A D G B E | B standard: B E A D G |
-| Tuning in use | G standard: G C F Bb Eb G C | B standard | B standard (same as factory) |
-| Construction | Neck-through | Set thru | Bolt-on (Thomann) |
+| Tuning in use | G standard: G C F Bb Eb G C | B standard | B standard |
+| Construction | Neck-through | Set thru | Bolt-on |
 | Body | Okoume | Swamp ash, 45 mm thick | Okoume |
 | Bridge | Edge-Zero II-7 tremolo, stud-lock | Evertune | MR5 (Mono-Rail V) |
 | Finish | Black Flat | Red Open Pore Matte | Black Flat |
