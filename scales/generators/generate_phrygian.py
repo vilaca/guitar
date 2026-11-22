@@ -39,9 +39,10 @@ allowed = set(note_names)
 opens = [35, 40, 45, 50, 55, 59, 64]
 labels = ['7 B', '6 E', '5 A', '4 D', '3 G', '2 B', '1 e']
 compact = [[0, 1, 3], [0, 2, 3], [0, 2, 3], [0, 2, 4], [0, 2, 4], [1, 3, 5], [2, 3, 5]]
+diagonal = [[0, 1, 3, 5], [2, 3, 5, 7], [3, 5, 7, 9], [5, 7, 9, 10], [7, 9, 11, 12], [10, 12, 13, 15], [12, 14, 15, 17]]
 assert all(len(row) == 3 for row in compact)
 
-def pattern(top, title, frets):
+def pattern(top, title, frets, gap=22):
     txt(M, top, title, 13, 'Helvetica-Bold')
     left = M + 38
     step = (W - M - 12 - left) / (sum(map(len, frets)) + 1)
@@ -70,21 +71,25 @@ def pattern(top, title, frets):
             c.drawCentredString(x, y - 3, label)
 
     for string, row in enumerate(frets):
-        y = top - 42 - (6 - string) * 32
+        y = top - 34 - (6 - string) * gap
         draw_row(y, labels[string], opens[string], row, len(played))
         played.extend(opens[string] + f for f in row)
     return played
 
-played = pattern(H-158, 'THREE NOTES PER STRING | B1 to A4', compact)
+played = pattern(H-142, 'THREE NOTES PER STRING | B1 to A4', compact)
 assert played == [n for n in range(35, 70) if n % 12 in allowed]
-txt(M, H-434, 'Play left to right. Bold frets mark B. Parentheses show neighboring scale frets to skip during the run.', 9)
+played = pattern(H-338, 'DIAGONAL | start on open B, string 7', diagonal)
+assert played == [n for n in range(35, 82) if n % 12 in allowed]
+assert all(a < b for a, b in zip([r[0] for r in diagonal], [r[0] for r in diagonal][1:]))
+txt(M, H-520, 'Play left to right. Bold frets mark B. Parentheses show neighboring scale frets to skip during the run.', 9)
+txt(M, H-533, 'Diagonal: start on open B1 (string 7), play four notes per string and shift up the neck. Finish on A5 (string 1, fret 17).', 9)
 
-txt(M, H-473, 'STANDARD 7-STRING | FRETS 0-12', 12, 'Helvetica-Bold')
-txt(M, H-492, 'Dark cells mark B roots. A dash marks a note outside B Phrygian.', 9)
+txt(M, H-558, 'STANDARD 7-STRING | FRETS 0-12', 12, 'Helvetica-Bold')
+txt(M, H-575, 'Dark cells mark B roots. A dash marks a note outside B Phrygian.', 9)
 left = M + 38
 cell_width = (W - M - left) / 13
-row_height = 23
-grid_top = H - 520
+row_height = 21
+grid_top = H - 596
 c.setFont('Helvetica-Bold', 8)
 for fret in range(13):
     c.drawCentredString(left + (fret + 0.5) * cell_width, grid_top + 7, str(fret))
@@ -102,9 +107,9 @@ for row, (label, pitch) in enumerate(zip(reversed(labels), reversed(opens))):
         c.setFont('Helvetica-Bold' if root else 'Helvetica', 9)
         c.drawCentredString(x + cell_width / 2, y + 8, note)
 
-txt(M, H-718, 'Root rule', 11, 'Helvetica-Bold')
-txt(M, H-738, 'The open seventh string is the root. All seven open strings fit B Phrygian.', 9)
-txt(M, H-757, 'For a lower standard tuning, keep the fret numbers and use the new seventh-string root.', 9)
+txt(M, H-762, 'Root rule', 11, 'Helvetica-Bold')
+txt(M, H-778, 'The open seventh string is the root. All seven open strings fit B Phrygian.', 9)
+txt(M, H-793, 'For a lower standard tuning, keep the fret numbers and use the new seventh-string root.', 9)
 txt(W-65,27,'1/13',8); c.showPage()
 
 
