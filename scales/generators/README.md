@@ -6,6 +6,7 @@ Standalone generators for the four scale guides and their shared playing glossar
 | --- | --- | --- |
 | `generate_phrygian.py` | 7-string B Phrygian, B standard, piano/synth, 43 progressions | 14 |
 | `generate_phrygian_dominant.py` | 7-string B Phrygian dominant, B standard, piano/synth, 43 progressions | 14 |
+| `generate_fretboard_maps.py` | B-standard fretboard maps, frets 0-24, with the diagonal route: B Phrygian dominant, B Phrygian, B minor pentatonic | 3 |
 | `generate_b_flat_dominant_bebop.py` | Bb dominant bebop, G-centred riff, guitar/piano, 45 progressions | 14 |
 | `generate_e_minor_pentatonic.py` | E minor pentatonic, guitar/piano, 46 progressions | 14 |
 | `generate_playing_glossary.py` | Shared rhythm and production terms | 1 |
@@ -31,6 +32,7 @@ On systems where Python is named `python3`, use `python3` in both commands. The 
 python generate_playing_glossary.py --output playing_glossary.pdf
 python generate_phrygian.py --output phrygian.pdf
 python generate_phrygian_dominant.py --output phrygian_dominant.pdf
+python generate_fretboard_maps.py --output fretboard_maps.pdf
 python generate_b_flat_dominant_bebop.py --output bebop.pdf
 python generate_e_minor_pentatonic.py --output pentatonic.pdf
 ```

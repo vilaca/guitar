@@ -8,6 +8,7 @@ The four scale guides use seven-string B standard (B E A D G B E). Each has the 
 - [B Phrygian dominant](scales/pdfs/phrygian_dominant_7_string_standard.pdf)
 - [B♭ dominant bebop with a G-centred riff](scales/pdfs/b_flat_dominant_bebop_7_string_and_piano.pdf)
 - [E minor pentatonic](scales/pdfs/e_minor_pentatonic_7_string_and_piano.pdf)
+- [Fretboard maps](scales/pdfs/fretboard_maps_7_string_standard.pdf) — frets 0-24 for B Phrygian dominant, B Phrygian and B minor pentatonic, with the diagonal route.
 - [Playing glossary](scales/pdfs/playing_glossary.pdf) — rhythm and production terms used in the guides.
 - [Guitar tunings reference](tunings/pdfs/guitar_tunings_reference.pdf) — standard, all-fourths and drop tunings, with Josh Homme and Stephen Carpenter examples.
 
