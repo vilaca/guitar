@@ -16,7 +16,6 @@ jobs = [
     ('generate_phrygian.py', 'phrygian_7_string_standard.pdf'),
     ('generate_phrygian_dominant.py', 'phrygian_dominant_7_string_standard.pdf'),
     ('generate_fretboard_maps.py', 'fretboard_maps_7_string_standard.pdf'),
-    ('generate_a_minor_blues_map.py', 'a_minor_blues_scale_map.pdf'),
     ('generate_b_flat_dominant_bebop.py', 'b_flat_dominant_bebop_7_string_and_piano.pdf'),
     ('generate_e_minor_pentatonic.py', 'e_minor_pentatonic_7_string_and_piano.pdf'),
 ]
